@@ -141,16 +141,22 @@ meny_pictures = {0: [
 }
 meny_text = ["Magnus sin text", 
               "Karl Emil sitt program: Viser live temperatur på skjerm", 
-              "Markus sin text", 
-              "Kai sin text", 
+              "Markus sitt program: Blås opp en ballong!", 
+              "Kai sitt program: Grimaser som endrer seg etter temperatur", 
               "Even sin text", 
               "Daniel sitt program: Få en Pokemon basert på temperatur",
               "Klikk for å avslutte, vil lagre verdier til fil"]
               
 spill_text = ["Magnus sin forklaring", 
+<<<<<<< HEAD
               "Her ser man hva temperatur Sense hat leser.", 
               "Markus sin forklaring", 
               "Kai sin forklaring", 
+=======
+              "Her ser man hva temperatur Sense hat leser, hold inne joy for å avslutte program", 
+              "Blås på trykksensoren for å blåse oppballongen", 
+              "Få 3 forskjellige grimaser, under 15 grader fryser den og klapper tenner, mellom 15 og 25 er den komfortabel og over 25 blir det for varmt", 
+>>>>>>> aa7319f6658067d758d91e5d080b182e52f1250f
               "Even sin forklaring", 
               "Rist Rasberry PI for å åpne Pokeballen. under 30 grader gir Piplup, og over gir Pikachu",
               "Verdier lagret, takk for denne gang!"]
@@ -412,26 +418,31 @@ def daniel():
       ]
 
     while not interrupt:
+      # Henter verdier fra senseHat
       temp = sense.get_temperature()
       accel = sense.get_accelerometer()
 
-      sense.set_pixels(POKEBALL)
+      sense.set_pixels(POKEBALL)          # Setter bilde til en pokeball
 
       aks = True
-      while aks == True and not interrupt:
-        x, y, z = sense.get_accelerometer_raw().values()
+      while aks == True and not interrupt:            # Så lenge aks = True, altså at Rasberry Pi blir ristet så kjører koden
+        x, y, z = sense.get_accelerometer_raw().values()    
 
+      # Tar absoluttverdiene av inputene
         x = abs(x)
         y = abs(y)
         z = abs(z)
-
+            
+            # Hvis noen av inputene øker med 2 i et gitt intervall, dvs at den rister, så kjører koden
         if x > 2 or y > 2 or z > 2 :
         
+      # Tilegner variabelen temp en verdi over eller under 30 grader i det Rasberry blir ristet
           if temp >= 30:
             temperatur = 30
           else:
             temperatur = 29
 
+            # Bildesekvens for å vise at Pokeballen er i ferd med å åpnes
           for i in range(3):
             sense.set_pixels(POKEBALL2)
             time.sleep(0.2)
@@ -453,6 +464,7 @@ def daniel():
           sense.set_pixels(POKEBALL5)
           time.sleep(2)
 
+            # Bildesekvens med animasjon av at ballen åpnes
           sense.set_pixels(OPENBALL)
           time.sleep(0.1)         
           sense.set_pixels(OPENBALL2)
@@ -472,20 +484,21 @@ def daniel():
           sense.set_pixels(OPENBALL9)
           time.sleep(0.1)
 
-
+            # Sjekker hva verdien for temp var. Hvis 30 så blir pokemonen Pikachu
           if temperatur == 30:
             sense.set_pixels(POK1)
             update_screen("Din Pokemon er Pikachu!")
             time.sleep(5)
             sense.set_pixels(POKEBALL)
 
+            # Hvis under 30 grader, så blir Pokemonen til Piplup
           elif temperatur == 29:
             sense.set_pixels(POK2)
             update_screen("Din pokemon er Piplup!")
             time.sleep(5)
             sense.set_pixels(POKEBALL)
 
-
+      # Hvis Rasberry ikke ristes settes bildet bare til utgangspunktet
         else:
           sense.set_pixels(POKEBALL)
 
@@ -1163,34 +1176,34 @@ def magnus():
     ]
 
     sense.set_pixels(SOL_NED)
-    time.sleep(1.5)
+    time.sleep(0.5)
 
     # Loadingscreen
     for i, v in enumerate(SOL_NED):
         if i == 7:
             SOL_NED[0:8] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 15:
             SOL_NED[8:16] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 23:
             SOL_NED[16:24] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 31:
             SOL_NED[24:32] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 39:
             SOL_NED[32:40] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 47:
             SOL_NED[40:48] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 55:
             SOL_NED[48:56] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
         elif i == 63:
             SOL_NED[56:64] = W, W, W, W, W, W, W, W,
-            time.sleep(float((random.randint(0, 10)) / 10))
+            time.sleep(float((random.randint(0, 15)) / 10))
 
         sense.set_pixels(SOL_NED)
 
@@ -1236,15 +1249,16 @@ def magnus():
 
 def markus():
     reset_interrupt()
-    start_pressure = sense.get_pressure()
-    state = 1
+    start_pressure = sense.get_pressure() # Måler trykket for å lage en referansetrykkverdi
+    state = 1 # state er en variabel som brukes for å holde kontroll på hvordan ballongen ser ut på LED-matrisen, og når ballongen skal sprekke
 
+    # Bilder for de ulike tilstandene ballongen går igjennom:
     STATE1 = [
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (74, 74, 74), (24, 53, 211), (24, 53, 211), (74, 74, 74), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (24, 53, 211), (24, 53, 211), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (24, 53, 211), (24, 53, 211), (24, 53, 211), (24, 53, 211), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (24, 53, 211), (24, 53, 211), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (24, 53, 211), (24, 53, 211), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -1402,12 +1416,13 @@ def markus():
     sense.set_pixels(STATE1)
 
     while not interrupt:
-        blowing_pressure = sense.get_pressure() - start_pressure
-        if blowing_pressure > 0.2:
-            inflate = True
+        blowing_pressure = sense.get_pressure() - start_pressure # Trykk fra blåsingen er differansen mellom oppdatert trykk og referansetrykk
+        if blowing_pressure > 0.2: # Her kan man styre hvor stor differansen må være, altså hvor hardt man må blåse, for at ballongen skal vokse
+            inflate = True # inflate er en variabel som sier om ballongen vokser eller krymper
         else:
             inflate = False
 
+        # Sjekker for hver tilstand om ballongen vokser eller krymper, og avgjør om ballongen skal gå til neste eller forrige tilstand:
         if state == 1:
             if inflate:
                 state = 2
@@ -1441,7 +1456,7 @@ def markus():
                 state = 4
                 sense.set_pixels(STATE4)
         elif state == 6:
-            if inflate:
+            if inflate: # Dersom ballongen vokser i tilstand 6 sprekker ballongen
                 state = 1
                 sense.set_pixels(STATE7)
                 time.sleep(0.2)
@@ -1462,7 +1477,7 @@ def markus():
 
         time.sleep(0.5)
     reset_interrupt()
-    return sense.get_pressure()
+    return sense.get_pressure() # Når funksjonen avsluttes returneres avlest trykkverdi
 
 
 

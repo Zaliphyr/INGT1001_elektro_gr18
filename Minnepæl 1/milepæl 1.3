@@ -1,0 +1,18 @@
+from sense_hat import SenseHat
+
+senseHat = SenseHat()
+
+a = -0.0065
+R = 287.06
+g_0 = 9.81
+
+T_1 = 16 + 273.15
+p_1 = 
+h_1 = 50
+
+while True:
+  p = senseHat.pressure*100
+	
+	h = (T_1/a) * ((p/p_1)**(-a*R/g_0) - 1) + h_1
+
+	senseHat.show_message(str(round(h, 2))+"m", 0.08)

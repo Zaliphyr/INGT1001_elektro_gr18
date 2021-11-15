@@ -139,17 +139,17 @@ meny_pictures = {0: [
         (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
     ]
 }
-meny_text = ["Magnus sin text", 
+meny_text = ["Magnus sitt program: Viser retningen til himmelen, et eventyr uten like", 
               "Karl Emil sitt program: Viser live temperatur på skjerm", 
-              "Markus sitt program: Blås opp en ballong!", 
+              "Markus sin text", 
               "Kai sitt program: Grimaser som endrer seg etter temperatur", 
               "Even sin text", 
               "Daniel sitt program: Få en Pokemon basert på temperatur",
               "Klikk for å avslutte, vil lagre verdier til fil"]
               
-spill_text = ["Magnus sin forklaring", 
+spill_text = ["Hold LED-skjermen mot deg og roter! Se om du kan få pila til å peke mot bakken", 
               "Her ser man hva temperatur Sense hat leser, hold inne joy for å avslutte program", 
-              "Blås på trykksensoren for å blåse oppballongen", 
+              "Markus sin forklaring", 
               "Få 3 forskjellige grimaser, under 15 grader fryser den og klapper tenner, mellom 15 og 25 er den komfortabel og over 25 blir det for varmt", 
               "Even sin forklaring", 
               "Rist Rasberry PI for å åpne Pokeballen. under 30 grader gir Piplup, og over gir Pikachu",

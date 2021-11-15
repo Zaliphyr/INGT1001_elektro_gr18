@@ -1,4 +1,4 @@
-#!/bin/python3
+# -*- coding: utf-8 -*-
 from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random
@@ -23,7 +23,7 @@ start_screen = [
     (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
   ]
 
-#Verdi som blir true om man holde rinne middle knappen, brukes for å stoppe programmer
+# Verdi som blir true om man holder inne middle knappen, brukes for å stoppe programmer
 interrupt = False
 
 # Verdier som indikerer om man har trykket en knapp
@@ -148,7 +148,7 @@ meny_text = ["Magnus sin text",
               "Klikk for å avslutte, vil lagre verdier til fil"]
               
 spill_text = ["Magnus sin forklaring", 
-              "Her ser man hva temperatur Sense hat leser, hold inne joy for å avslutte program", 
+              "Her ser man hva temperatur Sense hat leser.", 
               "Markus sin forklaring", 
               "Kai sin forklaring", 
               "Even sin forklaring", 
@@ -158,13 +158,24 @@ spill_text = ["Magnus sin forklaring",
 
 # Funksjon for å tegne rød firkant til skjermen
 def red_square():
-    r = (255, 0, 0)
-    for i in range(8):
+    if  meny_selection != 6 and meny_runned[meny_selection]:
+      r = (255, 0, 0)
+      for i in range(8):
         sense.set_pixel(i, 0, r)
         sense.set_pixel(0, i, r)
         sense.set_pixel(7, i, r)
         sense.set_pixel(i, 7, r)
+    time.sleep(0.01)
 
+
+def screen_six_display():
+  if meny_selection == 6:
+    for i in range(len(meny_runned) - 1):
+      if meny_runned[i]:
+          sense.set_pixel(1 + i, 7, (0, 255, 0))
+      else:
+          sense.set_pixel(1 + i, 7, (255, 255, 25))
+  time.sleep(0.1)
 
 # Våre egne funksjoner
 def kalles():
@@ -1481,12 +1492,13 @@ def startingLines():
 
 # Oppdaterer tekst i boksen
 def update_screen(text):
+    txt = str(text)
     print("\033[F" + "\033[F" + "\033[F", end="\x1b[1K\r")
-    if len(text) > box_width:
-        print("║" + text[:box_width].ljust(box_width) + "║")
-        print("║" + text[box_width:].ljust(box_width) + "║")
+    if len(txt) > box_width:
+        print("║" + txt[:box_width].ljust(box_width) + "║")
+        print("║" + txt[box_width:].ljust(box_width) + "║")
     else:
-        print("║" + text.ljust(box_width) + "║")
+        print("║" + txt.ljust(box_width) + "║")
         print("║" + (" "*box_width) + "║")
     print("╚" + ("═"*box_width) + "╝")
 
@@ -1528,8 +1540,8 @@ def main():
     global interrupt
     
     # Binder funksjoner til knapper
-    sense.stick.direction_left = j_left
-    sense.stick.direction_right = j_right
+    sense.stick.direction_down = j_left
+    sense.stick.direction_up = j_right
     sense.stick.direction_middle = j_middle
     
     
@@ -1538,7 +1550,7 @@ def main():
     sense.set_pixels(start_screen)
     startingLines()
     update_screen("")
-    time.sleep(5)
+    time.sleep(3)
     
     # Setter første bilde og tekst
     sense.set_pixels(meny_pictures[meny_selection])
@@ -1598,19 +1610,9 @@ def main():
                 break
         # Setter riktig bilde
         sense.set_pixels(meny_pictures[meny_selection])
+        red_square()
+        screen_six_display()
         
-        # Hvis man er på skjerm 6, er det bar nederst som viser hvilke program som er kjørt og ikke
-        if meny_selection == 6:
-            for i in range(len(meny_runned) - 1):
-                if meny_runned[i]:
-                    sense.set_pixel(1 + i, 7, (0, 255, 0))
-                else:
-                    sense.set_pixel(1 + i, 7, (255, 255, 255))
-        
-        # Hvis man har kjørt et program, så vises en rød firkant på den skjermen
-        if  meny_selection != 6 and meny_runned[meny_selection]:
-            red_square()
-
 
 if __name__ == "__main__":
     main()

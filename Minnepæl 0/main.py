@@ -139,25 +139,20 @@ meny_pictures = {0: [
         (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
     ]
 }
-meny_text = ["Magnus sin text", 
+meny_text = ["Magnus sitt program: Viser retningen til himmelen, et eventyr uten like", 
               "Karl Emil sitt program: Viser live temperatur på skjerm", 
               "Markus sitt program: Blås opp en ballong!", 
               "Kai sitt program: Grimaser som endrer seg etter temperatur", 
-              "Even sin text", 
+              "Even sitt program: Animasjon som viser helning om pitch-aksen", 
               "Daniel sitt program: Få en Pokemon basert på temperatur",
               "Klikk for å avslutte, vil lagre verdier til fil"]
               
-spill_text = ["Magnus sin forklaring", 
-<<<<<<< HEAD
-              "Her ser man hva temperatur Sense hat leser.", 
-              "Markus sin forklaring", 
-              "Kai sin forklaring", 
-=======
+
+spill_text = ["Hold LED-skjermen mot deg og roter! Se om du kan få pila til å peke mot bakken", 
               "Her ser man hva temperatur Sense hat leser, hold inne joy for å avslutte program", 
               "Blås på trykksensoren for å blåse oppballongen", 
               "Få 3 forskjellige grimaser, under 15 grader fryser den og klapper tenner, mellom 15 og 25 er den komfortabel og over 25 blir det for varmt", 
->>>>>>> aa7319f6658067d758d91e5d080b182e52f1250f
-              "Even sin forklaring", 
+              "Viser 3 forskjellige animasjoner, avhengig om pitchverdien er over, under eller mellom 0.5 og -0.5 radianer", 
               "Rist Rasberry PI for å åpne Pokeballen. under 30 grader gir Piplup, og over gir Pikachu",
               "Verdier lagret, takk for denne gang!"]
 
@@ -645,61 +640,6 @@ def even():
         w, w, b, b, b, b, w, w,
       ]
 
-    FRAME13 = [
-          w, w, g, g, g, g, w, w,
-        w, g, g, g, g, g, g, w,
-        g, g, g, w, w, g, g, g,
-        g, g, w, w, w, w, g, g,
-        g, g, w, w, w, w, g, g,
-        g, g, g, w, w, g, g, g,
-        w, g, g, g, g, g, g, w,
-        w, w, g, g, g, g, w, w,
-      ]
-
-    FRAME14 = [
-          w, w, w, w, w, w, w, w,
-        w, w, g, g, g, g, w, w,
-        w, g, g, g, g, g, g, w,
-        w, g, g, w, w, g, g, w,
-        w, g, g, w, w, g, g, w,
-        w, g, g, g, g, g, g, w,
-        w, w, g, g, g, g, w, w,
-        w, w, w, w, w, w, w, w,
-      ]
-    
-    FRAME15 = [
-          g, w, w, w, w, w, w, g,
-        w, w, w, w, w, w, w, w,
-        w, w, w, g, g, w, w, w,
-        w, w, g, g, g, g, w, w,
-        w, w, g, g, g, g, w, w,
-        w, w, w, g, g, w, w, w,
-        w, w, w, w, w, w, w, w,
-        g, w, w, w, w, w, w, g,
-      ]
-    
-    FRAME16 = [
-          g, g, w, w, w, w, g, g,
-        g, w, w, w, w, w, w, g,
-        w, w, w, w, w, w, w, w,
-        w, w, w, g, g, w, w, w,
-        w, w, w, g, g, w, w, w,
-        w, w, w, w, w, w, w, w,
-        g, w, w, w, w, w, w, g,
-        g, g, w, w, w, w, g, g,
-      ]
-    
-    FRAME17 = [
-          g, g, g, g, g, g, g, g,
-        g, g, w, w, w, w, g, g,
-        g, w, w, w, w, w, w, g,
-        g, w, w, w, w, w, w, g,
-        g, w, w, w, w, w, w, g,
-        g, w, w, w, w, w, w, g,
-        g, g, w, w, w, w, g, g,
-        g, g, g, g, g, g, g, g,
-      ]
-    
     FRAME13 = [
           g, g, g, g, g, g, g, g,
         g, g, g, g, g, g, g, g,

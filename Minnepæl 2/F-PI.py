@@ -35,5 +35,9 @@ def main():
 if __name__ == "__main__":
     main()
 
+# HI MY NAME Is
+# TESTEST
+# Dette er Daniel sin test, som går via danel branch
+# TESTEST
 
 

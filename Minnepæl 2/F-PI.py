@@ -32,7 +32,8 @@ bil_pos = 0
 def main():
     pass
 
-
+def collision():
+    
 
 
 if __name__ == "__main__":

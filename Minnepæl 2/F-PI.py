@@ -55,8 +55,23 @@ def mov_map(map):                   # Function to move the map
 def main():
     pass
 
-def collision():
+def map_collision():
     
+    g_map = map_creator()
+    pos = bil_pos()
+    collision = False
+    point = False
+
+    if (g_map[14][pos] == g_map[14][o]):
+        collision = True
+    
+    elif (g_map[14][pos] == g_map[14][c]):
+        point = True
+    
+    return point,collision
+
+
+
 
 
 if __name__ == "__main__":

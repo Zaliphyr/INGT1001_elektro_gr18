@@ -33,13 +33,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-def potetsekker(x):
-    if x == "potet" :
-        return "hvorfor"
-    
-
-# TESTEST
-# Dette er Daniel sin test, som går via danel branch
-# TESTEST
-

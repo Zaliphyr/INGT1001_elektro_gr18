@@ -1,5 +1,6 @@
 # Hei og velkommen til F-Pi main
 
+import random
 r = (0, 0, 0) # road / black
 g = (0, 255, 0) # grass / green
 o = (255, 0, 0) # obstacle
@@ -40,6 +41,37 @@ def map_creator():                  # Function to create an empty map
     return g_map                    # Returns the finished map
 
 
+
+
+
+def coin_placer():
+    g_map = map_creator()                         # Defining g_map variable from the function 
+
+    obstacle = True
+    while obstacle == True:
+        x = int(random.randint(1, 6))             # x is a random integer which corresponds to a pixel on the top row
+        y = int(random.randint(0, 3))             # y is a random integer which defines how often a coin should be placed
+        coin_placement = g_map[0][x]              # Variable for which pixel to place the coin. Adds to first row 
+
+        if o == coin_placement:                   # Checks to see if theres an obstacle in where the coin should be placed
+            obstacle = True
+            #print("Oi! Her er det en hindring!")
+        elif y == 1:                              # There's a 25% chance that y is 1, and then a coin will be placed
+            g_map[0][x] = c                       # Replaces the the current index with a coin
+            obstacle = False                      # Breaks the loop since theres no obstacle
+            
+            """
+            print("Nytt kart:")
+            for row in g_map:
+                print(row)
+            """
+        else:
+            #print("Ingen coin denne gangen.")
+            break
+    return g_map
+
+
+
 def mov_map(map):                   # Function to move the map
     p_map = map.copy()              # Makes a copy of the inserted map
     p_map.pop(len(p_map)-1)         # Removes the bottom row
@@ -52,12 +84,18 @@ def mov_map(map):                   # Function to move the map
     return p_map                    # Returns the new map
 
 
-def main():
-    pass
 
+
+
+def main():
+
+    coin_placer()
+
+    pass
 
 
 
 if __name__ == "__main__":
     main()
+
 

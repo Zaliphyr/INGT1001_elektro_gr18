@@ -2,7 +2,8 @@
 
 r = (0, 0, 0) # road / black
 g = (0, 255, 0) # grass / green
-c = (255, 255, 255)
+o = (255, 0, 0) # obstacle
+c = (255, 255, 0) # coin
 
 
 example_map = [ [g, r, r, r, r, r, r, g],
@@ -13,6 +14,7 @@ example_map = [ [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
+                
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
@@ -21,6 +23,9 @@ example_map = [ [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g]]
+
+
+bil_pos = 0
 
 
 

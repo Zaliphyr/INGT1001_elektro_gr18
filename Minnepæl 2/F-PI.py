@@ -2,6 +2,7 @@
 
 r = (0, 0, 0) # road / black
 g = (0, 255, 0) # grass / green
+c = (255, 255, 255)
 
 
 example_map = [ [g, r, r, r, r, r, r, g],
@@ -33,3 +34,6 @@ if __name__ == "__main__":
     main()
 
 # HI MY NAME Is
+# TESTEST
+# Dette er Daniel sin test, som går via danel branch
+# TESTEST

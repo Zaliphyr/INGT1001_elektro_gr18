@@ -2,9 +2,8 @@
 
 r = (0, 0, 0) # road / black
 g = (0, 255, 0) # grass / green
-
-c = (255, 255, 255)
-print("Kekk")
+o = (255, 0, 0) # obstacle
+c = (255, 255, 0) # coin
 
 
 example_map = [ [g, r, r, r, r, r, r, g],
@@ -15,6 +14,7 @@ example_map = [ [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
+                
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
@@ -23,6 +23,9 @@ example_map = [ [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g]]
+
+
+bil_pos = 0
 
 
 
@@ -34,14 +37,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-def potetsekker(x):
-    if x == "potet" :
-        return "hvorfor"
-    
-
-# TESTEST
-# Dette er Daniel sin test, som går via danel branch
-# TESTEST
 

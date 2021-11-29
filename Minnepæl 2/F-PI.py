@@ -1,5 +1,7 @@
 # Hei og velkommen til F-Pi main
 
+import random
+
 r = (0, 0, 0) # road / black
 g = (0, 255, 0) # grass / green
 o = (255, 0, 0) # obstacle
@@ -50,6 +52,32 @@ def mov_map(map):                   # Function to move the map
     p.append(g)
     p_map.insert(0, p)              # Inserts the new row at the top
     return p_map                    # Returns the new map
+
+def obstacle(kart, score):          # Function to create obstacle in first row
+    if score < 1000:                # Checking how high the score is
+        obst = random.randint(1, 6) # Random number
+        kart[0][obst] = o           # Changes the elements in the first row
+    elif 1000 <= score < 2000:
+        for i in range(2):
+            obst = random.randint(1, 6)
+            kart[0][obst] = o
+    elif 2000 <= score < 3000:
+        for i in range(3):
+            obst = random.randint(1, 6)
+            kart[0][obst] = o
+    elif 3000 <= score < 4000:
+        for i in range(4):
+            obst = random.randint(1, 6)
+            kart[0][obst] = o
+    else:
+        for i in range(5):
+            obst = random.randint(1, 6)
+            kart[0][obst] = o
+    
+    print(kart[0])
+    return kart
+
+obstacle(map_creator(), score)
 
 
 def main():

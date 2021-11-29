@@ -1,4 +1,6 @@
-# Hei og velkommen til F-Pi main
+from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
+import time
+import random
 
 r = (0, 0, 0) # road / black
 g = (0, 255, 0) # grass / green
@@ -34,12 +36,4 @@ if __name__ == "__main__":
     main()
 
 
-def potetsekker(x):
-    if x == "potet" :
-        return "hvorfor"
-    
-
-# TESTEST
-# Dette er Daniel sin test, som går via danel branch
-# TESTEST
 

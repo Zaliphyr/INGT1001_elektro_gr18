@@ -1,5 +1,10 @@
 # Hei og velkommen til F-Pi main
 
+<<<<<<< Updated upstream
+=======
+import random
+
+>>>>>>> Stashed changes
 r = (0, 0, 0) # road / black
 g = (0, 255, 0) # grass / green
 o = (255, 0, 0) # obstacle

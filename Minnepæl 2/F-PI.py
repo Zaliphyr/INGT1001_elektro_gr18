@@ -32,4 +32,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-# HI MY NAME Is
+def potetsekker(x):
+    if x == "potet" :
+        return "hvorfor"
+    

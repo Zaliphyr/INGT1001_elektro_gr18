@@ -79,6 +79,29 @@ def car_pos_joy(prev_pos): # Function for the position of the car controlled by 
     return position
 
 
+def map_creator():                  # Function to create an empty map
+    g_map = []
+    for i in range(16):             # Map is 16 rows
+        p = []
+        p.append(g)                 # Add first bit of grass
+        for j in range(6):          # Add 6 row pieces in the middle
+            p.append(r)
+        p.append(g)                 # Add last piece of grass
+        g_map.append(p)
+    return g_map                    # Returns the finished map
+
+
+def mov_map(map):                   # Function to move the map
+    p_map = map.copy()              # Makes a copy of the inserted map
+    p_map.pop(len(p_map)-1)         # Removes the bottom row
+    p = []                          # Make one row of the map
+    p.append(g)
+    for j in range(6):
+        p.append(r)
+    p.append(g)
+    p_map.insert(0, p)              # Inserts the new row at the top
+    return p_map                    # Returns the new map
+
 
 def main():
     pass

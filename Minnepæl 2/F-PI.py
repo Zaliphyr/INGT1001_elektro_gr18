@@ -1,7 +1,7 @@
 # Hei og velkommen til F-Pi main
 
 r = (0, 0, 0) # road / black
-g = (0, 255, 0) # grass / green SKRIVEFEIL FUCK OFF
+g = (0, 255, 0) # grass / green
 
 
 example_map = [ [g, r, r, r, r, r, r, g],

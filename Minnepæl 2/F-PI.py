@@ -1,11 +1,14 @@
 # Hei og velkommen til F-Pi main
-
+from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
+import time
 import random
 
-r = (0, 0, 0) # road / black
-g = (0, 255, 0) # grass / green
-o = (255, 0, 0) # obstacle
-c = (255, 255, 0) # coin
+sense = SenseHat()
+
+r = (0, 0, 0)               # road      / black
+g = (0, 255, 0)             # grass     / green
+c = (248, 231, 28)          # coin      / yellow
+v = (48, 135, 145)          # vehicle   / turquoise
 
 
 example_map = [ [g, r, r, r, r, r, r, g],
@@ -16,7 +19,7 @@ example_map = [ [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
-                
+
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
@@ -85,6 +88,20 @@ def mov_map(map):                   # Function to move the map
     p_map.insert(0, p)              # Inserts the new row at the top
     return p_map                    # Returns the new map
 
+def ENABLE_screen() :               # Function that sets pixels on sens hat
+
+        # HUSK ENDRE \/
+  road_screen = example_map[8:]     # Chooses the eight last lists of the list
+  
+  screen_pixels = []
+  for e in road_screen :
+    for pixel in e :
+      screen_pixels.append(pixel)   # Adds all elements in from main map to screen_pixels (total of 64 elements)
+
+  vehicle_pixel = 56 + bil_pos      # Finds the last 8 elements, where the car will move horizontal
+  screen_pixels[vehicle_pixel] = v  # Set the vehicle to life with posistion from vehicle function
+
+  sense.set_pixels(screen_pixels)
 
 def main():
     pass
@@ -94,4 +111,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
 

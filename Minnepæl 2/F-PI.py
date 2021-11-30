@@ -4,6 +4,7 @@ import time
 import random
 
 sense = SenseHat()
+sense.set_rotation(270)
 
 r = (0, 0, 0)               # road / black
 g = (0, 255, 0)             # grass / green
@@ -11,37 +12,139 @@ o = (255, 0, 0)             # obstacle / red
 c = (248, 231, 28)          # coin      / yellow
 v = (48, 135, 145)          # vehicle   / turquoise
 
+meny_pictures = {0: [
+    (245, 66, 35), (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35),
+    (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),
+    (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31), (255, 246, 162),
+    (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162), (255, 255, 255),
+    (5, 47, 189), (5, 77, 224), (35, 118, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245),
+    (5, 77, 224), (35, 118, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245),
+    (35, 118, 245), (35, 126, 245), (35, 111, 245), (35, 126, 245), (35, 126, 245), (35, 126, 245), (35, 126, 245), (35, 118, 245),
+    (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (35, 118, 245), (5, 77, 224),
+    ],
+    1: [
+        (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0),
+        (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255),
+        (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0),
+        (0, 0, 0), (255, 255, 255), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (255, 255, 255), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (255, 255, 255), (208, 2, 27), (208, 2, 27), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (255, 255, 255), (208, 2, 27), (208, 2, 27), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    2: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0),
+        (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0),
+        (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    3: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (248, 231, 28), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (248, 231, 28), (0, 0, 0),
+        (0, 0, 0), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
+        (0, 0, 0),
+        (0, 0, 0), (248, 231, 28), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (248, 231, 28), (0, 0, 0),
+        (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    4: [
+      (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0),
+    (0, 255, 0), (0, 255, 0), (255, 0, 0), (255, 0, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0),
+    (0, 255, 0), (255, 0, 0), (255, 0, 0), (255, 0, 0), (255, 0, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0),
+    (255, 0, 0), (255, 0, 0), (0, 0, 255), (0, 255, 0), (255, 0, 0), (255, 0, 0), (0, 255, 0), (0, 0, 255),
+    (255, 0, 0), (0, 255, 0), (0, 0, 255), (0, 0, 255), (0, 255, 0), (255, 0, 0), (0, 0, 255), (0, 0, 255),
+    (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 0, 255), (0, 0, 255), (0, 0, 255), (0, 0, 255), (0, 255, 0),
+    (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 0, 255), (0, 0, 255), (0, 255, 0), (0, 255, 0),
+    (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0),
+        ],
+    5: [
+      (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0),
+    (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27),
+    (255, 255, 255), (255, 255, 255), (0, 0, 0), (255, 255, 255), (255, 255, 255), (0, 0, 0), (255, 255, 255), (255, 255, 255),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255),
+    (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0),
+     ],
+    6: [
+        (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
+        (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27),
+        (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0),
+        (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27),
+        (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
+    ]
+}
+j_right_click = False
+j_left_click = False
+j_middle_click = False
 
-example_map = [ [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
+def j_right(event):
+    global j_right_click
+    if event.action == ACTION_PRESSED:
+        j_right_click = True
 
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g]]
+
+def j_left(event):
+    global j_left_click
+    if event.action == ACTION_PRESSED:
+        j_left_click = True
+
+def j_middle(event):
+    global interrupt
+    global j_middle_click
+    if event.action == ACTION_PRESSED:
+        j_middle_click = True
+    elif event.action == ACTION_HELD:
+        interrupt = True
+
+def reset_buttons():
+    global interrupt
+    global j_middle_click
+    global j_left_click
+    global j_right_click
+    interrupt = False
+    j_middle_click = False
+    j_left_click = False
+    j_right_click = False
+
+#example_map = [ [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g]]
 
 
 def car_pos_joy(prev_pos): # Function for the position of the car controlled by the joystick,
                            # with previous position as input shown by an integer between 0 and 7
-    from sense_hat import SenseHat # Importing SenseHat from sense_hat library
-    sense = SenseHat()
-    event = sense.stick.wait_for_event() # Henter data fra joystick
-    joy_input = event[1]
 
-    if joy_input == "down":
+    if j_left_click:
         position = prev_pos - 1
-    elif joy_input == "up":
+        reset_buttons()
+    elif j_right_click:
         position = prev_pos + 1
+        reset_buttons()
     else:
         position = prev_pos
 
@@ -126,7 +229,6 @@ def obstacle(kart, score):          # Function to create obstacle in first row
             obst = random.randint(1, 6)
             kart[0][obst] = o
     
-    print(kart[0])
     return kart
 
 
@@ -154,18 +256,66 @@ def map_collision(g_map, car_pos):
     
     elif (g_map[14][car_pos] == c):
         point = True
+        g_map[14][car_pos] = r
+    
+    return point, collision
+
+def move_collision(g_map, car_pos):
+    collision = False
+    point = False
+
+    if(g_map[15][car_pos] == o):
+        collision = True
+    elif(g_map[15][car_pos] == c):
+        point = True
+        g_map[15][car_pos] = r
     
     return point, collision
 
 
-def main():
+def transition(pic1, pic2, right):
+  sleep_time = 0.05
+  if right:
+    state = []
+    for i in range(1, 9):
+      for j in range(8):
+        for k in range(i, 8):
+          state.append(pic1[(8*j)+k])
+        for k in range(i):
+          state.append(pic2[(8*j)+k])
+      sense.set_pixels(state)
+      time.sleep(sleep_time)
+      state = []
+  else:
+    state = []
+    for i in range(1, 9):
+      for j in range(8):
+        for k in range(8-i, 8):
+          state.append(pic2[(8*j)+k])
+        for k in range(8-i):
+          state.append(pic1[(8*j)+k])
+      sense.set_pixels(state)
+      time.sleep(sleep_time)
+      state = []
+
+
+def run_game():
     game_map = map_creator()
     running = True
     coins = 0
     vehicle_pos = 5
 
     while running:
-        enable_screen(game_map, vehicle_pos)
+        for i in range(3):
+            vehicle_pos = car_pos_joy(vehicle_pos)
+            enable_screen(game_map, vehicle_pos)
+            point, collision = move_collision(game_map, vehicle_pos)
+            if collision:
+                running = False
+                break
+            if point:
+                coins += 1
+            time.sleep(0.3)
         point, collision = map_collision(game_map, vehicle_pos)
 
         if collision:
@@ -177,6 +327,48 @@ def main():
         game_map = obstacle(game_map, coins)
         game_map = coin_placer(game_map)
         game_map = mov_map(game_map)
+    return coins
+
+
+def main():
+    global j_right_click
+    global j_left_click
+    global j_middle_click
+    meny_selection = 0
+    meny_max = 1
+    coins = 0
+
+    sense.stick.direction_down = j_left
+    sense.stick.direction_up = j_right
+    sense.stick.direction_middle = j_middle
+
+    while True:
+        if j_right_click:
+            reset_buttons()
+            meny_selection += 1
+            if meny_selection > meny_max:
+                meny_selection = 0
+                transition(meny_pictures[meny_max], meny_selection[0], True)
+            else:
+                transition(meny_pictures[meny_selection-1], meny_pictures[meny_selection], True)
+        elif j_left_click:
+            reset_buttons()
+            meny_selection -= 1
+            if meny_selection < 0:
+                meny_selection = meny_max
+                transition(meny_pictures[0], meny_pictures[meny_max], False)
+            else:
+                transition(meny_pictures[meny_selection+1], meny_pictures[meny_selection], False)
+        elif j_middle_click:
+            reset_buttons()
+            if meny_selection == 0:
+                coins = run_game()
+            elif meny_selection == 1:
+                break
+
+        sense.set_pixels(meny_pictures[meny_selection])
+    sense.clear()
+    print(coins)
 
 
 

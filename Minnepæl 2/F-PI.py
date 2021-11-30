@@ -110,8 +110,6 @@ def obstacle(kart, score):          # Function to create obstacle in first row
         for i in range(5):
             obst = random.randint(1, 6)
             kart[0][obst] = o
-    
-    print(kart[0])
     return kart
 
 obstacle(map_creator(), score)

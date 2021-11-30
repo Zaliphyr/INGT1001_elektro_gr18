@@ -106,6 +106,22 @@ def ENABLE_screen() :               # Function that sets pixels on sens hat
 def main():
     pass
 
+def map_collision():
+    
+    g_map = map_creator()
+    pos = bil_pos()
+    collision = False
+    point = False
+
+    if (g_map[14][pos] == g_map[14][o]):
+        collision = True
+    
+    elif (g_map[14][pos] == g_map[14][c]):
+        point = True
+    
+    return point,collision
+
+
 
 
 

@@ -4,6 +4,7 @@ import time
 import random
 
 sense = SenseHat()
+sense.set_rotation(270)
 
 r = (0, 0, 0)               # road / black
 g = (0, 255, 0)             # grass / green
@@ -11,69 +12,139 @@ o = (255, 0, 0)             # obstacle / red
 c = (248, 231, 28)          # coin      / yellow
 v = (48, 135, 145)          # vehicle   / turquoise
 
+meny_pictures = {0: [
+    (245, 66, 35), (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35),
+    (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),
+    (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31), (255, 246, 162),
+    (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162), (255, 255, 255),
+    (5, 47, 189), (5, 77, 224), (35, 118, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245),
+    (5, 77, 224), (35, 118, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245),
+    (35, 118, 245), (35, 126, 245), (35, 111, 245), (35, 126, 245), (35, 126, 245), (35, 126, 245), (35, 126, 245), (35, 118, 245),
+    (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (35, 118, 245), (5, 77, 224),
+    ],
+    1: [
+        (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0),
+        (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255),
+        (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0),
+        (0, 0, 0), (255, 255, 255), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (255, 255, 255), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (255, 255, 255), (208, 2, 27), (208, 2, 27), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (255, 255, 255), (208, 2, 27), (208, 2, 27), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    2: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0),
+        (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0),
+        (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    3: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (248, 231, 28), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (248, 231, 28), (0, 0, 0),
+        (0, 0, 0), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
+        (0, 0, 0),
+        (0, 0, 0), (248, 231, 28), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (248, 231, 28), (0, 0, 0),
+        (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    4: [
+      (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0),
+    (0, 255, 0), (0, 255, 0), (255, 0, 0), (255, 0, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0),
+    (0, 255, 0), (255, 0, 0), (255, 0, 0), (255, 0, 0), (255, 0, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0),
+    (255, 0, 0), (255, 0, 0), (0, 0, 255), (0, 255, 0), (255, 0, 0), (255, 0, 0), (0, 255, 0), (0, 0, 255),
+    (255, 0, 0), (0, 255, 0), (0, 0, 255), (0, 0, 255), (0, 255, 0), (255, 0, 0), (0, 0, 255), (0, 0, 255),
+    (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 0, 255), (0, 0, 255), (0, 0, 255), (0, 0, 255), (0, 255, 0),
+    (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 0, 255), (0, 0, 255), (0, 255, 0), (0, 255, 0),
+    (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0),
+        ],
+    5: [
+      (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0),
+    (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27),
+    (255, 255, 255), (255, 255, 255), (0, 0, 0), (255, 255, 255), (255, 255, 255), (0, 0, 0), (255, 255, 255), (255, 255, 255),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255),
+    (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0),
+     ],
+    6: [
+        (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
+        (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27),
+        (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0),
+        (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27),
+        (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
+    ]
+}
+j_right_click = False
+j_left_click = False
+j_middle_click = False
 
-example_map = [ [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g],
-                [g, r, r, r, r, r, r, g]]
+def j_right(event):
+    global j_right_click
+    if event.action == ACTION_PRESSED:
+        j_right_click = True
 
 
-def car_pos_gyro(prev_pos): # Function for the position of the car controlled by gyroscope,
-                            # with previous position as input shown by an integer between 0 and 7
-    from sense_hat import SenseHat # Importing SenseHat from sense_hat library
-    sense = SenseHat()
+def j_left(event):
+    global j_left_click
+    if event.action == ACTION_PRESSED:
+        j_left_click = True
 
-    orientation = sense.get_orientation_degrees() # Collecting orientational data from sensehat
-    yaw = orientation["yaw"] # Singling out the data for the yaw orientation
+def j_middle(event):
+    global interrupt
+    global j_middle_click
+    if event.action == ACTION_PRESSED:
+        j_middle_click = True
+    elif event.action == ACTION_HELD:
+        interrupt = True
 
-    if yaw >= 350 or yaw <= 10: # If the "wheel" of the car is almost flat:
-        position = prev_pos # Keep the previous position
-    elif 350 > yaw > 315: # If the "wheel" of the car is pointed a little to the left:
-        position = prev_pos - 1 # Move the car one space to the left
-    elif 315 >= yaw >= 270: # If the "wheel" of the car is pointed between 45 and 90 degrees to the left:
-        position = prev_pos - 2 # Move the car two spaces to the left
-    elif 270 > yaw > 180: # If the "wheel" of the car is at pointed more than 90 degrees to the left:
-        position = prev_pos - 3 # Move the car three places to the left
-    elif 10 < yaw < 45: # If the "wheel" of the car is pointed a little to the right:
-        position = prev_pos + 1 # Move the car one space to the right
-    elif 45 <= yaw <= 90: # If the "wheel" of the car is pointed between 45 and 90 degrees to the right:
-        position = prev_pos + 2 # Move the car two spaces to the right
-    elif 90 < yaw < 180: # If the "wheel" of the car is at pointed more than 90 degrees to the right:
-        position = prev_pos + 3 # Move the car three spaces to the right
-    else: # If the value is 180 degrees or somehow show something that's not between 0 and 360:
-        position = prev_pos # Keep the previous position of the car
+def reset_buttons():
+    global interrupt
+    global j_middle_click
+    global j_left_click
+    global j_right_click
+    interrupt = False
+    j_middle_click = False
+    j_left_click = False
+    j_right_click = False
 
-    if position < 0: # The car can't go further to the left than 0, therefor if the position is negative:
-        position = 0 # Set the position to 0
-    elif position > 7: # The car can't go further to the right than 7, therefor if the position is over 7:
-        position = 7 # Set the position to 7
+#example_map = [ [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g],
+#                [g, r, r, r, r, r, r, g]]
 
-    return position # The function returns the value of the postition from 0 to 7
 
 def car_pos_joy(prev_pos): # Function for the position of the car controlled by the joystick,
                            # with previous position as input shown by an integer between 0 and 7
-    from sense_hat import SenseHat # Importing SenseHat from sense_hat library
-    sense = SenseHat()
-    event = sense.stick.wait_for_event() # Henter data fra joystick
-    joy_input = event[1]
 
-    if joy_input == "left":
+    if j_left_click:
         position = prev_pos - 1
-    elif joy_input == "right":
+        reset_buttons()
+    elif j_right_click:
         position = prev_pos + 1
+        reset_buttons()
     else:
         position = prev_pos
 
@@ -97,11 +168,8 @@ def map_creator():                  # Function to create an empty map
     return g_map                    # Returns the finished map
 
 
-
-
-def coin_placer():                      # Function that places a coin somwhere on the map
-    g_map = map_creator()
-
+def coin_placer(g_map):                      # Function that places a coin somwhere on the map
+   
     obstacle = True
     while obstacle == True:             # The code will run as long as theres an obstacle where the coin is proposed to go        
         x = int(random.randint(1, 6))   # x is a random integer which corresponds to a pixel on the top row
@@ -126,7 +194,6 @@ def coin_placer():                      # Function that places a coin somwhere o
             break
     
     return g_map
-
 
 
 def mov_map(map):                   # Function to move the map
@@ -162,44 +229,368 @@ def obstacle(kart, score):          # Function to create obstacle in first row
             obst = random.randint(1, 6)
             kart[0][obst] = o
     
-    print(kart[0])
     return kart
 
-obstacle(map_creator(), score)
 
-
-def ENABLE_screen() :               # Function that sets pixels on sens hat
-
-        # HUSK ENDRE \/
-  road_screen = example_map[8:]     # Chooses the eight last lists of the list
+def enable_screen(game_map, car_pos) :               # Function that sets pixels on sens hat
+  road_screen = game_map.copy()
+  road_screen = road_screen[8:]     # Chooses the eight last lists of the list
   
   screen_pixels = []
   for e in road_screen :
     for pixel in e :
       screen_pixels.append(pixel)   # Adds all elements in from main map to screen_pixels (total of 64 elements)
 
-  vehicle_pixel = 56 + bil_pos      # Finds the last 8 elements, where the car will move horizontal
+  vehicle_pixel = 56 + car_pos      # Finds the last 8 elements, where the car will move horizontal
   screen_pixels[vehicle_pixel] = v  # Set the vehicle to life with posistion from vehicle function
 
   sense.set_pixels(screen_pixels)
 
-def main():
-    pass
+def player_dead() :
 
-def map_collision():
-    
-    g_map = map_creator()
-    pos = bil_pos()
+  sun_down0 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+  ]
+  
+  sun_down1 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              v,              v,              v,              r,                g,
+  ]
+  
+  sun_down2 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              v,              v,              v,              r,                g,
+      g,              r,              r,              v,              v,              v,              r,                g,
+  ]
+  
+  sun_down3 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), o,              (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              v,              v,              v,              r,                g,
+      g,              r,              r,              v,              v,              v,              r,                g,
+      g,              r,              r,              v,              v,              v,              r,                g,
+  ]
+  
+  sun_down4 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), o,              (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), o,              (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              v,              v,              v,              r,                g,
+      g,              r,              r,              v,              v,              v,              r,                g,
+      g,              r,              r,              v,              v,              v,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+  ]
+  
+  sun_down5 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), o,              (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), v,              v,              o,              (255, 246, 162),  (255, 255, 255),
+      g,              r,              v,              v,              v,              o,              r,                g,
+      g,              r,              v,              v,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+  ]
+  
+  sun_down6 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), v,              v,              v,              (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), v,              v,              v,              o,              (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              o,              r,                g,
+      g,              r,              r,              r,              r,              o,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+  ]
+  
+  sun_down7 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (245, 103, 35), v,              v,              (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), v,              v,              (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              o,              r,                g,
+      g,              r,              r,              r,              r,              o,              r,                g,
+      g,              r,              r,              r,              r,              o,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+  ]
+  
+  sun_down8 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  v,              (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), v,              (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              o,              r,                g,
+      g,              r,              r,              r,              r,              o,              r,                g,
+      g,              r,              r,              r,              r,              o,              r,                g,
+  ]
+  
+  sun_down9 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  v,              (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              o,              r,                g,
+      g,              r,              r,              r,              r,              o,              r,                g,
+  ]
+  
+  sun_down10 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (120, 169, 226),(245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              o,              r,                g,
+  ]
+  
+  sun_down11 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (182, 209, 240), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+  ]
+  
+  sun_down12 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (216, 231, 247), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+  ]
+  
+  sun_down13 = [
+      (245, 66, 35),  (245, 66, 35),  (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (245, 66, 35),  (255, 255, 255), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+  ]
+  
+  sun_down14 = [
+      (245, 66, 35),  (255, 255, 255),(245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (255, 255, 255),(255, 255, 255),(255, 255, 255), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (255, 255, 255),(245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+  ]
+  
+  sun_down15 = [
+      (245, 66, 35),  (255, 255, 255),(245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35),   (245, 176, 35),
+      (255, 255, 255),(255, 255, 255),(255, 255, 255), (255, 255, 255), (245, 176, 35), (245, 176, 35), (245, 213, 35),   (250, 232, 31),
+      (245, 103, 35), (255, 255, 255),(245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),   (255, 246, 162),
+      (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162),  (255, 255, 255),
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+      g,              r,              r,              r,              r,              r,              r,                g,
+  ]
+  
+
+  y = 0.08
+  x = 0.15
+  
+  sense.set_pixels(sun_down0)
+  time.sleep(.7)
+  sense.set_pixels(sun_down1)
+  time.sleep(x)
+  sense.set_pixels(sun_down2)
+  time.sleep(x)
+  sense.set_pixels(sun_down3)
+  time.sleep(.4)
+  sense.set_pixels(sun_down4)
+  time.sleep(.6)
+  sense.set_pixels(sun_down5)
+  time.sleep(.5)
+  sense.set_pixels(sun_down6)
+  time.sleep(x)
+  sense.set_pixels(sun_down7)
+  time.sleep(x)
+  sense.set_pixels(sun_down8)
+  time.sleep(x)
+  sense.set_pixels(sun_down9)
+  time.sleep(x)
+  sense.set_pixels(sun_down10)
+  time.sleep(x)
+  sense.set_pixels(sun_down11)
+  time.sleep(x)
+  sense.set_pixels(sun_down12)
+  time.sleep(x)
+  sense.set_pixels(sun_down13)
+  time.sleep(x)
+  sense.set_pixels(sun_down14)
+  time.sleep(y)
+  sense.set_pixels(sun_down15)
+  time.sleep(y)
+  sense.set_pixels(sun_down14)
+  time.sleep(y)
+  sense.set_pixels(sun_down13)
+  time.sleep(y)
+  sense.set_pixels(sun_down0)
+  time.sleep(y)
+
+
+def map_collision(g_map, car_pos):
     collision = False
     point = False
 
-    if (g_map[14][pos] == g_map[14][o]):
+    if (g_map[14][car_pos] == o):
         collision = True
     
-    elif (g_map[14][pos] == g_map[14][c]):
+    elif (g_map[14][car_pos] == c):
         point = True
+        g_map[14][car_pos] = r
     
-    return point,collision
+    return point, collision
+
+def move_collision(g_map, car_pos):
+    collision = False
+    point = False
+
+    if(g_map[15][car_pos] == o):
+        collision = True
+    elif(g_map[15][car_pos] == c):
+        point = True
+        g_map[15][car_pos] = r
+    
+    return point, collision
+
+
+def transition(pic1, pic2, right):
+  sleep_time = 0.05
+  if right:
+    state = []
+    for i in range(1, 9):
+      for j in range(8):
+        for k in range(i, 8):
+          state.append(pic1[(8*j)+k])
+        for k in range(i):
+          state.append(pic2[(8*j)+k])
+      sense.set_pixels(state)
+      time.sleep(sleep_time)
+      state = []
+  else:
+    state = []
+    for i in range(1, 9):
+      for j in range(8):
+        for k in range(8-i, 8):
+          state.append(pic2[(8*j)+k])
+        for k in range(8-i):
+          state.append(pic1[(8*j)+k])
+      sense.set_pixels(state)
+      time.sleep(sleep_time)
+      state = []
+
+
+def run_game():
+    game_map = map_creator()
+    running = True
+    coins = 0
+    vehicle_pos = 5
+
+    while running:
+        for i in range(3):
+            vehicle_pos = car_pos_joy(vehicle_pos)
+            enable_screen(game_map, vehicle_pos)
+            point, collision = move_collision(game_map, vehicle_pos)
+            if collision:
+                running = False
+                break
+            if point:
+                coins += 1
+            time.sleep(0.3)
+        point, collision = map_collision(game_map, vehicle_pos)
+
+        if collision:
+            running = False
+
+        if point:
+            coins += 1
+        
+        game_map = obstacle(game_map, coins)
+        game_map = coin_placer(game_map)
+        game_map = mov_map(game_map)
+    return coins
+
+
+def main():
+    global j_right_click
+    global j_left_click
+    global j_middle_click
+    meny_selection = 0
+    meny_max = 1
+    coins = 0
+
+    sense.stick.direction_down = j_left
+    sense.stick.direction_up = j_right
+    sense.stick.direction_middle = j_middle
+
+    while True:
+        if j_right_click:
+            reset_buttons()
+            meny_selection += 1
+            if meny_selection > meny_max:
+                meny_selection = 0
+                transition(meny_pictures[meny_max], meny_selection[0], True)
+            else:
+                transition(meny_pictures[meny_selection-1], meny_pictures[meny_selection], True)
+        elif j_left_click:
+            reset_buttons()
+            meny_selection -= 1
+            if meny_selection < 0:
+                meny_selection = meny_max
+                transition(meny_pictures[0], meny_pictures[meny_max], False)
+            else:
+                transition(meny_pictures[meny_selection+1], meny_pictures[meny_selection], False)
+        elif j_middle_click:
+            reset_buttons()
+            if meny_selection == 0:
+                coins = run_game()
+            elif meny_selection == 1:
+                break
+
+        sense.set_pixels(meny_pictures[meny_selection])
+    sense.clear()
+    print(coins)
+
 
 
 

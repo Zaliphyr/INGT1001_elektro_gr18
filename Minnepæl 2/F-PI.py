@@ -27,6 +27,20 @@ example_map = [ [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g],
                 [g, r, r, r, r, r, r, g]]
 
+F_PI = [
+      (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27),
+    (0, 0, 0), (208, 2, 70), (208, 2, 70), (208, 2, 164), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (208, 2, 164), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (0, 0, 0), (208, 2, 27),
+    (0, 0, 0), (144, 19, 254), (0, 0, 0), (208, 2, 70), (0, 0, 0), (208, 2, 27), (0, 0, 0), (208, 2, 70),
+    (0, 0, 0), (144, 19, 254), (0, 0, 0), (144, 19, 254), (208, 2, 164), (208, 2, 70), (0, 0, 0), (144, 19, 254),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+  ]
+
+
+
+
 
 bil_pos = 0
 
@@ -86,6 +100,91 @@ def mov_map(map):                   # Function to move the map
     p_map.insert(0, p)              # Inserts the new row at the top
     return p_map                    # Returns the new map
 
+<<<<<<< Updated upstream
+=======
+  
+def obstacle(kart, score):          # Function to create obstacle in first row
+    if score < 1000:                # Checking how high the score is
+        obst = random.randint(1, 6) # Random number
+        kart[0][obst] = o           # Changes the elements in the first row
+    elif 1000 <= score < 2000:
+        for i in range(2):
+            obst = random.randint(1, 6)
+            kart[0][obst] = o
+    elif 2000 <= score < 3000:
+        for i in range(3):
+            obst = random.randint(1, 6)
+            kart[0][obst] = o
+    elif 3000 <= score < 4000:
+        for i in range(4):
+            obst = random.randint(1, 6)
+            kart[0][obst] = o
+    else:
+        for i in range(5):
+            obst = random.randint(1, 6)
+            kart[0][obst] = o
+    
+    print(kart[0])
+    return kart
+
+
+def enable_screen(game_map, car_pos) :               # Function that sets pixels on sens hat
+    road_screen = game_map.copy()
+    road_screen = road_screen[8:]     # Chooses the eight last lists of the list
+    
+    screen_pixels = []
+    for e in road_screen :
+        for pixel in e :
+            screen_pixels.append(pixel)   # Adds all elements in from main map to screen_pixels (total of 64 elements)
+
+    vehicle_pixel = 56 + car_pos      # Finds the last 8 elements, where the car will move horizontal
+    screen_pixels[vehicle_pixel] = v  # Set the vehicle to life with posistion from vehicle function
+
+    sense.set_pixels(screen_pixels)
+
+
+
+def enable_third_person(game_map, car_pos) :
+
+    sunset_picture = [
+      (189, 16, 224), (189, 16, 224), (224, 133, 241), (248, 201, 28), (248, 201, 28), (224, 133, 241), (189, 16, 224), (189, 16, 224),
+    (189, 16, 224), (224, 133, 241), (248, 201, 28), (248, 201, 28), (248, 201, 28), (248, 201, 28), (224, 133, 241), (189, 16, 224),
+    (224, 133, 241), (248, 201, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 201, 28), (224, 133, 241),
+    (224, 133, 241), (248, 231, 28), (248, 231, 28), (255, 245, 127), (255, 245, 127), (248, 231, 28), (248, 231, 28), (224, 133, 241),
+    ]
+
+
+    road_screen = game_map.copy()
+    road_screen = road_screen[12:]     # Chooses the four last lists of the list
+
+    incoming_obstacles = road_screen
+    
+    screen_pixels = []
+    for e in road_screen :
+        for pixel in e :
+            screen_pixels.append(pixel)   # Adds all elements in from main map to screen_pixels (total of 64 elements)
+
+    vehicle_pixel = 56 + car_pos      # Finds the last 8 elements, where the car will move horizontal
+    screen_pixels[vehicle_pixel] = v  # Set the vehicle to life with posistion from vehicle function
+
+    sense.set_pixels(screen_pixels)
+
+
+
+
+def map_collision(g_map, car_pos):
+    collision = False
+    point = False
+
+    if (g_map[14][car_pos] == o):
+        collision = True
+    
+    elif (g_map[14][car_pos] == c):
+        point = True
+    
+    return point, collision
+
+>>>>>>> Stashed changes
 
 def main():
     pass

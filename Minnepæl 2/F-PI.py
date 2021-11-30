@@ -55,20 +55,20 @@ def mov_map(map):                   # Function to move the map
 def main():
     pass
 
-def map_collision():
+def map_collision():                # Function to detect collision
     
-    g_map = map_creator()
-    pos = bil_pos()
+    g_map = map_creator()           # Import map
+    pos = bil_pos()                 # Import car position
     collision = False
     point = False
 
-    if (g_map[14][pos] == g_map[14][o]):
+    if (g_map[14][pos] == g_map[14][o]):    # Detects collision if there is an obstacle in front of the car
         collision = True
     
-    elif (g_map[14][pos] == g_map[14][c]):
+    elif (g_map[14][pos] == g_map[14][c]):  # Detects points if a coin is in front of the car
         point = True
     
-    return point,collision
+    return point,collision                  # Returns point and collision
 
 
 

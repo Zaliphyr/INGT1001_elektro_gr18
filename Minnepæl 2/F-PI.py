@@ -48,9 +48,8 @@ def map_creator():                  # Function to create an empty map
 
 
 
-def coin_placer():                      # Function that places a coin somwhere on the map
-    g_map = map_creator()
-
+def coin_placer(g_map):                      # Function that places a coin somwhere on the map
+   
     obstacle = True
     while obstacle == True:             # The code will run as long as theres an obstacle where the coin is proposed to go        
         x = int(random.randint(1, 6))   # x is a random integer which corresponds to a pixel on the top row
@@ -117,17 +116,16 @@ def obstacle(kart, score):          # Function to create obstacle in first row
 obstacle(map_creator(), score)
 
 
-def ENABLE_screen() :               # Function that sets pixels on sens hat
-
-        # HUSK ENDRE \/
-  road_screen = example_map[8:]     # Chooses the eight last lists of the list
+def ENABLE_screen(game_map, car_pos) :               # Function that sets pixels on sens hat
+  road_screen = game_map.copy()
+  road_screen = road_screen[8:]     # Chooses the eight last lists of the list
   
   screen_pixels = []
   for e in road_screen :
     for pixel in e :
       screen_pixels.append(pixel)   # Adds all elements in from main map to screen_pixels (total of 64 elements)
 
-  vehicle_pixel = 56 + bil_pos      # Finds the last 8 elements, where the car will move horizontal
+  vehicle_pixel = 56 + car_pos      # Finds the last 8 elements, where the car will move horizontal
   screen_pixels[vehicle_pixel] = v  # Set the vehicle to life with posistion from vehicle function
 
   sense.set_pixels(screen_pixels)
@@ -135,20 +133,17 @@ def ENABLE_screen() :               # Function that sets pixels on sens hat
 def main():
     pass
 
-def map_collision():
-    
-    g_map = map_creator()
-    pos = bil_pos()
+def map_collision(g_map, car_pos):
     collision = False
     point = False
 
-    if (g_map[14][pos] == g_map[14][o]):
+    if (g_map[14][car_pos] == o):
         collision = True
     
-    elif (g_map[14][pos] == g_map[14][c]):
+    elif (g_map[14][car_pos] == c):
         point = True
     
-    return point,collision
+    return point, collision
 
 
 

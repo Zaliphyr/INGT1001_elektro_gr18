@@ -46,8 +46,6 @@ def map_creator():                  # Function to create an empty map
     return g_map                    # Returns the finished map
 
 
-
-
 def coin_placer(g_map):                      # Function that places a coin somwhere on the map
    
     obstacle = True
@@ -74,7 +72,6 @@ def coin_placer(g_map):                      # Function that places a coin somwh
             break
     
     return g_map
-
 
 
 def mov_map(map):                   # Function to move the map
@@ -113,10 +110,8 @@ def obstacle(kart, score):          # Function to create obstacle in first row
     print(kart[0])
     return kart
 
-obstacle(map_creator(), score)
 
-
-def ENABLE_screen(game_map, car_pos) :               # Function that sets pixels on sens hat
+def enable_screen(game_map, car_pos) :               # Function that sets pixels on sens hat
   road_screen = game_map.copy()
   road_screen = road_screen[8:]     # Chooses the eight last lists of the list
   
@@ -130,8 +125,6 @@ def ENABLE_screen(game_map, car_pos) :               # Function that sets pixels
 
   sense.set_pixels(screen_pixels)
 
-def main():
-    pass
 
 def map_collision(g_map, car_pos):
     collision = False
@@ -144,6 +137,28 @@ def map_collision(g_map, car_pos):
         point = True
     
     return point, collision
+
+
+def main():
+    game_map = map_creator()
+    running = True
+    coins = 0
+    vehicle_pos = 5
+
+    while running:
+        enable_screen(game_map, vehicle_pos)
+        point, collision = map_collision(game_map, vehicle_pos)
+
+        if collision:
+            running = False
+
+        if point:
+            coins += 1
+        
+        game_map = obstacle(game_map, coins)
+        game_map = coin_placer(game_map)
+        game_map = mov_map(game_map)
+
 
 
 

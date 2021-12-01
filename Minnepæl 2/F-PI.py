@@ -440,6 +440,26 @@ def map_collision():                # Function to detect collision
     
     return point,collision                  # Returns point and collision
 
+def scores_hat():
+
+    scores = open("score_list.txt")
+    sense.show_message(scores.readline())
+    sense.show_message(scores.readline())
+    sense.show_message(scores.readline())
+
+def scores_console():
+
+    scores = open("scores_list.txt")
+    print(scores.readline())
+    print(scores.readline())
+    print(scores.readline())
+    print(scores.readline())
+    print(scores.readline())
+    print(scores.readline())
+    print(scores.readline())
+    print(scores.readline())
+    print(scores.readline())
+    print(scores.readline())        
 
 
 

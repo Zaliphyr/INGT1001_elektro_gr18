@@ -922,6 +922,10 @@ def move_collision(g_map, car_pos):
     return point, collision
 
 
+
+
+
+
 def choose_name() :
     white = (255, 255, 255)
     black = (0, 0, 0)
@@ -1022,9 +1026,9 @@ def update_csv(name, coins):
                 if i % 2 == 0 :
                     f.write("%s %s\n"% (list_names[i], list_names[i + 1]))  # and adds all the players from list_names
         if new_record :
-          print("Player", name, "updated ->", coins, "coins")
+          update_screen(["Player", name, "updated ->", coins, "coins"])
         else :
-          print("Player", name, ", no new record")                                            # with updated scores
+          update_screen(["Player", name, "no new record"])                                            # with updated scores
 
     else :    
         
@@ -1207,7 +1211,7 @@ def memory(coins):
         with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
             for name in player_scoreboard :
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
-        print("Scoreboard created")
+        update_screen(["Scoreboard created"])
 
 def scores_hat():                                               # Function for displaying leaderboard on sense HAT
 

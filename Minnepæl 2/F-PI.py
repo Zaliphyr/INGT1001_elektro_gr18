@@ -729,7 +729,7 @@ def update_csv(name, coins):
         if new_record :
           update_screen(["Player", name, "updated ->", coins, "coins"])
         else :
-          update_screen(["Player", name, ", no new record"])                                            # with updated scores
+          update_screen(["Player", name, "no new record"])                                            # with updated scores
 
     else :    
         

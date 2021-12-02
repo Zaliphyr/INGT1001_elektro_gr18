@@ -623,7 +623,6 @@ def move_collision(g_map, car_pos):
     return point, collision
 
 
-
 def choose_name() :
     white = (255, 255, 255)
     black = (0, 0, 0)
@@ -726,7 +725,7 @@ def update_csv(name, coins):
         if new_record :
           print("Player", name, "updated ->", coins, "coins")
         else :
-          print("Player", name, ", not new record")                                            # with updated scores
+          print("Player", name, ", no new record")                                            # with updated scores
 
     else :    
         
@@ -948,13 +947,13 @@ def main():
             if meny_selection == 0: # Play game
                 coins = run_game()
                 player_dead()
+                memory(coins)
             elif meny_selection == 1: # Leaderboard
                 #Funksjon for å vise toppliste
                 numberonebullshitguy = 0
             elif meny_selection == 2: # Settings
                  settings()
             elif meny_selection == 3: # Quit game
-                memory(coins)
                 break
 
         sense.set_pixels(meny_pictures[meny_selection]) # Update screen

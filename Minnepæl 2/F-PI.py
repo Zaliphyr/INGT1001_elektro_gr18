@@ -488,25 +488,18 @@ def scores_hat():
 
     scores = open("score_list.txt")                             # Open file with top scores
     sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
-    sense.show_message(scores.readline(), scroll_speed = 0.03)  # Read first line of file and scroll the text
-    sense.show_message(scores.readline(), scroll_speed = 0.03)  
-    sense.show_message(scores.readline(), scroll_speed = 0.03) 
+    for i in range(3):                                          # Read the first three lines of the file and scroll them
+        sense.show_message(scores.readline(), scroll_speed = 0.03)  
+    scores.close()
+     
 
 def scores_console():
 
     scores = open("scores_list.txt")    # Open file with top scores
     print("Top 10 leaderboard")         # Print message Top 10 leaderboard
-    print(scores.readline())            # Read first line in file and print the text
-    print(scores.readline())            
-    print(scores.readline())            
-    print(scores.readline())            
-    print(scores.readline())            
-    print(scores.readline())            
-    print(scores.readline())            
-    print(scores.readline())            
-    print(scores.readline())            
-    print(scores.readline())            
-
+    for i in range(10):                 # Read the first 10 lines of the file
+        print(scores.readline())
+    scores.close()            
 
 
 

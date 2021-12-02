@@ -2,6 +2,8 @@
 from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random
+import csv
+import os
 
 def reset_sense():          # A function used to reset sense so that the gyroscope works properly
     global sense            # Accessing the global variable sense
@@ -321,8 +323,8 @@ def obstacle(kart, score):          # Function to create obstacle in first row
     return kart
 
 
-def enable_screen(game_map, car_pos) :               # Function that sets pixels on sens hat
-  road_screen = game_map[8:]     # Chooses the eight last lists of the list
+def enable_screen(game_map, car_pos) :               # Function that sets pixels on sense hat
+  road_screen = game_map[8:]                         # Chooses the eight last lists of the list
   
   screen_pixels = []
   for e in road_screen :
@@ -581,6 +583,80 @@ def move_collision(g_map, car_pos):
     
     return point, collision
 
+def choose_name() :
+    name = ""
+    name_list = []
+    alfab = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    white = (255, 255, 255)
+    black = (0, 0, 0)
+    green = (0, 77, 26)
+    
+    
+    
+    x = 0
+    while len(name_list) < 3 :
+        sense.show_letter(alfab[x], text_colour=white, back_colour=black)
+      
+        if j_up_click :
+            reset_buttons()
+            x -= 1
+        elif j_down_click:
+            reset_buttons()
+            x += 1
+        elif j_middle_click:
+            reset_buttons()
+            name_list.append(alfab[x])
+            sense.show_letter(alfab[x], text_colour=(0, 255, 0), back_colour=black)
+            time.sleep(0.2)
+            x = 0
+    
+    for e in name_list :
+      name += e
+    
+    
+    time.sleep(0.2)
+    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
+    
+    return name
+
+def update_csv(name, coins) :                                               # Function that updates an already created file
+    list_names = []
+    with open('SCOREBOARD_FPI.csv', newline='') as f:
+        file_content = csv.reader(f, delimiter=' ', quotechar='|')          # Opens the .csv file and reads all lines:
+        for player in file_content :                                        # like this ["name", "coins"]
+            for i, v in enumerate(player) :                                 #           ["ABC", "13"] ...
+               list_names.append(v)                                         # Adds all list into one list ["name", "coins", "ABC", "13"] ..
+    
+    player_exist = False
+    for e in list_names :                                                   # Iterates over the created list (list_names)
+        if e == name :                                                      # to see if the name already exists
+            player_exist = True                                             # using the Booelen variable player_exist
+        
+            
+    if player_exist :
+        new_record = False      
+        for i, v in enumerate(list_names) :
+            if v == name :                                                  # Updates the one player that aldreay exists and
+                if int(list_names[i+1]) >= int(coins) :
+                  pass
+                else :
+                  new_record = True
+                  list_names[i + 1] = str(coins)                              # gives it a new record (coins)
+        with open('SCOREBOARD_FPI.csv', "w") as f:                          # Overwrites the current file
+            for i, v in enumerate(list_names) :                             
+                if i % 2 == 0 :
+                    f.write("%s %s\n"% (list_names[i], list_names[i + 1]))  # and adds all the players from list_names
+        if new_record :
+          print("Player", name, "updated ->", coins, "coins")
+        else :
+          print("Player", name, ", not new record")                                            # with updated scores
+
+    else :    
+        
+        with open('SCOREBOARD_FPI.csv', "a") as f:                          # If the name chosen does not already exist
+            f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
+        print("Player", name, "added ->", coins, "coins" )
+
 
 def transition(pic1, pic2, right):
   sleep_time = 0.05
@@ -651,6 +727,19 @@ def run_game():
 
     return coins
 
+def memory(coins) :                                                         # Function that adds choose_name() and update_csv() 
+    name = choose_name()                                                    # Find the variable name
+    global player_scoreboard
+    player_scoreboard = {"Name" : "Coins"}                                  # Create a dict with player names and scores
+    player_scoreboard[name] = coins
+    player_scoreboard
+    if os.path.isfile('./SCOREBOARD_FPI.csv') :                             # If the .csv file already exist the 
+        update_csv(name, coins)                                             # update_csv() runs
+    else :
+        with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
+            for name in player_scoreboard :
+                f.write("%s %s\n"% (name, player_scoreboard[name]))
+        print("Scoreboard created")
 
 def main():
     meny_selection = 0          # Selects the first menu
@@ -688,12 +777,13 @@ def main():
             if meny_selection == 0:
                 coins = run_game()
                 player_dead()
+                memory(coins)
             elif meny_selection == 1:
                 break
 
         sense.set_pixels(meny_pictures[meny_selection]) # Update screen
     sense.clear()
-    print(coins)
+
 
 
 

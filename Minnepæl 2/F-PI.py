@@ -623,7 +623,6 @@ def move_collision(g_map, car_pos):
     return point, collision
 
 
-
 def choose_name() :
     white = (255, 255, 255)
     black = (0, 0, 0)
@@ -726,7 +725,7 @@ def update_csv(name, coins):
         if new_record :
           print("Player", name, "updated ->", coins, "coins")
         else :
-          print("Player", name, ", not new record")                                            # with updated scores
+          print("Player", name, ", no new record")                                            # with updated scores
 
     else :    
         
@@ -911,6 +910,29 @@ def memory(coins):
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
         print("Scoreboard created")
 
+def scores_hat():                                               # Function for displaying leaderboard on sense HAT
+
+    scores = open("score_list.txt")                             # Open file with top scores
+    sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
+    for i in range(3):                                          # Read the first three lines of the file and scroll them
+        sense.show_message(scores.readline(), scroll_speed = 0.03)  
+    scores.close()                                              # Close the file to avoid complications
+     
+
+def scores_console():                           # Function for displaying leaderboard in console
+
+    scores = open("scores_list.txt")            # Open file with top scores
+    
+    scorelist = []                              # Create an empty list
+    scorelist.append("Leaderboard")             # Add message Leaderboard to list
+    for i in range(5):                    
+        scorelist.append(scores.readline())     # Add the first 5 lines in the txt file to the list
+    
+    update_screen(scorelist)                    # Use update_screen function to display the top 5 scores in
+                                                # the console
+    scores.close()                              # Close the file to avoid complications
+
+
 # Main function
 def main():
     meny_selection = 0          # Selects the first menu
@@ -948,13 +970,12 @@ def main():
             if meny_selection == 0: # Play game
                 coins = run_game()
                 player_dead()
+                memory(coins)
             elif meny_selection == 1: # Leaderboard
-                #Funksjon for å vise toppliste
-                numberonebullshitguy = 0
+                scores_hat()
             elif meny_selection == 2: # Settings
                  settings()
             elif meny_selection == 3: # Quit game
-                memory(coins)
                 break
 
         sense.set_pixels(meny_pictures[meny_selection]) # Update screen
@@ -962,6 +983,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
 

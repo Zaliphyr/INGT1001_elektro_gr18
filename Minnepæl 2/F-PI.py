@@ -596,10 +596,10 @@ def choose_name() :
     while len(name_list) < 3 :
         sense.show_letter(alfab[x], text_colour=white, back_colour=black)
       
-        if j_left_click :
+        if j_up_click :
             reset_buttons()
             x -= 1
-        elif j_right_click:
+        elif j_down_click:
             reset_buttons()
             x += 1
         elif j_middle_click:
@@ -607,6 +607,7 @@ def choose_name() :
             name_list.append(alfab[x])
             sense.show_letter(alfab[x], text_colour=(0, 255, 0), back_colour=black)
             time.sleep(0.2)
+            x = 0
     
     for e in name_list :
       name += e

@@ -586,11 +586,255 @@ def scores_console():
     for i in range(5):                    
         scorelist.append(scores.readline())     # Add the first 5 lines in the txt file to the list
     
-    update_screen(scorelist)                    # Use update_screen function to display the top 5 scores in
-                                                # the console
-    scores.close()                              # Close the file to avoid complications
+    for e in name_list :
+      name += e
+    
+    
+    time.sleep(0.2)
+    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
+    
+    return name
+
+# Function that updates an already created file
+def update_csv(name, coins):
+    list_names = []
+    with open('SCOREBOARD_FPI.csv', newline='') as f:
+        file_content = csv.reader(f, delimiter=' ', quotechar='|')          # Opens the .csv file and reads all lines:
+        for player in file_content :                                        # like this ["name", "coins"]
+            for i, v in enumerate(player) :                                 #           ["ABC", "13"] ...
+               list_names.append(v)                                         # Adds all list into one list ["name", "coins", "ABC", "13"] ..
+    
+    player_exist = False
+    for e in list_names :                                                   # Iterates over the created list (list_names)
+        if e == name :                                                      # to see if the name already exists
+            player_exist = True                                             # using the Booelen variable player_exist
+        
+            
+    if player_exist :
+        new_record = False      
+        for i, v in enumerate(list_names) :
+            if v == name :                                                  # Updates the one player that aldreay exists and
+                if int(list_names[i+1]) >= int(coins) :
+                  pass
+                else :
+                  new_record = True
+                  list_names[i + 1] = str(coins)                              # gives it a new record (coins)
+        with open('SCOREBOARD_FPI.csv', "w") as f:                          # Overwrites the current file
+            for i, v in enumerate(list_names) :                             
+                if i % 2 == 0 :
+                    f.write("%s %s\n"% (list_names[i], list_names[i + 1]))  # and adds all the players from list_names
+        if new_record :
+          print("Player", name, "updated ->", coins, "coins")
+        else :
+          print("Player", name, ", not new record")                                            # with updated scores
+
+    else :    
+        
+        with open('SCOREBOARD_FPI.csv', "a") as f:                          # If the name chosen does not already exist
+            f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
+        print("Player", name, "added ->", coins, "coins" )
+
+# Function to transition between 2 pictures
+def transition(pic1, pic2, right):
+  sleep_time = 0.05
+  if right:
+    state = []
+    for i in range(1, 9):
+      for j in range(8):
+        for k in range(i, 8):
+          state.append(pic1[(8*j)+k])
+        for k in range(i):
+          state.append(pic2[(8*j)+k])
+      sense.set_pixels(state)
+      time.sleep(sleep_time)
+      state = []
+  else:
+    state = []
+    for i in range(1, 9):
+      for j in range(8):
+        for k in range(8-i, 8):
+          state.append(pic2[(8*j)+k])
+        for k in range(8-i):
+          state.append(pic1[(8*j)+k])
+      sense.set_pixels(state)
+      time.sleep(sleep_time)
+      state = []
+
+# Function that runs the game
+def run_game():
+    game_map = map_creator()            # Creates the map
+    running = True
+    coins = 0
+    vehicle_pos = 5
+
+    last_time_ran_car = 0.0
+    last_time_ran_map = 0.0
+
+    reset_sense()
+
+    while running:
+        now = time.time()
+        sense.get_gyroscope()
+
+        if now - last_time_ran_car > 1/3:                                              # Allows 3 movements before map moves
+            vehicle_pos = car_pos_gyro(vehicle_pos)                      # Updates viechle position
+            enable_screen(game_map, vehicle_pos)                        # Sends it to the led matrix
+            point, collision = move_collision(game_map, vehicle_pos)    # Checks for collition or coin on move horisontally
+            if collision:
+                running = False
+                break
+            if point:
+                coins += 1
+            last_time_ran_car = now
+
+        if now - last_time_ran_map > 1:
+            point, collision = map_collision(game_map, vehicle_pos)         # Checks for collition or coin vertically
+
+            if collision:
+                running = False
+
+            if point:
+                coins += 1
+            
+            game_map = obstacle(game_map, coins)    # Adds new obstacles off screen
+            game_map = coin_placer(game_map)        # Adds new coins off screen
+            game_map = mov_map(game_map)            # Moves the map
+
+            last_time_ran_map = now
+
+    return coins
+
+settings_pictures = {0: [
+      (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (74, 144, 226), (74, 144, 226), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (74, 144, 226), (74, 144, 226), (0, 0, 0), (0, 0, 0),
+    (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (74, 144, 226), (74, 144, 226), (74, 144, 226), (74, 144, 226),
+    (208, 2, 27), (74, 74, 74), (74, 74, 74), (208, 2, 27), (74, 144, 226), (74, 74, 74), (74, 74, 74), (74, 144, 226),
+    (0, 0, 0), (74, 74, 74), (74, 74, 74), (0, 0, 0), (0, 0, 0), (74, 74, 74), (74, 74, 74), (0, 0, 0),
+    (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33),
+    (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33),
+  ],
+  1: [
+      (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (255, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+  ],
+  2: [
+      (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+  ]
+  }
+
+def settings():
+    settings_selection = 0
+    settings_max = 2
+
+    while True:
+        if j_right_click:       # Checks for joy right movement
+            reset_buttons()     # Reset the joy values
+            settings_selection += 1 # Moves the menu
+            if settings_selection > settings_max:   # Check for menu rollover
+                settings_selection = 0
+                transition(settings_pictures[settings_max], settings_pictures[0], True)    # Moves image on screen
+            else:
+                transition(settings_pictures[settings_selection-1], settings_pictures[settings_selection], True)    # Moves image on screen
+        elif j_left_click:      # Checks for joy left movement
+            reset_buttons()     # Reset the joy values
+            settings_selection -= 1 # Moves the menu
+            if settings_selection < 0:  # Check for menu rollover
+                settings_selection = settings_max
+                transition(settings_pictures[0], settings_pictures[settings_max], False)    # Moves image on screen
+            else:
+                transition(settings_pictures[settings_selection+1], settings_pictures[settings_selection], False)   # Moves image on screen
+        elif j_middle_click:    # Check for joy middle click
+            reset_buttons()     # Reset joy values
+            if settings_selection == 0: # Velg bil
+                #velg-bil-funksjon
+                numberonebullshitguy=0
+            elif settings_selection == 1: # Velg kart
+                #Funksjon for å velge kart
+                numberonebullshitguy = 0
+            elif settings_selection == 2: # Gå tilbake
+                 break
+                 numberonebullshitguy = 1
+
+        sense.set_pixels(settings_pictures[settings_selection]) # Update screen
 
 
+# Function that adds choose_name() and update_csv()
+def memory(coins):
+    name = choose_name()                                                    # Find the variable name
+    global player_scoreboard
+    player_scoreboard = {"Name" : "Coins"}                                  # Create a dict with player names and scores
+    player_scoreboard[name] = coins
+    player_scoreboard
+    if os.path.isfile('./SCOREBOARD_FPI.csv') :                             # If the .csv file already exist the 
+        update_csv(name, coins)                                             # update_csv() runs
+    else :
+        with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
+            for name in player_scoreboard :
+                f.write("%s %s\n"% (name, player_scoreboard[name]))
+        print("Scoreboard created")
+
+# Main function
+def main():
+    meny_selection = 0          # Selects the first menu
+    meny_max = 3               # Sets the max number of menues used
+    coins = 0
+
+    sense.stick.direction_down = j_left         # Binds the joystick to the joy functions
+    sense.stick.direction_up = j_right          #
+    sense.stick.direction_middle = j_middle     #
+    sense.stick.direction_right = j_down        #
+    sense.stick.direction_left = j_up           #
+
+    # Add top of display in console
+    startingLines()
+
+    while True:
+        if j_right_click:       # Checks for joy right movement
+            reset_buttons()     # Reset the joy values
+            meny_selection += 1 # Moves the menu
+            if meny_selection > meny_max:   # Check for menu rollover
+                meny_selection = 0
+                transition(meny_pictures[meny_max], meny_pictures[0], True)    # Moves image on screen
+            else:
+                transition(meny_pictures[meny_selection-1], meny_pictures[meny_selection], True)    # Moves image on screen
+        elif j_left_click:      # Checks for joy left movement
+            reset_buttons()     # Reset the joy values
+            meny_selection -= 1 # Moves the menu
+            if meny_selection < 0:  # Check for menu rollover
+                meny_selection = meny_max
+                transition(meny_pictures[0], meny_pictures[meny_max], False)    # Moves image on screen
+            else:
+                transition(meny_pictures[meny_selection+1], meny_pictures[meny_selection], False)   # Moves image on screen
+        elif j_middle_click:    # Check for joy middle click
+            reset_buttons()     # Reset joy values
+            if meny_selection == 0: # Play game
+                coins = run_game()
+                player_dead()
+            elif meny_selection == 1: # Leaderboard
+                #Funksjon for å vise toppliste
+                numberonebullshitguy = 0
+            elif meny_selection == 2: # Settings
+                 settings()
+            elif meny_selection == 3: # Quit game
+                memory(coins)
+                break
+
+        sense.set_pixels(meny_pictures[meny_selection]) # Update screen
+    sense.clear()
 
 if __name__ == "__main__":
     main()

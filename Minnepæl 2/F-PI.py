@@ -490,7 +490,7 @@ def scores_hat():
     sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
     for i in range(3):                                          # Read the first three lines of the file and scroll them
         sense.show_message(scores.readline(), scroll_speed = 0.03)  
-    scores.close()
+    scores.close()                                              # Close the file to avoid complications
      
 
 def scores_console():
@@ -499,7 +499,7 @@ def scores_console():
     print("Top 10 leaderboard")         # Print message Top 10 leaderboard
     for i in range(10):                 # Read the first 10 lines of the file
         print(scores.readline())
-    scores.close()            
+    scores.close()                      # Close the file to avoid complications
 
 
 

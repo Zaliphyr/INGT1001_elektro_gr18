@@ -911,8 +911,7 @@ def main():
                 coins = run_game()
                 player_dead()
             elif meny_selection == 1: # Leaderboard
-                #Funksjon for å vise toppliste
-                numberonebullshitguy = 0
+                scores_hat()
             elif meny_selection == 2: # Settings
                  settings()
             elif meny_selection == 3: # Quit game

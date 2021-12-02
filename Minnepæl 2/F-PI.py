@@ -165,9 +165,9 @@ def startingLines():
     print("║" + "▄▀█ █▀█ █▀▀ ▀█▀ █▀   █▄▀ █ █ █   █▀▀ █▀ ▀█▀ █▀▀   █▄▄ █ █   █▀ █▀█ █ █   █  ".center(box_width, " ") + "║")
     print("║" + "█▀█ █▀▄ ██▄  █  ▄█   █ █ █▄█ █▄▄ ██▄ ▄█  █  ██▄   █▄█ █ █▄▄ ▄█ █▀▀ █ █▄▄ █▄▄".center(box_width, " ") + "║")
     print("║" + (" "*box_width) + "║")
+    for i in range(space-1):
+        print("║" + (" "*box_width) + "║")
     print("╚" + ("═"*box_width) + "╝")
-    for i in range(space-1):                # Prints the empty lines reserved for text
-        print(" " * (box_width+2))
 
 # Function to send text to the screen
 def update_screen(text_list):
@@ -175,10 +175,9 @@ def update_screen(text_list):
 
     for i in text_list:
         print("║" + i.ljust(box_width) + "║")
-    print("╚" + ("═"*box_width) + "╝")
     for i in range(space-(len(text_list)+1)):
-        print(" " * (box_width+2))
-
+        print("║" + (" "*box_width) + "║")
+    print("╚" + ("═"*box_width) + "╝")
 
 #example_map = [ [g, r, r, r, r, r, r, g],
 #                [g, r, r, r, r, r, r, g],
@@ -652,6 +651,7 @@ def update_csv(name, coins) :                                               # Fu
         print("Player", name, "added ->", coins, "coins" )
 
 
+# Function to transition between 2 pictures
 def transition(pic1, pic2, right):
   sleep_time = 0.05
   if right:

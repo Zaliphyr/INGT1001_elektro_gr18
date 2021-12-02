@@ -552,39 +552,105 @@ def player_dead() :
   ]
   
 
-def map_collision():                # Function to detect collision
-    
-    g_map = map_creator()           # Import map
-    pos = bil_pos()                 # Import car position
+  y = 0.08
+  x = 0.15
+  
+  sense.set_pixels(sun_down0)
+  time.sleep(.7)
+  sense.set_pixels(sun_down1)
+  time.sleep(x)
+  sense.set_pixels(sun_down2)
+  time.sleep(x)
+  sense.set_pixels(sun_down3)
+  time.sleep(.4)
+  sense.set_pixels(sun_down4)
+  time.sleep(.6)
+  sense.set_pixels(sun_down5)
+  time.sleep(.5)
+  sense.set_pixels(sun_down6)
+  time.sleep(x)
+  sense.set_pixels(sun_down7)
+  time.sleep(x)
+  sense.set_pixels(sun_down8)
+  time.sleep(x)
+  sense.set_pixels(sun_down9)
+  time.sleep(x)
+  sense.set_pixels(sun_down10)
+  time.sleep(x)
+  sense.set_pixels(sun_down11)
+  time.sleep(x)
+  sense.set_pixels(sun_down12)
+  time.sleep(x)
+  sense.set_pixels(sun_down13)
+  time.sleep(x)
+  sense.set_pixels(sun_down14)
+  time.sleep(y)
+  sense.set_pixels(sun_down15)
+  time.sleep(y)
+  sense.set_pixels(sun_down14)
+  time.sleep(y)
+  sense.set_pixels(sun_down13)
+  time.sleep(y)
+  sense.set_pixels(sun_down0)
+  time.sleep(y)
+
+
+def map_collision(g_map, car_pos):
     collision = False
     point = False
 
-    if (g_map[14][pos] == g_map[14][o]):    # Detects collision if there is an obstacle in front of the car
+    if (g_map[14][car_pos] == o):
         collision = True
     
-    elif (g_map[14][pos] == g_map[14][c]):  # Detects points if a coin is in front of the car
+    elif (g_map[14][car_pos] == c):
         point = True
         g_map[14][car_pos] = r
     
-    return point,collision                  # Returns point and collision
+    return point, collision
 
-def scores_hat():
 
-    scores = open("score_list.txt")                             # Open file with top scores
-    sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
-    for i in range(3):                                          # Read the first three lines of the file and scroll them
-        sense.show_message(scores.readline(), scroll_speed = 0.03)  
-    scores.close()                                              # Close the file to avoid complications
-     
+def move_collision(g_map, car_pos):
+    collision = False
+    point = False
 
-def scores_console():
-
-    scores = open("scores_list.txt")            # Open file with top scores
+    if(g_map[15][car_pos] == o):
+        collision = True
+    elif(g_map[15][car_pos] == c):
+        point = True
+        g_map[15][car_pos] = r
     
-    scorelist = []                              # Create an empty list
-    scorelist.append("Leaderboard")             # Add message Leaderboard to list
-    for i in range(5):                    
-        scorelist.append(scores.readline())     # Add the first 5 lines in the txt file to the list
+
+    return point, collision
+
+
+
+
+def choose_name() :
+    name = ""
+    name_list = []
+    alfab = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    white = (255, 255, 255)
+    black = (0, 0, 0)
+    green = (0, 77, 26)
+    
+    
+    
+    x = 0
+    while len(name_list) < 3 :
+        sense.show_letter(alfab[x], text_colour=white, back_colour=black)
+      
+        if j_up_click :
+            reset_buttons()
+            x -= 1
+        elif j_down_click:
+            reset_buttons()
+            x += 1
+        elif j_middle_click:
+            reset_buttons()
+            name_list.append(alfab[x])
+            sense.show_letter(alfab[x], text_colour=(0, 255, 0), back_colour=black)
+            time.sleep(0.2)
+            x = 0
     
     for e in name_list :
       name += e
@@ -786,14 +852,14 @@ settings_pictures = {0: [
     (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33),
   ],
   1: [
-      (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (255, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+      (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (0, 0, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (0, 0, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (0, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 0, 0), (255, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
   ],
   2: [
       (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),

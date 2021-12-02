@@ -245,7 +245,7 @@ def update_screen(text_list):
     print("\033[F" * space, end="\x1b[1K\r")
 
     for i in text_list:
-        print("║" + i.ljust(box_width) + "║")
+        print("║" + str(i).ljust(box_width) + "║")
     for i in range(space-(len(text_list)+1)):
         print("║" + (" "*box_width) + "║")
     print("╚" + ("═"*box_width) + "╝")

@@ -486,26 +486,26 @@ def map_collision():                # Function to detect collision
 
 def scores_hat():
 
-    scores = open("score_list.txt")
-    sense.show_message("TOP 3", scroll_speed = 0.03)
-    sense.show_message(scores.readline(), scroll_speed = 0.03)
-    sense.show_message(scores.readline(), scroll_speed = 0.03)
-    sense.show_message(scores.readline(), scroll_speed = 0.03)
+    scores = open("score_list.txt")                             # Open file with top scores
+    sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
+    sense.show_message(scores.readline(), scroll_speed = 0.03)  # Read first line of file and scroll the text
+    sense.show_message(scores.readline(), scroll_speed = 0.03)  
+    sense.show_message(scores.readline(), scroll_speed = 0.03) 
 
 def scores_console():
 
-    scores = open("scores_list.txt")
-    print("Top 10 leaderboard")
-    print(scores.readline())
-    print(scores.readline())
-    print(scores.readline())
-    print(scores.readline())
-    print(scores.readline())
-    print(scores.readline())
-    print(scores.readline())
-    print(scores.readline())
-    print(scores.readline())
-    print(scores.readline())        
+    scores = open("scores_list.txt")    # Open file with top scores
+    print("Top 10 leaderboard")         # Print message Top 10 leaderboard
+    print(scores.readline())            # Read first line in file and print the text
+    print(scores.readline())            
+    print(scores.readline())            
+    print(scores.readline())            
+    print(scores.readline())            
+    print(scores.readline())            
+    print(scores.readline())            
+    print(scores.readline())            
+    print(scores.readline())            
+    print(scores.readline())            
 
 
 

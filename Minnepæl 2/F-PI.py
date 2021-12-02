@@ -2,9 +2,15 @@
 from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random
+import csv
+import os
 
-sense = SenseHat()          # This is the sense hat
-sense.set_rotation(270)     # Selects correct led matrix rotation
+def reset_sense():          # A function used to reset sense so that the gyroscope works properly
+    global sense            # Accessing the global variable sense
+    sense = SenseHat()      # This is the sense hat
+    sense.set_rotation(270) # Selects correct led matrix rotation
+reset_sense()
+
 box_width = 120             # The max width for the text in the console, this is changable here
 space = 10                  # Avalable lines for printing text
 
@@ -93,6 +99,8 @@ meny_pictures = {0: [
 j_right_click = False
 j_left_click = False
 j_middle_click = False
+j_up_click = False
+j_down_click = False
 
 # Function bound to joy right
 def j_right(event):
@@ -105,6 +113,18 @@ def j_left(event):
     global j_left_click
     if event.action == ACTION_PRESSED:
         j_left_click = True
+
+# Function bound to joy up
+def j_up(event):
+    global j_up_click
+    if event.action == ACTION_PRESSED:
+        j_up_click = True
+
+# Function bound to joy down
+def j_down(event):
+    global j_down_click
+    if event.action == ACTION_PRESSED:
+        j_down_click = True
 
 # Function bound to joy middle
 def j_middle(event):
@@ -121,10 +141,14 @@ def reset_buttons():
     global j_middle_click
     global j_left_click
     global j_right_click
+    global j_up_click
+    global j_down_click
     interrupt = False
     j_middle_click = False
     j_left_click = False
     j_right_click = False
+    j_up_click = False
+    j_down_click = False
 
 # Function to print the console header
 def startingLines():
@@ -141,25 +165,19 @@ def startingLines():
     print("║" + "▄▀█ █▀█ █▀▀ ▀█▀ █▀   █▄▀ █ █ █   █▀▀ █▀ ▀█▀ █▀▀   █▄▄ █ █   █▀ █▀█ █ █   █  ".center(box_width, " ") + "║")
     print("║" + "█▀█ █▀▄ ██▄  █  ▄█   █ █ █▄█ █▄▄ ██▄ ▄█  █  ██▄   █▄█ █ █▄▄ ▄█ █▀▀ █ █▄▄ █▄▄".center(box_width, " ") + "║")
     print("║" + (" "*box_width) + "║")
+    for i in range(space-1):
+        print("║" + (" "*box_width) + "║")
     print("╚" + ("═"*box_width) + "╝")
-    for i in range(space-1):                # Prints the empty lines reserved for text
-        print(" " * (box_width+2))
 
 # Function to send text to the screen
-def update_screen(text):
-    segments = []                               # Splits the text up into segments if they are longer than the avalable width
-    while len(text) > box_width:                #
-        segments.append(text[:box_width])       #
-        text = text[box_width:]                 #
-    segments.append(text)                       #
+def update_screen(text_list):
+    print("\033[F" * space, end="\x1b[1K\r")
 
-    print("\033[F" * space, end="\x1b[1K\r")    # Removes the empty lines
-
-    for i in segments:                          # Adds text where empty lines was
+    for i in text_list:
         print("║" + i.ljust(box_width) + "║")
-        print("╚" + ("═"*box_width) + "╝")
-    for i in range(space-(len(segments)+1)):    # Fills in the missing empty lines
-        print(" " * (box_width+2))
+    for i in range(space-(len(text_list)+1)):
+        print("║" + (" "*box_width) + "║")
+    print("╚" + ("═"*box_width) + "╝")
 
 #example_map = [ [g, r, r, r, r, r, r, g],
 #                [g, r, r, r, r, r, r, g],
@@ -192,12 +210,34 @@ def car_pos_joy(prev_pos): # Function for the position of the car controlled by 
     else:
         position = prev_pos
 
-    if position < 0:        # The car can't go further to the left than 0, therefor if the position is negative:
-        position = 0        # Set the position to 0
-    elif position > 7:      # The car can't go further to the right than 7, therefor if the position is over 7:
-        position = 7        # Set the position to 7
+    if position < 1:        # The car can't go further to the left than 0, therefor if the position is negative:
+        position = 1        # Set the position to 0
+    elif position > 6:      # The car can't go further to the right than 7, therefor if the position is over 7:
+        position = 6        # Set the position to 7
     
     return position
+
+def car_pos_gyro(prev_pos): # Function for the position of the car controlled by gyroscope,
+                            # with previous position as input shown by an integer between 0 and 7
+
+    orientation = sense.get_gyroscope() # Collecting orientational data from sensehat
+    yaw = orientation["yaw"] # Singling out the data for the yaw orientation
+    if yaw >= 340 or yaw <= 20: # If the "wheel" of the car is almost flat:
+        position = prev_pos # Keep the previous position
+    elif 340 > yaw > 180: # If the "wheel" of the car is pointed to the left:
+        position = prev_pos - 1 # Move the car one space to the left
+    elif 20 < yaw < 180: # If the "wheel" of the car is pointed to the right:
+        position = prev_pos + 1 # Move the car one space to the right
+    else: # If the wheel is turned 180 degrees or the reading somehow gives another number:
+        position = prev_pos # Keep the previous position
+
+
+    if position < 1: # The car can't go further to the left than 1, therefor if the position is negative:
+        position = 1 # Set the position to 1
+    elif position > 6: # The car can't go further to the right than 6, therefor if the position is over 6:
+        position = 6 # Set the position to 6
+
+    return position # The function returns the value of the postition from 1 to 6
 
 
 def map_creator():                  # Function to create an empty map
@@ -276,8 +316,8 @@ def obstacle(kart, score):          # Function to create obstacle in first row
     return kart
 
 
-def enable_screen(game_map, car_pos) :               # Function that sets pixels on sens hat
-  road_screen = game_map[8:]     # Chooses the eight last lists of the list
+def enable_screen(game_map, car_pos) :               # Function that sets pixels on sense hat
+  road_screen = game_map[8:]                         # Chooses the eight last lists of the list
   
   screen_pixels = []
   for e in road_screen :

@@ -661,6 +661,77 @@ def choose_name() :
     
     return name
 
+def choose_name() :
+    white = (255, 255, 255)
+    black = (0, 0, 0)
+    gray = (100, 100, 100)
+    green = (0, 255, 0)
+  
+    alfab = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    name = ""
+    name_list = []
+    page_confirmed = 0
+
+    def page1() :
+        color = gray
+        if page_confirmed >= 1 :
+            color = green
+        sense.set_pixel(0,0, color)
+    def page2() :
+        color = gray
+        if page_confirmed >= 2 :
+            color = green
+        sense.set_pixel(2,0, color)
+    def page3() :
+        color = gray
+        if page_confirmed >= 3 :
+            color = green
+        sense.set_pixel(4,0, color)
+  
+    character = 0
+  
+    dot = True
+    while len(name_list) < 3 :
+        if dot :
+            sense.show_letter(alfab[character], text_colour=white, back_colour=black)
+            page1()
+            page2()
+            page3()
+            dot = False
+    
+        
+        if j_up_click :
+            reset_buttons()
+            character -= 1
+            if character < 0 :
+                character = (len(alfab)-1)
+            dot = True
+            
+      
+        elif j_down_click:
+            reset_buttons()
+            character += 1
+            if character >= (len(alfab)) :
+                character = 0
+            dot = True
+
+        elif j_middle_click:
+            reset_buttons()
+            page_confirmed += 1
+            name_list.append(alfab[character])
+            sense.show_letter(alfab[character], text_colour=white, back_colour=black)
+            time.sleep(0.2)
+            character = 0
+            dot = True
+            
+  
+    for e in name_list :
+        name += e
+      
+    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
+  
+    return name
+
 # Function that updates an already created file
 def update_csv(name, coins):
     list_names = []

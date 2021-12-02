@@ -623,10 +623,6 @@ def move_collision(g_map, car_pos):
     return point, collision
 
 
-
-
-
-
 def choose_name() :
     white = (255, 255, 255)
     black = (0, 0, 0)

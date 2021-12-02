@@ -2,16 +2,26 @@
 from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random
+import csv
+import os
 
-sense = SenseHat()
-sense.set_rotation(270)
+def reset_sense():          # A function used to reset sense so that the gyroscope works properly
+    global sense            # Accessing the global variable sense
+    sense = SenseHat()      # This is the sense hat
+    sense.set_rotation(270) # Selects correct led matrix rotation
+reset_sense()
 
+box_width = 120             # The max width for the text in the console, this is changable here
+space = 10                  # Avalable lines for printing text
+
+# Colors used on the map
 r = (0, 0, 0)               # road / black
 g = (0, 255, 0)             # grass / green
 o = (255, 0, 0)             # obstacle / red
 c = (248, 231, 28)          # coin      / yellow
 v = (48, 135, 145)          # vehicle   / turquoise
 
+# Pictures used for the menu
 meny_pictures = {0: [
     (245, 66, 35), (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35),
     (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),
@@ -84,21 +94,39 @@ meny_pictures = {0: [
         (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
     ]
 }
+
+# These become true when joy directions are pressed
 j_right_click = False
 j_left_click = False
 j_middle_click = False
+j_up_click = False
+j_down_click = False
 
+# Function bound to joy right
 def j_right(event):
     global j_right_click
     if event.action == ACTION_PRESSED:
         j_right_click = True
 
-
+# Function bound to joy left
 def j_left(event):
     global j_left_click
     if event.action == ACTION_PRESSED:
         j_left_click = True
 
+# Function bound to joy up
+def j_up(event):
+    global j_up_click
+    if event.action == ACTION_PRESSED:
+        j_up_click = True
+
+# Function bound to joy down
+def j_down(event):
+    global j_down_click
+    if event.action == ACTION_PRESSED:
+        j_down_click = True
+
+# Function bound to joy middle
 def j_middle(event):
     global interrupt
     global j_middle_click
@@ -107,15 +135,49 @@ def j_middle(event):
     elif event.action == ACTION_HELD:
         interrupt = True
 
+# Needs to be runned after using a joy direction
 def reset_buttons():
     global interrupt
     global j_middle_click
     global j_left_click
     global j_right_click
+    global j_up_click
+    global j_down_click
     interrupt = False
     j_middle_click = False
     j_left_click = False
     j_right_click = False
+    j_up_click = False
+    j_down_click = False
+
+# Function to print the console header
+def startingLines():
+    print("╔" + ("═"*box_width) + "╗")
+    print("║" + (" "*box_width) + "║")
+    print("║" + "███████╗      ██████╗ ██╗".center(box_width, " ") + "║")
+    print("║" + "██╔════╝      ██╔══██╗██║".center(box_width, " ") + "║")
+    print("║" + "█████╗  █████╗██████╔╝██║".center(box_width, " ") + "║")
+    print("║" + "██╔══╝  ╚════╝██╔═══╝ ██║".center(box_width, " ") + "║")
+    print("║" + "██║           ██║     ██║".center(box_width, " ") + "║")
+    print("║" + "╚═╝           ╚═╝     ╚═╝".center(box_width, " ") + "║")
+    print("║" + (" "*box_width) + "║")
+    print("║" + " ▀                                                                          ".center(box_width, " ") + "║")
+    print("║" + "▄▀█ █▀█ █▀▀ ▀█▀ █▀   █▄▀ █ █ █   █▀▀ █▀ ▀█▀ █▀▀   █▄▄ █ █   █▀ █▀█ █ █   █  ".center(box_width, " ") + "║")
+    print("║" + "█▀█ █▀▄ ██▄  █  ▄█   █ █ █▄█ █▄▄ ██▄ ▄█  █  ██▄   █▄█ █ █▄▄ ▄█ █▀▀ █ █▄▄ █▄▄".center(box_width, " ") + "║")
+    print("║" + (" "*box_width) + "║")
+    for i in range(space-1):
+        print("║" + (" "*box_width) + "║")
+    print("╚" + ("═"*box_width) + "╝")
+
+# Function to send text to the screen
+def update_screen(text_list):
+    print("\033[F" * space, end="\x1b[1K\r")
+
+    for i in text_list:
+        print("║" + i.ljust(box_width) + "║")
+    for i in range(space-(len(text_list)+1)):
+        print("║" + (" "*box_width) + "║")
+    print("╚" + ("═"*box_width) + "╝")
 
 #example_map = [ [g, r, r, r, r, r, r, g],
 #                [g, r, r, r, r, r, r, g],
@@ -148,12 +210,34 @@ def car_pos_joy(prev_pos): # Function for the position of the car controlled by 
     else:
         position = prev_pos
 
-    if position < 0: # The car can't go further to the left than 0, therefor if the position is negative:
-        position = 0 # Set the position to 0
-    elif position > 7: # The car can't go further to the right than 7, therefor if the position is over 7:
-        position = 7 # Set the position to 7
+    if position < 1:        # The car can't go further to the left than 0, therefor if the position is negative:
+        position = 1        # Set the position to 0
+    elif position > 6:      # The car can't go further to the right than 7, therefor if the position is over 7:
+        position = 6        # Set the position to 7
     
     return position
+
+def car_pos_gyro(prev_pos): # Function for the position of the car controlled by gyroscope,
+                            # with previous position as input shown by an integer between 0 and 7
+
+    orientation = sense.get_gyroscope() # Collecting orientational data from sensehat
+    yaw = orientation["yaw"] # Singling out the data for the yaw orientation
+    if yaw >= 340 or yaw <= 20: # If the "wheel" of the car is almost flat:
+        position = prev_pos # Keep the previous position
+    elif 340 > yaw > 180: # If the "wheel" of the car is pointed to the left:
+        position = prev_pos - 1 # Move the car one space to the left
+    elif 20 < yaw < 180: # If the "wheel" of the car is pointed to the right:
+        position = prev_pos + 1 # Move the car one space to the right
+    else: # If the wheel is turned 180 degrees or the reading somehow gives another number:
+        position = prev_pos # Keep the previous position
+
+
+    if position < 1: # The car can't go further to the left than 1, therefor if the position is negative:
+        position = 1 # Set the position to 1
+    elif position > 6: # The car can't go further to the right than 6, therefor if the position is over 6:
+        position = 6 # Set the position to 6
+
+    return position # The function returns the value of the postition from 1 to 6
 
 
 def map_creator():                  # Function to create an empty map
@@ -218,8 +302,8 @@ def obstacle3D(kart):                   # Function to reate obstacle every 3rd r
         kart[0][obst] = o               # Changes the random element in the first row
     return kart                         # Return map with obstacles with obstacles every 3rd row
 
-def enable_screen(game_map, car_pos) :               # Function that sets pixels on sens hat
-  road_screen = game_map[8:]     # Chooses the eight last lists of the list
+def enable_screen(game_map, car_pos) :               # Function that sets pixels on sense hat
+  road_screen = game_map[8:]                         # Chooses the eight last lists of the list
   
   screen_pixels = []
   for e in road_screen :
@@ -478,7 +562,82 @@ def move_collision(g_map, car_pos):
     
     return point, collision
 
+def choose_name() :
+    name = ""
+    name_list = []
+    alfab = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    white = (255, 255, 255)
+    black = (0, 0, 0)
+    green = (0, 77, 26)
+    
+    
+    
+    x = 0
+    while len(name_list) < 3 :
+        sense.show_letter(alfab[x], text_colour=white, back_colour=black)
+      
+        if j_up_click :
+            reset_buttons()
+            x -= 1
+        elif j_down_click:
+            reset_buttons()
+            x += 1
+        elif j_middle_click:
+            reset_buttons()
+            name_list.append(alfab[x])
+            sense.show_letter(alfab[x], text_colour=(0, 255, 0), back_colour=black)
+            time.sleep(0.2)
+            x = 0
+    
+    for e in name_list :
+      name += e
+    
+    
+    time.sleep(0.2)
+    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
+    
+    return name
 
+def update_csv(name, coins) :                                               # Function that updates an already created file
+    list_names = []
+    with open('SCOREBOARD_FPI.csv', newline='') as f:
+        file_content = csv.reader(f, delimiter=' ', quotechar='|')          # Opens the .csv file and reads all lines:
+        for player in file_content :                                        # like this ["name", "coins"]
+            for i, v in enumerate(player) :                                 #           ["ABC", "13"] ...
+               list_names.append(v)                                         # Adds all list into one list ["name", "coins", "ABC", "13"] ..
+    
+    player_exist = False
+    for e in list_names :                                                   # Iterates over the created list (list_names)
+        if e == name :                                                      # to see if the name already exists
+            player_exist = True                                             # using the Booelen variable player_exist
+        
+            
+    if player_exist :
+        new_record = False      
+        for i, v in enumerate(list_names) :
+            if v == name :                                                  # Updates the one player that aldreay exists and
+                if int(list_names[i+1]) >= int(coins) :
+                  pass
+                else :
+                  new_record = True
+                  list_names[i + 1] = str(coins)                              # gives it a new record (coins)
+        with open('SCOREBOARD_FPI.csv', "w") as f:                          # Overwrites the current file
+            for i, v in enumerate(list_names) :                             
+                if i % 2 == 0 :
+                    f.write("%s %s\n"% (list_names[i], list_names[i + 1]))  # and adds all the players from list_names
+        if new_record :
+          print("Player", name, "updated ->", coins, "coins")
+        else :
+          print("Player", name, ", not new record")                                            # with updated scores
+
+    else :    
+        
+        with open('SCOREBOARD_FPI.csv', "a") as f:                          # If the name chosen does not already exist
+            f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
+        print("Player", name, "added ->", coins, "coins" )
+
+
+# Function to transition between 2 pictures
 def transition(pic1, pic2, right):
   sleep_time = 0.05
   if right:
@@ -506,76 +665,105 @@ def transition(pic1, pic2, right):
 
 
 def run_game():
-    game_map = map_creator()
+    game_map = map_creator()            # Creates the map
     running = True
     coins = 0
     vehicle_pos = 5
 
+    last_time_ran_car = 0.0
+    last_time_ran_map = 0.0
+
+    reset_sense()
+
     while running:
-        for i in range(3):
-            vehicle_pos = car_pos_joy(vehicle_pos)
-            enable_screen(game_map, vehicle_pos)
-            point, collision = move_collision(game_map, vehicle_pos)
+        now = time.time()
+        sense.get_gyroscope()
+
+        if now - last_time_ran_car > 1/3:                                              # Allows 3 movements before map moves
+            vehicle_pos = car_pos_gyro(vehicle_pos)                      # Updates viechle position
+            enable_screen(game_map, vehicle_pos)                        # Sends it to the led matrix
+            point, collision = move_collision(game_map, vehicle_pos)    # Checks for collition or coin on move horisontally
             if collision:
                 running = False
                 break
             if point:
                 coins += 1
-            time.sleep(0.3)
-        point, collision = map_collision(game_map, vehicle_pos)
+            last_time_ran_car = now
 
-        if collision:
-            running = False
+        if now - last_time_ran_map > 1:
+            point, collision = map_collision(game_map, vehicle_pos)         # Checks for collition or coin vertically
 
-        if point:
-            coins += 1
-        
-        game_map = obstacle(game_map)
-        game_map = coin_placer(game_map)
-        game_map = mov_map(game_map)
+            if collision:
+                running = False
+
+            if point:
+                coins += 1
+            
+            game_map = obstacle(game_map, coins)    # Adds new obstacles off screen
+            game_map = coin_placer(game_map)        # Adds new coins off screen
+            game_map = mov_map(game_map)            # Moves the map
+
+            last_time_ran_map = now
+
     return coins
 
+def memory(coins) :                                                         # Function that adds choose_name() and update_csv() 
+    name = choose_name()                                                    # Find the variable name
+    global player_scoreboard
+    player_scoreboard = {"Name" : "Coins"}                                  # Create a dict with player names and scores
+    player_scoreboard[name] = coins
+    player_scoreboard
+    if os.path.isfile('./SCOREBOARD_FPI.csv') :                             # If the .csv file already exist the 
+        update_csv(name, coins)                                             # update_csv() runs
+    else :
+        with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
+            for name in player_scoreboard :
+                f.write("%s %s\n"% (name, player_scoreboard[name]))
+        print("Scoreboard created")
 
 def main():
-    global j_right_click
-    global j_left_click
-    global j_middle_click
-    meny_selection = 0
-    meny_max = 1
+    meny_selection = 0          # Selects the first menu
+    meny_max = 1                # Sets the max number of menues used
     coins = 0
 
-    sense.stick.direction_down = j_left
-    sense.stick.direction_up = j_right
-    sense.stick.direction_middle = j_middle
+    sense.stick.direction_down = j_left         # Binds the joystick to the joy functions
+    sense.stick.direction_up = j_right          #
+    sense.stick.direction_middle = j_middle     #
+    sense.stick.direction_right = j_down        #
+    sense.stick.direction_left = j_up           #
+
+    # Add top of display in console
+    startingLines()
 
     while True:
-        if j_right_click:
-            reset_buttons()
-            meny_selection += 1
-            if meny_selection > meny_max:
+        if j_right_click:       # Checks for joy right movement
+            reset_buttons()     # Reset the joy values
+            meny_selection += 1 # Moves the menu
+            if meny_selection > meny_max:   # Check for menu rollover
                 meny_selection = 0
-                transition(meny_pictures[meny_max], meny_selection[0], True)
+                transition(meny_pictures[meny_max], meny_selection[0], True)    # Moves image on screen
             else:
-                transition(meny_pictures[meny_selection-1], meny_pictures[meny_selection], True)
-        elif j_left_click:
-            reset_buttons()
-            meny_selection -= 1
-            if meny_selection < 0:
+                transition(meny_pictures[meny_selection-1], meny_pictures[meny_selection], True)    # Moves image on screen
+        elif j_left_click:      # Checks for joy left movement
+            reset_buttons()     # Reset the joy values
+            meny_selection -= 1 # Moves the menu
+            if meny_selection < 0:  # Check for menu rollover
                 meny_selection = meny_max
-                transition(meny_pictures[0], meny_pictures[meny_max], False)
+                transition(meny_pictures[0], meny_pictures[meny_max], False)    # Moves image on screen
             else:
-                transition(meny_pictures[meny_selection+1], meny_pictures[meny_selection], False)
-        elif j_middle_click:
-            reset_buttons()
+                transition(meny_pictures[meny_selection+1], meny_pictures[meny_selection], False)   # Moves image on screen
+        elif j_middle_click:    # Check for joy middle click
+            reset_buttons()     # Reset joy values
             if meny_selection == 0:
                 coins = run_game()
                 player_dead()
+                memory(coins)
             elif meny_selection == 1:
                 break
 
-        sense.set_pixels(meny_pictures[meny_selection])
+        sense.set_pixels(meny_pictures[meny_selection]) # Update screen
     sense.clear()
-    print(coins)
+
 
 def score_list_file(name, score):             # Function for the score list saved in a file
   dic = {}                                    # Generating an empty dictionary

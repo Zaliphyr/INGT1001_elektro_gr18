@@ -538,38 +538,38 @@ def move_collision(g_map, car_pos):
     
     return point, collision
 
-def choose_name() :                                                         # Function that lets the player choose a name                                                             # and remembers it
+def choose_name() :
     name = ""
     name_list = []
-    alfab = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]  # List with all characters of the alfabeth
+    alfab = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     white = (255, 255, 255)
     black = (0, 0, 0)
-    green = (0, 255, 0)
+    green = (0, 77, 26)
     
-    sense.show_message("Please choose your name:  3 characters", text_colour=black, back_colour=white, scroll_speed=0.035 )     # Displays information
+    #sense.show_message("Please choose your name:  3 characters", text_colour=white, back_colour=black, scroll_speed=0.05 )
     
     x = 0
-    while len(name_list) < 3 :                                              # Loop runs while name has less than 3 characters
-      sense.show_letter(alfab[x], text_colour=black, back_colour=white)     # Displays the elements of the list "alfab"
+    while len(name_list) < 3 :
+      sense.show_letter(alfab[x], text_colour=white, back_colour=black)
       
-      for event in sense.stick.get_events():                                # Enables the joystick
-        if event.action == "pressed":                                       # Move left and right in the list "alfab" with variable x
-          if event.direction == "left":
+      for event in sense.stick.get_events():
+        if event.action == "pressed":
+          if event.direction == "down":
             x -= 1
-          elif event.direction == "right":
+          elif event.direction == "up":
             x += 1
           elif event.direction == "middle":
-            name_list.append(alfab[x])                                          # Adds every chosen character to the list name_list
-            sense.show_letter(alfab[x], text_colour=green, back_colour=white)   # Makes the character flash green when chosen
+            name_list.append(alfab[x])
+            sense.show_letter(alfab[x], text_colour=(0, 255, 0), back_colour=black)
             time.sleep(0.2)
     
-    for e in name_list :                                                        # Create the variable name to be the string equal to the chosen name
+    for e in name_list :
       name += e
     
-    sense.show_message("Your name is:", text_colour=black, back_colour=white, scroll_speed=0.035)   
+    #sense.show_message("Your name is:", text_colour=white, back_colour=black, scroll_speed=0.05)
     time.sleep(0.2)
-    sense.show_message(name, text_colour=(0, 77, 26), back_colour=white)        # Display your chosen name, after "Your name is:"
-
+    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
+    
     return name
 
 def update_csv(name, coins) :                                               # Function that updates an already created file
@@ -587,20 +587,28 @@ def update_csv(name, coins) :                                               # Fu
         
             
     if player_exist :
+        new_record = False      
         for i, v in enumerate(list_names) :
             if v == name :                                                  # Updates the one player that aldreay exists and
-                list_names[i + 1] = str(coins)                              # gives it a new record (coins)
+                if int(list_names[i+1]) >= int(coins) :
+                  pass
+                else :
+                  new_record = True
+                  list_names[i + 1] = str(coins)                              # gives it a new record (coins)
         with open('SCOREBOARD_FPI.csv', "w") as f:                          # Overwrites the current file
             for i, v in enumerate(list_names) :                             
                 if i % 2 == 0 :
                     f.write("%s %s\n"% (list_names[i], list_names[i + 1]))  # and adds all the players from list_names
-        print("Player updated")                                             # with updated scores
+        if new_record :
+          print("Player", name, "updated ->", coins, "coins")
+        else :
+          print("Player", name, ", not new record")                                            # with updated scores
 
     else :    
         
         with open('SCOREBOARD_FPI.csv', "a") as f:                          # If the name chosen does not already exist
             f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
-        print("Player added")
+        print("Player", name, "added ->", coins, "coins" )
 
 
 def transition(pic1, pic2, right):
@@ -660,8 +668,7 @@ def run_game():
     return coins
 
 def memory(coins) :                                                         # Function that adds choose_name() and update_csv() 
-    choose_name()                                                           # Find the variable name
-    name = choose_name()
+    name = choose_name()                                                    # Find the variable name
     global player_scoreboard
     player_scoreboard = {"Name" : "Coins"}                                  # Create a dict with player names and scores
     player_scoreboard[name] = coins
@@ -714,8 +721,7 @@ def main():
 
         sense.set_pixels(meny_pictures[meny_selection]) # Update screen
     sense.clear()
-    name = choose_name()
-    print(name, " -> ", coins)
+
 
 
 

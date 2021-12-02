@@ -524,12 +524,12 @@ def scores_console():
     scores = open("scores_list.txt")            # Open file with top scores
     
     scorelist = []                              # Create an empty list
-    scorelist.append("Leaderboard")             # Print message Leaderboard
+    scorelist.append("Leaderboard")             # Add message Leaderboard to list
     for i in range(5):                    
-        scorelist.append(scores.readline())
+        scorelist.append(scores.readline())     # Add the first 5 lines in the txt file to the list
     
-    update_screen(scorelist)
-    
+    update_screen(scorelist)                    # Use update_screen function to display the top 5 scores in
+                                                # the console
     scores.close()                              # Close the file to avoid complications
 
 

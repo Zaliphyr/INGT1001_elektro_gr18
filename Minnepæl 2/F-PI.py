@@ -619,16 +619,10 @@ def move_collision(g_map, car_pos):
         point = True
         g_map[15][car_pos] = r
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-    update_screen(scorelist)                    # Use update_screen function to display the top 5 scores in
-                                                # the console
-    scores.close()                              # Close the file to avoid complications
 
-
-=======
-=======
     return point, collision
+
+
 
 
 def choose_name() :
@@ -658,7 +652,6 @@ def choose_name() :
             time.sleep(0.2)
             x = 0
     
->>>>>>> parent of 0183bbf (Merge pull request #24 from Zaliphyr/Kai)
     for e in name_list :
       name += e
     
@@ -908,10 +901,6 @@ def main():
 
         sense.set_pixels(meny_pictures[meny_selection]) # Update screen
     sense.clear()
-<<<<<<< HEAD
->>>>>>> parent of 5e8e5aa (Update F-PI.py)
-=======
->>>>>>> parent of 0183bbf (Merge pull request #24 from Zaliphyr/Kai)
 
 if __name__ == "__main__":
     main()

@@ -23,46 +23,45 @@ v = (48, 135, 145)          # vehicle   / turquoise
 
 # Pictures used for the menu
 meny_pictures = {0: [
-    (245, 66, 35), (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35),
-    (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),
-    (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31), (255, 246, 162),
-    (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 176, 35), (245, 176, 35), (250, 232, 31), (255, 246, 162), (255, 255, 255),
-    (5, 47, 189), (5, 77, 224), (35, 118, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245), (35, 199, 245),
-    (5, 77, 224), (35, 118, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245), (35, 177, 245),
-    (35, 118, 245), (35, 126, 245), (35, 111, 245), (35, 126, 245), (35, 126, 245), (35, 126, 245), (35, 126, 245), (35, 118, 245),
-    (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (0, 101, 255), (35, 118, 245), (5, 77, 224),
-    ],
+      (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (76, 207, 26), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (76, 207, 26), (76, 207, 26), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (76, 207, 26), (76, 207, 26), (76, 207, 26), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (76, 207, 26), (76, 207, 26), (76, 207, 26), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (76, 207, 26), (76, 207, 26), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (76, 207, 26), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+  ],
     1: [
-        (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0),
-        (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255),
-        (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0),
-        (0, 0, 0), (255, 255, 255), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (255, 255, 255), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-        (255, 255, 255), (208, 2, 27), (208, 2, 27), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-        (255, 255, 255), (208, 2, 27), (208, 2, 27), (208, 2, 27), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-    ],
+      (0, 0, 0), (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (248, 231, 28), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (248, 231, 28), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (248, 231, 28), (248, 231, 28), (248, 231, 28), (223, 86, 23), (223, 86, 23),
+    (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (223, 86, 23),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (223, 86, 23), (223, 86, 23), (223, 86, 23),
+    (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (223, 86, 23),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (223, 86, 23), (223, 86, 23), (223, 86, 23),
+  ],
     2: [
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0),
-        (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0),
-        (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (34, 52, 230), (34, 52, 230), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-    ],
+      (0, 0, 0), (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0),
+    (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255),
+    (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255),
+    (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0),
+    (0, 0, 0), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (0, 0, 0), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+  ],
     3: [
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (248, 231, 28), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (248, 231, 28), (0, 0, 0),
-        (0, 0, 0), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
-        (0, 0, 0),
-        (0, 0, 0), (248, 231, 28), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (248, 231, 28), (0, 0, 0),
-        (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-    ],
+      (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
+    (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27),
+    (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+    (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0),
+    (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27),
+    (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
+  ],
     4: [
       (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0),
     (0, 255, 0), (0, 255, 0), (255, 0, 0), (255, 0, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0), (0, 255, 0),
@@ -94,6 +93,78 @@ meny_pictures = {0: [
         (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
     ]
 }
+
+
+car_text = [[   "Nissan Skyline GT-R R34 1999",
+                "Farge: Lys grå",
+                "2.6 L twin-turbocharged RB26DETT I6",
+                "276 bhp @ 7000 rpm",
+                "400 Nm",
+                "AWD",
+                "0-100: 4.9s",
+                "Top Speed: 266 km/h"],
+
+                ["Toyota Supra MK IV 1993",
+                "Farge: Oransje",
+                "3.0 L twin-turbocharged 2JZ-GTE I6",
+                "276 bhp @ 5600 rpm",
+                "434 Nm",
+                "RWD",
+                "0-100: 4.7s",
+                "Top Speed: 285 km/h"],
+
+                ["Dodge Charger R/T 1970",
+                "Farge: Lilla",
+                "7.0 L 426 HEMI V8",
+                "425 bhp @ 5000 rpm",
+                "665 Nm",
+                "RWD",
+                "0-100: 5.4s",
+                "Top Speed: 211 km/h"],
+
+                ["Ferrari F40 1987",
+                "Farge: Rød",
+                "2.9 L twin-turbocharged Tipo F120A V8",
+                "471 bhp @ 7000 rpm",
+                "578 Nm",
+                "RWD",
+                "0-100: 4.3s",
+                "Top Speed: 327 km/h"],
+                
+                ["Postman Pat sin bil",
+                "Farge: rød",
+                "10.0L Quad-Turbocharged W24",
+                "10000bhp @ 7000rpm",
+                "12000Nm",
+                "AWD",
+                "0-100km/h: 0.6s",
+                "Top Speed: 6600km/h (Mach 5.384)"],
+                
+                ["Subaru Impreza",
+                "Farge: (5, 0, 255) - #0500FF",
+                "2.0L Turbo 6MT B4",
+                "261 hp @ 6000 rpm",
+                "343Nm",
+                "AWD",
+                "0-100km/h: 5.5s",
+                "Top Speed: 244km/h"],
+                ["Mini 1000 Mk II 1976",
+                "Farge: (205, 255, 0) - #CDFF00",
+                "39 bhp @ 4750 rpm",
+                "1.0L BMC Austin A-series 998",
+                "0-100km/h: 19s",
+                "70Nm",
+                "FWD",
+                "Top Speed: 130km/h"],
+                
+                ["DeLorean DMC-12",
+                "Farge: (155, 155, 155) - #9B9B9B",
+                "2.85L ZMJ-159 V6",
+                "130bhp @ 5500 rpm",
+                "207Nm",
+                "RWD",
+                "0-100km/h: 9.6s",
+                "Top Speed: 209km/h"]]
 
 # These become true when joy directions are pressed
 j_right_click = False
@@ -165,46 +236,22 @@ def startingLines():
     print("║" + "▄▀█ █▀█ █▀▀ ▀█▀ █▀   █▄▀ █ █ █   █▀▀ █▀ ▀█▀ █▀▀   █▄▄ █ █   █▀ █▀█ █ █   █  ".center(box_width, " ") + "║")
     print("║" + "█▀█ █▀▄ ██▄  █  ▄█   █ █ █▄█ █▄▄ ██▄ ▄█  █  ██▄   █▄█ █ █▄▄ ▄█ █▀▀ █ █▄▄ █▄▄".center(box_width, " ") + "║")
     print("║" + (" "*box_width) + "║")
+    for i in range(space-1):
+        print("║" + (" "*box_width) + "║")
     print("╚" + ("═"*box_width) + "╝")
-    for i in range(space-1):                # Prints the empty lines reserved for text
-        print(" " * (box_width+2))
 
 # Function to send text to the screen
-def update_screen(text):
-    segments = []                               # Splits the text up into segments if they are longer than the avalable width
-    while len(text) > box_width:                #
-        segments.append(text[:box_width])       #
-        text = text[box_width:]                 #
-    segments.append(text)                       #
+def update_screen(text_list):
+    print("\033[F" * space, end="\x1b[1K\r")
 
-    print("\033[F" * space, end="\x1b[1K\r")    # Removes the empty lines
-
-    for i in segments:                          # Adds text where empty lines was
+    for i in text_list:
         print("║" + i.ljust(box_width) + "║")
-        print("╚" + ("═"*box_width) + "╝")
-    for i in range(space-(len(segments)+1)):    # Fills in the missing empty lines
-        print(" " * (box_width+2))
+    for i in range(space-(len(text_list)+1)):
+        print("║" + (" "*box_width) + "║")
+    print("╚" + ("═"*box_width) + "╝")
 
-#example_map = [ [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g]]
-
-
-def car_pos_joy(prev_pos): # Function for the position of the car controlled by the joystick,
+# Function for the position of the car controlled by the joystick,
+def car_pos_joy(prev_pos):
                            # with previous position as input shown by an integer between 0 and 7
 
     if j_left_click:
@@ -223,7 +270,8 @@ def car_pos_joy(prev_pos): # Function for the position of the car controlled by 
     
     return position
 
-def car_pos_gyro(prev_pos): # Function for the position of the car controlled by gyroscope,
+# Function for the position of the car controlled by gyroscope
+def car_pos_gyro(prev_pos):
                             # with previous position as input shown by an integer between 0 and 7
 
     orientation = sense.get_gyroscope() # Collecting orientational data from sensehat
@@ -245,8 +293,8 @@ def car_pos_gyro(prev_pos): # Function for the position of the car controlled by
 
     return position # The function returns the value of the postition from 1 to 6
 
-
-def map_creator():                  # Function to create an empty map
+# Function to create an empty map
+def map_creator():
     g_map = []
     for i in range(16):             # Map is 16 rows
         p = []
@@ -257,8 +305,8 @@ def map_creator():                  # Function to create an empty map
         g_map.append(p)
     return g_map                    # Returns the finished map
 
-
-def coin_placer(g_map):                      # Function that places a coin somwhere on the map
+# Function that places a coin somwhere on the map
+def coin_placer(g_map):
    
     obstacle = True
     while obstacle == True:             # The code will run as long as theres an obstacle where the coin is proposed to go        
@@ -285,8 +333,8 @@ def coin_placer(g_map):                      # Function that places a coin somwh
     
     return g_map
 
-
-def mov_map(map):                   # Function to move the map
+# Function to move the map
+def mov_map(map):
     p_map = map                     # Makes a copy of the inserted map
     p_map.pop(len(p_map)-1)         # Removes the bottom row
     p = []                          # Make one row of the map
@@ -297,32 +345,21 @@ def mov_map(map):                   # Function to move the map
     p_map.insert(0, p)              # Inserts the new row at the top
     return p_map                    # Returns the new map
 
-  
-def obstacle(kart, score):          # Function to create obstacle in first row
-    if score < 1000:                # Checking how high the score is
-        obst = random.randint(1, 6) # Random number
-        kart[0][obst] = o           # Changes the elements in the first row
-    elif 1000 <= score < 2000:
-        for i in range(2):
-            obst = random.randint(1, 6)
-            kart[0][obst] = o
-    elif 2000 <= score < 3000:
-        for i in range(3):
-            obst = random.randint(1, 6)
-            kart[0][obst] = o
-    elif 3000 <= score < 4000:
-        for i in range(4):
-            obst = random.randint(1, 6)
-            kart[0][obst] = o
-    else:
-        for i in range(5):
-            obst = random.randint(1, 6)
-            kart[0][obst] = o
-    
-    return kart
+# Function to create obstacle in each row
+def obstacle(kart):
+    obst = random.randint(1, 6)         # Random number
+    kart[0][obst] = o                   # Changes the random element in the first row
+    return kart                         # Returns map with obstacles
 
+# Function to reate obstacle every 3rd row
+def obstacle3D(kart):
+    if o not in kart[1] and o not in kart[2]:   # If there is no obstacles in the 2nd and 3rd row
+        obst = random.randint(1, 6)     # Random number
+        kart[0][obst] = o               # Changes the random element in the first row
+    return kart                         # Return map with obstacles with obstacles every 3rd row
 
-def enable_screen(game_map, car_pos) :               # Function that sets pixels on sense hat
+# Function that sets pixels on sense hat
+def enable_screen(game_map, car_pos):
   road_screen = game_map[8:]                         # Chooses the eight last lists of the list
   
   screen_pixels = []
@@ -334,6 +371,7 @@ def enable_screen(game_map, car_pos) :               # Function that sets pixels
   screen_pixels[vehicle_pixel] = v  # Set the vehicle to life with posistion from vehicle function
 
   sense.set_pixels(screen_pixels)
+
 
 def player_dead() :
 
@@ -514,310 +552,43 @@ def player_dead() :
   ]
   
 
-  y = 0.08
-  x = 0.15
-  
-  sense.set_pixels(sun_down0)
-  time.sleep(.7)
-  sense.set_pixels(sun_down1)
-  time.sleep(x)
-  sense.set_pixels(sun_down2)
-  time.sleep(x)
-  sense.set_pixels(sun_down3)
-  time.sleep(.4)
-  sense.set_pixels(sun_down4)
-  time.sleep(.6)
-  sense.set_pixels(sun_down5)
-  time.sleep(.5)
-  sense.set_pixels(sun_down6)
-  time.sleep(x)
-  sense.set_pixels(sun_down7)
-  time.sleep(x)
-  sense.set_pixels(sun_down8)
-  time.sleep(x)
-  sense.set_pixels(sun_down9)
-  time.sleep(x)
-  sense.set_pixels(sun_down10)
-  time.sleep(x)
-  sense.set_pixels(sun_down11)
-  time.sleep(x)
-  sense.set_pixels(sun_down12)
-  time.sleep(x)
-  sense.set_pixels(sun_down13)
-  time.sleep(x)
-  sense.set_pixels(sun_down14)
-  time.sleep(y)
-  sense.set_pixels(sun_down15)
-  time.sleep(y)
-  sense.set_pixels(sun_down14)
-  time.sleep(y)
-  sense.set_pixels(sun_down13)
-  time.sleep(y)
-  sense.set_pixels(sun_down0)
-  time.sleep(y)
-
-
-def map_collision(g_map, car_pos):
+def map_collision():                # Function to detect collision
+    
+    g_map = map_creator()           # Import map
+    pos = bil_pos()                 # Import car position
     collision = False
     point = False
 
-    if (g_map[14][car_pos] == o):
+    if (g_map[14][pos] == g_map[14][o]):    # Detects collision if there is an obstacle in front of the car
         collision = True
     
-    elif (g_map[14][car_pos] == c):
+    elif (g_map[14][pos] == g_map[14][c]):  # Detects points if a coin is in front of the car
         point = True
         g_map[14][car_pos] = r
     
-    return point, collision
+    return point,collision                  # Returns point and collision
 
-def move_collision(g_map, car_pos):
-    collision = False
-    point = False
+def scores_hat():
 
-    if(g_map[15][car_pos] == o):
-        collision = True
-    elif(g_map[15][car_pos] == c):
-        point = True
-        g_map[15][car_pos] = r
+    scores = open("score_list.txt")                             # Open file with top scores
+    sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
+    for i in range(3):                                          # Read the first three lines of the file and scroll them
+        sense.show_message(scores.readline(), scroll_speed = 0.03)  
+    scores.close()                                              # Close the file to avoid complications
+     
+
+def scores_console():
+
+    scores = open("scores_list.txt")            # Open file with top scores
     
-    return point, collision
-
-def choose_name() :
-    white = (255, 255, 255)
-    black = (0, 0, 0)
-    gray = (100, 100, 100)
-    green = (0, 255, 0)
-  
-    alfab = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    name = ""
-    name_list = []
-    page_confirmed = 0
-
-    def page1() :
-        color = gray
-        if page_confirmed >= 1 :
-            color = green
-        sense.set_pixel(0,0, color)
-    def page2() :
-        color = gray
-        if page_confirmed >= 2 :
-            color = green
-        sense.set_pixel(2,0, color)
-    def page3() :
-        color = gray
-        if page_confirmed >= 3 :
-            color = green
-        sense.set_pixel(4,0, color)
-  
-    character = 0
-  
-    dot = True
-    while len(name_list) < 3 :
-        if dot :
-            sense.show_letter(alfab[character], text_colour=white, back_colour=black)
-            page1()
-            page2()
-            page3()
-            dot = False
+    scorelist = []                              # Create an empty list
+    scorelist.append("Leaderboard")             # Add message Leaderboard to list
+    for i in range(5):                    
+        scorelist.append(scores.readline())     # Add the first 5 lines in the txt file to the list
     
-        
-        if j_up_click :
-            reset_buttons()
-            character -= 1
-            if character < 0 :
-                character = (len(alfab)-1)
-            dot = True
-            
-      
-        elif j_down_click:
-            reset_buttons()
-            character += 1
-            if character >= (len(alfab)) :
-                character = 0
-            dot = True
-
-        elif j_middle_click:
-            reset_buttons()
-            page_confirmed += 1
-            name_list.append(alfab[character])
-            sense.show_letter(alfab[character], text_colour=white, back_colour=black)
-            time.sleep(0.2)
-            character = 0
-            dot = True
-            
-  
-    for e in name_list :
-        name += e
-      
-    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
-  
-    return name
-
-def update_csv(name, coins) :                                               # Function that updates an already created file
-    list_names = []
-    with open('SCOREBOARD_FPI.csv', newline='') as f:
-        file_content = csv.reader(f, delimiter=' ', quotechar='|')          # Opens the .csv file and reads all lines:
-        for player in file_content :                                        # like this ["name", "coins"]
-            for i, v in enumerate(player) :                                 #           ["ABC", "13"] ...
-               list_names.append(v)                                         # Adds all list into one list ["name", "coins", "ABC", "13"] ..
-    
-    player_exist = False
-    for e in list_names :                                                   # Iterates over the created list (list_names)
-        if e == name :                                                      # to see if the name already exists
-            player_exist = True                                             # using the Booelen variable player_exist
-        
-            
-    if player_exist :
-        new_record = False      
-        for i, v in enumerate(list_names) :
-            if v == name :                                                  # Updates the one player that aldreay exists and
-                if int(list_names[i+1]) >= int(coins) :
-                  pass
-                else :
-                  new_record = True
-                  list_names[i + 1] = str(coins)                              # gives it a new record (coins)
-        with open('SCOREBOARD_FPI.csv', "w") as f:                          # Overwrites the current file
-            for i, v in enumerate(list_names) :                             
-                if i % 2 == 0 :
-                    f.write("%s %s\n"% (list_names[i], list_names[i + 1]))  # and adds all the players from list_names
-        if new_record :
-          print("Player", name, "updated ->", coins, "coins")
-        else :
-          print("Player", name, ", no new record")                                            # with updated scores
-
-    else :    
-        
-        with open('SCOREBOARD_FPI.csv', "a") as f:                          # If the name chosen does not already exist
-            f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
-        print("Player", name, "added ->", coins, "coins" )
-
-
-def transition(pic1, pic2, right):
-  sleep_time = 0.05
-  if right:
-    state = []
-    for i in range(1, 9):
-      for j in range(8):
-        for k in range(i, 8):
-          state.append(pic1[(8*j)+k])
-        for k in range(i):
-          state.append(pic2[(8*j)+k])
-      sense.set_pixels(state)
-      time.sleep(sleep_time)
-      state = []
-  else:
-    state = []
-    for i in range(1, 9):
-      for j in range(8):
-        for k in range(8-i, 8):
-          state.append(pic2[(8*j)+k])
-        for k in range(8-i):
-          state.append(pic1[(8*j)+k])
-      sense.set_pixels(state)
-      time.sleep(sleep_time)
-      state = []
-
-
-def run_game():
-    game_map = map_creator()            # Creates the map
-    running = True
-    coins = 0
-    vehicle_pos = 5
-
-    last_time_ran_car = 0.0
-    last_time_ran_map = 0.0
-
-    reset_sense()
-
-    while running:
-        now = time.time()
-        sense.get_gyroscope()
-
-        if now - last_time_ran_car > 1/3:                                              # Allows 3 movements before map moves
-            vehicle_pos = car_pos_gyro(vehicle_pos)                      # Updates viechle position
-            enable_screen(game_map, vehicle_pos)                        # Sends it to the led matrix
-            point, collision = move_collision(game_map, vehicle_pos)    # Checks for collition or coin on move horisontally
-            if collision:
-                running = False
-                break
-            if point:
-                coins += 1
-            last_time_ran_car = now
-
-        if now - last_time_ran_map > 1:
-            point, collision = map_collision(game_map, vehicle_pos)         # Checks for collition or coin vertically
-
-            if collision:
-                running = False
-
-            if point:
-                coins += 1
-            
-            game_map = obstacle(game_map, coins)    # Adds new obstacles off screen
-            game_map = coin_placer(game_map)        # Adds new coins off screen
-            game_map = mov_map(game_map)            # Moves the map
-
-            last_time_ran_map = now
-
-    return coins
-
-def memory(coins) :                                                         # Function that adds choose_name() and update_csv() 
-    name = choose_name()                                                    # Find the variable name
-    global player_scoreboard
-    player_scoreboard = {"Name" : "Coins"}                                  # Create a dict with player names and scores
-    player_scoreboard[name] = coins
-    player_scoreboard
-    if os.path.isfile('./SCOREBOARD_FPI.csv') :                             # If the .csv file already exist the 
-        update_csv(name, coins)                                             # update_csv() runs
-    else :
-        with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
-            for name in player_scoreboard :
-                f.write("%s %s\n"% (name, player_scoreboard[name]))
-        print("Scoreboard created")
-
-def main():
-    meny_selection = 0          # Selects the first menu
-    meny_max = 1                # Sets the max number of menues used
-    coins = 0
-
-    sense.stick.direction_down = j_left         # Binds the joystick to the joy functions
-    sense.stick.direction_up = j_right          #
-    sense.stick.direction_middle = j_middle     #
-    sense.stick.direction_right = j_down        #
-    sense.stick.direction_left = j_up           #
-
-    while True:
-        if j_right_click:       # Checks for joy right movement
-            reset_buttons()     # Reset the joy values
-            meny_selection += 1 # Moves the menu
-            if meny_selection > meny_max:   # Check for menu rollover
-                meny_selection = 0
-                transition(meny_pictures[meny_max], meny_selection[0], True)    # Moves image on screen
-            else:
-                transition(meny_pictures[meny_selection-1], meny_pictures[meny_selection], True)    # Moves image on screen
-        elif j_left_click:      # Checks for joy left movement
-            reset_buttons()     # Reset the joy values
-            meny_selection -= 1 # Moves the menu
-            if meny_selection < 0:  # Check for menu rollover
-                meny_selection = meny_max
-                transition(meny_pictures[0], meny_pictures[meny_max], False)    # Moves image on screen
-            else:
-                transition(meny_pictures[meny_selection+1], meny_pictures[meny_selection], False)   # Moves image on screen
-        elif j_middle_click:    # Check for joy middle click
-            reset_buttons()     # Reset joy values
-            if meny_selection == 0:
-                coins = run_game()
-                player_dead()
-                memory(coins)
-            elif meny_selection == 1:
-                break
-
-        sense.set_pixels(meny_pictures[meny_selection]) # Update screen
-    sense.clear()
-
-
-
-
+    update_screen(scorelist)                    # Use update_screen function to display the top 5 scores in
+                                                # the console
+    scores.close()                              # Close the file to avoid complications
 
 
 

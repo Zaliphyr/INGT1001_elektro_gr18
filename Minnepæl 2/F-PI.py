@@ -3,8 +3,12 @@ from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random
 
-sense = SenseHat()          # This is the sense hat
-sense.set_rotation(270)     # Selects correct led matrix rotation
+def reset_sense():          # A function used to reset sense so that the gyroscope works properly
+    global sense            # Accessing the global variable sense
+    sense = SenseHat()      # This is the sense hat
+    sense.set_rotation(270) # Selects correct led matrix rotation
+reset_sense()
+
 box_width = 120             # The max width for the text in the console, this is changable here
 space = 10                  # Avalable lines for printing text
 
@@ -192,12 +196,34 @@ def car_pos_joy(prev_pos): # Function for the position of the car controlled by 
     else:
         position = prev_pos
 
-    if position < 0:        # The car can't go further to the left than 0, therefor if the position is negative:
-        position = 0        # Set the position to 0
-    elif position > 7:      # The car can't go further to the right than 7, therefor if the position is over 7:
-        position = 7        # Set the position to 7
+    if position < 1:        # The car can't go further to the left than 0, therefor if the position is negative:
+        position = 1        # Set the position to 0
+    elif position > 6:      # The car can't go further to the right than 7, therefor if the position is over 7:
+        position = 6        # Set the position to 7
     
     return position
+
+def car_pos_gyro(prev_pos): # Function for the position of the car controlled by gyroscope,
+                            # with previous position as input shown by an integer between 0 and 7
+
+    orientation = sense.get_gyroscope() # Collecting orientational data from sensehat
+    yaw = orientation["yaw"] # Singling out the data for the yaw orientation
+    if yaw >= 340 or yaw <= 20: # If the "wheel" of the car is almost flat:
+        position = prev_pos # Keep the previous position
+    elif 340 > yaw > 180: # If the "wheel" of the car is pointed to the left:
+        position = prev_pos - 1 # Move the car one space to the left
+    elif 20 < yaw < 180: # If the "wheel" of the car is pointed to the right:
+        position = prev_pos + 1 # Move the car one space to the right
+    else: # If the wheel is turned 180 degrees or the reading somehow gives another number:
+        position = prev_pos # Keep the previous position
+
+
+    if position < 1: # The car can't go further to the left than 1, therefor if the position is negative:
+        position = 1 # Set the position to 1
+    elif position > 6: # The car can't go further to the right than 6, therefor if the position is over 6:
+        position = 6 # Set the position to 6
+
+    return position # The function returns the value of the postition from 1 to 6
 
 
 def map_creator():                  # Function to create an empty map
@@ -569,9 +595,17 @@ def run_game():
     coins = 0
     vehicle_pos = 5
 
+    last_time_ran_car = 0.0
+    last_time_ran_map = 0.0
+
+    reset_sense()
+
     while running:
-        for i in range(3):                                              # Allows 3 movements before map moves
-            vehicle_pos = car_pos_joy(vehicle_pos)                      # Updates viechle position
+        now = time.time()
+        sense.get_gyroscope()
+
+        if now - last_time_ran_car > 1/3:                                              # Allows 3 movements before map moves
+            vehicle_pos = car_pos_gyro(vehicle_pos)                      # Updates viechle position
             enable_screen(game_map, vehicle_pos)                        # Sends it to the led matrix
             point, collision = move_collision(game_map, vehicle_pos)    # Checks for collition or coin on move horisontally
             if collision:
@@ -579,18 +613,23 @@ def run_game():
                 break
             if point:
                 coins += 1
-            time.sleep(0.3)
-        point, collision = map_collision(game_map, vehicle_pos)         # Checks for collition or coin vertically
+            last_time_ran_car = now
 
-        if collision:
-            running = False
+        if now - last_time_ran_map > 1:
+            point, collision = map_collision(game_map, vehicle_pos)         # Checks for collition or coin vertically
 
-        if point:
-            coins += 1
-        
-        game_map = obstacle(game_map, coins)    # Adds new obstacles off screen
-        game_map = coin_placer(game_map)        # Adds new coins off screen
-        game_map = mov_map(game_map)            # Moves the map
+            if collision:
+                running = False
+
+            if point:
+                coins += 1
+            
+            game_map = obstacle(game_map, coins)    # Adds new obstacles off screen
+            game_map = coin_placer(game_map)        # Adds new coins off screen
+            game_map = mov_map(game_map)            # Moves the map
+
+            last_time_ran_map = now
+
     return coins
 
 

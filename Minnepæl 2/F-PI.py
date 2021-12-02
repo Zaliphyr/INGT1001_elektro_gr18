@@ -213,12 +213,10 @@ def obstacle(kart):                     # Function to create obstacle in each ro
     return kart                         # Returns map with obstacles
 
 def obstacle3D(kart):                   # Function to reate obstacle every 3rd row
-    count = 3                           # Counter
-    if count % 3 == 0:                  # If counter is dividable by 3
+    if o not in kart[1] and o not in kart[2]:   # If there is no obstacles in the 2nd and 3rd row
         obst = random.randint(1, 6)     # Random number
-        kart[0][obst] = o               # Changes the random element
-    count += 1                          # Increases counter by 1
-    return kart                         # Returns map with obstacles
+        kart[0][obst] = o               # Changes the random element in the first row
+    return kart                         # Return map with obstacles with obstacles every 3rd row
 
 def enable_screen(game_map, car_pos) :               # Function that sets pixels on sens hat
   road_screen = game_map[8:]     # Chooses the eight last lists of the list

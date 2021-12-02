@@ -487,13 +487,15 @@ def map_collision():                # Function to detect collision
 def scores_hat():
 
     scores = open("score_list.txt")
-    sense.show_message(scores.readline())
-    sense.show_message(scores.readline())
-    sense.show_message(scores.readline())
+    sense.show_message("TOP 3", scroll_speed = 0.03)
+    sense.show_message(scores.readline(), scroll_speed = 0.03)
+    sense.show_message(scores.readline(), scroll_speed = 0.03)
+    sense.show_message(scores.readline(), scroll_speed = 0.03)
 
 def scores_console():
 
     scores = open("scores_list.txt")
+    print("Top 10 leaderboard")
     print(scores.readline())
     print(scores.readline())
     print(scores.readline())

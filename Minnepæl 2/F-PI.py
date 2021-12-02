@@ -197,7 +197,7 @@ def coin_placer(g_map):                      # Function that places a coin somwh
 
 
 def mov_map(map):                   # Function to move the map
-    p_map = map.copy()              # Makes a copy of the inserted map
+    p_map = map                     # Makes a copy of the inserted map
     p_map.pop(len(p_map)-1)         # Removes the bottom row
     p = []                          # Make one row of the map
     p.append(g)
@@ -233,8 +233,7 @@ def obstacle(kart, score):          # Function to create obstacle in first row
 
 
 def enable_screen(game_map, car_pos) :               # Function that sets pixels on sens hat
-  road_screen = game_map.copy()
-  road_screen = road_screen[8:]     # Chooses the eight last lists of the list
+  road_screen = game_map[8:]     # Chooses the eight last lists of the list
   
   screen_pixels = []
   for e in road_screen :
@@ -584,6 +583,7 @@ def main():
             reset_buttons()
             if meny_selection == 0:
                 coins = run_game()
+                player_dead()
             elif meny_selection == 1:
                 break
 

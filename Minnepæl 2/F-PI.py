@@ -251,26 +251,8 @@ def update_screen(text_list):
         print("║" + (" "*box_width) + "║")
     print("╚" + ("═"*box_width) + "╝")
 
-#example_map = [ [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g]]
-
-
-def car_pos_joy(prev_pos): # Function for the position of the car controlled by the joystick,
+# Function for the position of the car controlled by the joystick,
+def car_pos_joy(prev_pos):
                            # with previous position as input shown by an integer between 0 and 7
 
     if j_left_click:
@@ -289,7 +271,8 @@ def car_pos_joy(prev_pos): # Function for the position of the car controlled by 
     
     return position
 
-def car_pos_gyro(prev_pos): # Function for the position of the car controlled by gyroscope,
+# Function for the position of the car controlled by gyroscope
+def car_pos_gyro(prev_pos):
                             # with previous position as input shown by an integer between 0 and 7
 
     orientation = sense.get_gyroscope() # Collecting orientational data from sensehat
@@ -311,8 +294,8 @@ def car_pos_gyro(prev_pos): # Function for the position of the car controlled by
 
     return position # The function returns the value of the postition from 1 to 6
 
-
-def map_creator():                  # Function to create an empty map
+# Function to create an empty map
+def map_creator():
     g_map = []
     for i in range(16):             # Map is 16 rows
         p = []
@@ -323,8 +306,8 @@ def map_creator():                  # Function to create an empty map
         g_map.append(p)
     return g_map                    # Returns the finished map
 
-
-def coin_placer(g_map):                      # Function that places a coin somwhere on the map
+# Function that places a coin somwhere on the map
+def coin_placer(g_map):
    
     obstacle = True
     while obstacle == True:             # The code will run as long as theres an obstacle where the coin is proposed to go        
@@ -351,8 +334,8 @@ def coin_placer(g_map):                      # Function that places a coin somwh
     
     return g_map
 
-
-def mov_map(map):                   # Function to move the map
+# Function to move the map
+def mov_map(map):
     p_map = map                     # Makes a copy of the inserted map
     p_map.pop(len(p_map)-1)         # Removes the bottom row
     p = []                          # Make one row of the map
@@ -363,18 +346,21 @@ def mov_map(map):                   # Function to move the map
     p_map.insert(0, p)              # Inserts the new row at the top
     return p_map                    # Returns the new map
 
-def obstacle(kart):                     # Function to create obstacle in each row
+# Function to create obstacle in each row
+def obstacle(kart):
     obst = random.randint(1, 6)         # Random number
     kart[0][obst] = o                   # Changes the random element in the first row
     return kart                         # Returns map with obstacles
 
-def obstacle3D(kart):                   # Function to reate obstacle every 3rd row
+# Function to reate obstacle every 3rd row
+def obstacle3D(kart):
     if o not in kart[1] and o not in kart[2]:   # If there is no obstacles in the 2nd and 3rd row
         obst = random.randint(1, 6)     # Random number
         kart[0][obst] = o               # Changes the random element in the first row
     return kart                         # Return map with obstacles with obstacles every 3rd row
 
-def enable_screen(game_map, car_pos) :               # Function that sets pixels on sense hat
+# Function that sets pixels on sense hat
+def enable_screen(game_map, car_pos):
   road_screen = game_map[8:]                         # Chooses the eight last lists of the list
   
   screen_pixels = []
@@ -386,6 +372,7 @@ def enable_screen(game_map, car_pos) :               # Function that sets pixels
   screen_pixels[vehicle_pixel] = v  # Set the vehicle to life with posistion from vehicle function
 
   sense.set_pixels(screen_pixels)
+
 
 def player_dead() :
 
@@ -622,6 +609,7 @@ def map_collision(g_map, car_pos):
     
     return point, collision
 
+
 def move_collision(g_map, car_pos):
     collision = False
     point = False
@@ -633,6 +621,7 @@ def move_collision(g_map, car_pos):
         g_map[15][car_pos] = r
     
     return point, collision
+
 
 def choose_name() :
     name = ""
@@ -670,7 +659,8 @@ def choose_name() :
     
     return name
 
-def update_csv(name, coins) :                                               # Function that updates an already created file
+# Function that updates an already created file
+def update_csv(name, coins):
     list_names = []
     with open('SCOREBOARD_FPI.csv', newline='') as f:
         file_content = csv.reader(f, delimiter=' ', quotechar='|')          # Opens the .csv file and reads all lines:
@@ -708,7 +698,6 @@ def update_csv(name, coins) :                                               # Fu
             f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
         print("Player", name, "added ->", coins, "coins" )
 
-
 # Function to transition between 2 pictures
 def transition(pic1, pic2, right):
   sleep_time = 0.05
@@ -735,7 +724,7 @@ def transition(pic1, pic2, right):
       time.sleep(sleep_time)
       state = []
 
-
+# Function that runs the game
 def run_game():
     game_map = map_creator()            # Creates the map
     running = True
@@ -779,7 +768,8 @@ def run_game():
 
     return coins
 
-def memory(coins) :                                                         # Function that adds choose_name() and update_csv() 
+# Function that adds choose_name() and update_csv()
+def memory(coins):
     name = choose_name()                                                    # Find the variable name
     global player_scoreboard
     player_scoreboard = {"Name" : "Coins"}                                  # Create a dict with player names and scores
@@ -793,6 +783,7 @@ def memory(coins) :                                                         # Fu
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
         print("Scoreboard created")
 
+# Main function
 def main():
     meny_selection = 0          # Selects the first menu
     meny_max = 1                # Sets the max number of menues used

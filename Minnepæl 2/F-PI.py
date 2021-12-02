@@ -95,6 +95,78 @@ meny_pictures = {0: [
     ]
 }
 
+
+car_text = [[   "Nissan Skyline GT-R R34 1999",
+                "Farge: Lys grå",
+                "2.6 L twin-turbocharged RB26DETT I6",
+                "276 bhp @ 7000 rpm",
+                "400 Nm",
+                "AWD",
+                "0-100: 4.9s",
+                "Top Speed: 266 km/h"],
+
+                ["Toyota Supra MK IV 1993",
+                "Farge: Oransje",
+                "3.0 L twin-turbocharged 2JZ-GTE I6",
+                "276 bhp @ 5600 rpm",
+                "434 Nm",
+                "RWD",
+                "0-100: 4.7s",
+                "Top Speed: 285 km/h"],
+
+                ["Dodge Charger R/T 1970",
+                "Farge: Lilla",
+                "7.0 L 426 HEMI V8",
+                "425 bhp @ 5000 rpm",
+                "665 Nm",
+                "RWD",
+                "0-100: 5.4s",
+                "Top Speed: 211 km/h"],
+
+                ["Ferrari F40 1987",
+                "Farge: Rød",
+                "2.9 L twin-turbocharged Tipo F120A V8",
+                "471 bhp @ 7000 rpm",
+                "578 Nm",
+                "RWD",
+                "0-100: 4.3s",
+                "Top Speed: 327 km/h"],
+                
+                ["Postman Pat sin bil",
+                "Farge: rød",
+                "10.0L Quad-Turbocharged W24",
+                "10000bhp @ 7000rpm",
+                "12000Nm",
+                "AWD",
+                "0-100km/h: 0.6s",
+                "Top Speed: 6600km/h (Mach 5.384)"],
+                
+                ["Subaru Impreza",
+                "Farge: (5, 0, 255) - #0500FF",
+                "2.0L Turbo 6MT B4",
+                "261 hp @ 6000 rpm",
+                "343Nm",
+                "AWD",
+                "0-100km/h: 5.5s",
+                "Top Speed: 244km/h"],
+                ["Mini 1000 Mk II 1976",
+                "Farge: (205, 255, 0) - #CDFF00",
+                "39 bhp @ 4750 rpm",
+                "1.0L BMC Austin A-series 998",
+                "0-100km/h: 19s",
+                "70Nm",
+                "FWD",
+                "Top Speed: 130km/h"],
+                
+                ["DeLorean DMC-12",
+                "Farge: (155, 155, 155) - #9B9B9B",
+                "2.85L ZMJ-159 V6",
+                "130bhp @ 5500 rpm",
+                "207Nm",
+                "RWD",
+                "0-100km/h: 9.6s",
+                "Top Speed: 209km/h"]]
+
 # These become true when joy directions are pressed
 j_right_click = False
 j_left_click = False
@@ -179,26 +251,8 @@ def update_screen(text_list):
         print("║" + (" "*box_width) + "║")
     print("╚" + ("═"*box_width) + "╝")
 
-#example_map = [ [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g],
-#                [g, r, r, r, r, r, r, g]]
-
-
-def car_pos_joy(prev_pos): # Function for the position of the car controlled by the joystick,
+# Function for the position of the car controlled by the joystick,
+def car_pos_joy(prev_pos):
                            # with previous position as input shown by an integer between 0 and 7
 
     if j_left_click:
@@ -217,7 +271,8 @@ def car_pos_joy(prev_pos): # Function for the position of the car controlled by 
     
     return position
 
-def car_pos_gyro(prev_pos): # Function for the position of the car controlled by gyroscope,
+# Function for the position of the car controlled by gyroscope
+def car_pos_gyro(prev_pos):
                             # with previous position as input shown by an integer between 0 and 7
 
     orientation = sense.get_gyroscope() # Collecting orientational data from sensehat
@@ -239,8 +294,8 @@ def car_pos_gyro(prev_pos): # Function for the position of the car controlled by
 
     return position # The function returns the value of the postition from 1 to 6
 
-
-def map_creator():                  # Function to create an empty map
+# Function to create an empty map
+def map_creator():
     g_map = []
     for i in range(16):             # Map is 16 rows
         p = []
@@ -251,8 +306,8 @@ def map_creator():                  # Function to create an empty map
         g_map.append(p)
     return g_map                    # Returns the finished map
 
-
-def coin_placer(g_map):                      # Function that places a coin somwhere on the map
+# Function that places a coin somwhere on the map
+def coin_placer(g_map):
    
     obstacle = True
     while obstacle == True:             # The code will run as long as theres an obstacle where the coin is proposed to go        
@@ -279,8 +334,8 @@ def coin_placer(g_map):                      # Function that places a coin somwh
     
     return g_map
 
-
-def mov_map(map):                   # Function to move the map
+# Function to move the map
+def mov_map(map):
     p_map = map                     # Makes a copy of the inserted map
     p_map.pop(len(p_map)-1)         # Removes the bottom row
     p = []                          # Make one row of the map
@@ -291,18 +346,21 @@ def mov_map(map):                   # Function to move the map
     p_map.insert(0, p)              # Inserts the new row at the top
     return p_map                    # Returns the new map
 
-def obstacle(kart):                     # Function to create obstacle in each row
+# Function to create obstacle in each row
+def obstacle(kart):
     obst = random.randint(1, 6)         # Random number
     kart[0][obst] = o                   # Changes the random element in the first row
     return kart                         # Returns map with obstacles
 
-def obstacle3D(kart):                   # Function to reate obstacle every 3rd row
+# Function to reate obstacle every 3rd row
+def obstacle3D(kart):
     if o not in kart[1] and o not in kart[2]:   # If there is no obstacles in the 2nd and 3rd row
         obst = random.randint(1, 6)     # Random number
         kart[0][obst] = o               # Changes the random element in the first row
     return kart                         # Return map with obstacles with obstacles every 3rd row
 
-def enable_screen(game_map, car_pos) :               # Function that sets pixels on sense hat
+# Function that sets pixels on sense hat
+def enable_screen(game_map, car_pos):
   road_screen = game_map[8:]                         # Chooses the eight last lists of the list
   
   screen_pixels = []
@@ -314,6 +372,7 @@ def enable_screen(game_map, car_pos) :               # Function that sets pixels
   screen_pixels[vehicle_pixel] = v  # Set the vehicle to life with posistion from vehicle function
 
   sense.set_pixels(screen_pixels)
+
 
 def player_dead() :
 

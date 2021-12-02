@@ -624,43 +624,6 @@ def move_collision(g_map, car_pos):
 
 
 
-
-def choose_name() :
-    name = ""
-    name_list = []
-    alfab = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    white = (255, 255, 255)
-    black = (0, 0, 0)
-    green = (0, 77, 26)
-    
-    
-    
-    x = 0
-    while len(name_list) < 3 :
-        sense.show_letter(alfab[x], text_colour=white, back_colour=black)
-      
-        if j_up_click :
-            reset_buttons()
-            x -= 1
-        elif j_down_click:
-            reset_buttons()
-            x += 1
-        elif j_middle_click:
-            reset_buttons()
-            name_list.append(alfab[x])
-            sense.show_letter(alfab[x], text_colour=(0, 255, 0), back_colour=black)
-            time.sleep(0.2)
-            x = 0
-    
-    for e in name_list :
-      name += e
-    
-    
-    time.sleep(0.2)
-    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
-    
-    return name
-
 def choose_name() :
     white = (255, 255, 255)
     black = (0, 0, 0)

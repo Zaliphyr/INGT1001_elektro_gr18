@@ -3,15 +3,19 @@ from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random
 
-sense = SenseHat()
-sense.set_rotation(270)
+sense = SenseHat()          # This is the sense hat
+sense.set_rotation(270)     # Selects correct led matrix rotation
+box_width = 120             # The max width for the text in the console, this is changable here
+space = 10                  # Avalable lines for printing text
 
+# Colors used on the map
 r = (0, 0, 0)               # road / black
 g = (0, 255, 0)             # grass / green
 o = (255, 0, 0)             # obstacle / red
 c = (248, 231, 28)          # coin      / yellow
 v = (48, 135, 145)          # vehicle   / turquoise
 
+# Pictures used for the menu
 meny_pictures = {0: [
     (245, 66, 35), (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35),
     (245, 66, 35), (245, 103, 35), (245, 125, 35), (245, 154, 35), (245, 176, 35), (245, 176, 35), (245, 213, 35), (250, 232, 31),
@@ -84,21 +88,25 @@ meny_pictures = {0: [
         (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27),
     ]
 }
+
+# These become true when joy directions are pressed
 j_right_click = False
 j_left_click = False
 j_middle_click = False
 
+# Function bound to joy right
 def j_right(event):
     global j_right_click
     if event.action == ACTION_PRESSED:
         j_right_click = True
 
-
+# Function bound to joy left
 def j_left(event):
     global j_left_click
     if event.action == ACTION_PRESSED:
         j_left_click = True
 
+# Function bound to joy middle
 def j_middle(event):
     global interrupt
     global j_middle_click
@@ -107,6 +115,7 @@ def j_middle(event):
     elif event.action == ACTION_HELD:
         interrupt = True
 
+# Needs to be runned after using a joy direction
 def reset_buttons():
     global interrupt
     global j_middle_click
@@ -116,6 +125,41 @@ def reset_buttons():
     j_middle_click = False
     j_left_click = False
     j_right_click = False
+
+# Function to print the console header
+def startingLines():
+    print("╔" + ("═"*box_width) + "╗")
+    print("║" + (" "*box_width) + "║")
+    print("║" + "███████╗      ██████╗ ██╗".center(box_width, " ") + "║")
+    print("║" + "██╔════╝      ██╔══██╗██║".center(box_width, " ") + "║")
+    print("║" + "█████╗  █████╗██████╔╝██║".center(box_width, " ") + "║")
+    print("║" + "██╔══╝  ╚════╝██╔═══╝ ██║".center(box_width, " ") + "║")
+    print("║" + "██║           ██║     ██║".center(box_width, " ") + "║")
+    print("║" + "╚═╝           ╚═╝     ╚═╝".center(box_width, " ") + "║")
+    print("║" + (" "*box_width) + "║")
+    print("║" + " ▀                                                                          ".center(box_width, " ") + "║")
+    print("║" + "▄▀█ █▀█ █▀▀ ▀█▀ █▀   █▄▀ █ █ █   █▀▀ █▀ ▀█▀ █▀▀   █▄▄ █ █   █▀ █▀█ █ █   █  ".center(box_width, " ") + "║")
+    print("║" + "█▀█ █▀▄ ██▄  █  ▄█   █ █ █▄█ █▄▄ ██▄ ▄█  █  ██▄   █▄█ █ █▄▄ ▄█ █▀▀ █ █▄▄ █▄▄".center(box_width, " ") + "║")
+    print("║" + (" "*box_width) + "║")
+    print("╚" + ("═"*box_width) + "╝")
+    for i in range(space-1):                # Prints the empty lines reserved for text
+        print(" " * (box_width+2))
+
+# Function to send text to the screen
+def update_screen(text):
+    segments = []                               # Splits the text up into segments if they are longer than the avalable width
+    while len(text) > box_width:                #
+        segments.append(text[:box_width])       #
+        text = text[box_width:]                 #
+    segments.append(text)                       #
+
+    print("\033[F" * space, end="\x1b[1K\r")    # Removes the empty lines
+
+    for i in segments:                          # Adds text where empty lines was
+        print("║" + i.ljust(box_width) + "║")
+        print("╚" + ("═"*box_width) + "╝")
+    for i in range(space-(len(segments)+1)):    # Fills in the missing empty lines
+        print(" " * (box_width+2))
 
 #example_map = [ [g, r, r, r, r, r, r, g],
 #                [g, r, r, r, r, r, r, g],
@@ -148,10 +192,10 @@ def car_pos_joy(prev_pos): # Function for the position of the car controlled by 
     else:
         position = prev_pos
 
-    if position < 0: # The car can't go further to the left than 0, therefor if the position is negative:
-        position = 0 # Set the position to 0
-    elif position > 7: # The car can't go further to the right than 7, therefor if the position is over 7:
-        position = 7 # Set the position to 7
+    if position < 0:        # The car can't go further to the left than 0, therefor if the position is negative:
+        position = 0        # Set the position to 0
+    elif position > 7:      # The car can't go further to the right than 7, therefor if the position is over 7:
+        position = 7        # Set the position to 7
     
     return position
 

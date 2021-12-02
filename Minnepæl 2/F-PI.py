@@ -535,11 +535,11 @@ def scores_hat():
 
 def scores_console():
 
-    scores = open("scores_list.txt")    # Open file with top scores
-    print("Top 10 leaderboard")         # Print message Top 10 leaderboard
-    for i in range(10):                 # Read the first 10 lines of the file
+    scores = open("scores_list.txt")      # Open file with top scores
+    print("Leaderboard")                  # Print message Top 10 leaderboard
+    for i in range(5):                    # Read the first 10 lines of the file
         print(scores.readline())
-    scores.close()                      # Close the file to avoid complications
+    scores.close()                        # Close the file to avoid complications
 
 
 

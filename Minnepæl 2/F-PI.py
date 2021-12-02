@@ -764,41 +764,6 @@ def main():
         sense.set_pixels(meny_pictures[meny_selection]) # Update screen
     sense.clear()
 
-
-def score_list_file(name, score):             # Function for the score list saved in a file
-  dic = {}                                    # Generating an empty dictionary
-  with open("score_list.txt") as file:         # Opens the score file
-    if file == "":                            # If the file is empty
-      pass
-    else:                                     # If the file has content
-      for i in file:                          # For each line in the file
-        j = i.split()                         # Splits the line into a list
-        dic[j[0]] = j[1]                      # Updates the dictionary with first list element as key and second
-                                              # element as value
-
-  if name in dic:                             # If the player already has played
-    if score > int(dic[name]):                # And if the player gets a higher score
-      dic[name] = score                       # Player gets registered with new score
-  else:                                       # If the player has not already played
-    dic[name] = score                         # Player gets registered
-
-  sorted_dic = {}                             # Generating a sorted dictionary
-  while dic != {}:                            # While dictionary is not empty
-    best_score = 0                            # Sets a best score
-    for i in dic:                             # For every player that has played
-      if int(dic[i]) > best_score:            # If the player's score is higher than the best core
-        best_score = int(dic[i])              # Player's score is set as best score
-        best_player = i                       # Player is set as best player
-    dic.pop(best_player)                      # Best player is removed from original dictionary
-    sorted_dic[best_player] = best_score      # Best player is added to sorted dictionary
-
-  with open("score_list.txt", "w") as file:    # Opens the score file
-    for i in sorted_dic:                      # For every player in the sorted dictionary
-      file.write(i + " " + str(sorted_dic[i]) + "\n")   # Score file is overwritten with the sorted dictionary
-                                                        # from best to worst
-
-
-
 if __name__ == "__main__":
     main()
 

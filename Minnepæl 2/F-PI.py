@@ -183,6 +183,7 @@ def update_screen(text):
     for i in range(space-(len(segments)+1)):    # Fills in the missing empty lines
         print(" " * (box_width+2))
 
+
 #example_map = [ [g, r, r, r, r, r, r, g],
 #                [g, r, r, r, r, r, r, g],
 #                [g, r, r, r, r, r, r, g],
@@ -661,6 +662,9 @@ def main():
     sense.stick.direction_middle = j_middle     #
     sense.stick.direction_right = j_down        #
     sense.stick.direction_left = j_up           #
+
+    # Add top of display in console
+    startingLines()
 
     while True:
         if j_right_click:       # Checks for joy right movement

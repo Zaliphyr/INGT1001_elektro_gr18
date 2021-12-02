@@ -546,19 +546,20 @@ def choose_name() :
     black = (0, 0, 0)
     green = (0, 77, 26)
     
-    #sense.show_message("Please choose your name:  3 characters", text_colour=white, back_colour=black, scroll_speed=0.05 )
+    
     
     x = 0
     while len(name_list) < 3 :
-      sense.show_letter(alfab[x], text_colour=white, back_colour=black)
+        sense.show_letter(alfab[x], text_colour=white, back_colour=black)
       
-      for event in sense.stick.get_events():
-        if event.action == "pressed":
-          if event.direction == "down":
+        if j_left_click :
+            reset_buttons()
             x -= 1
-          elif event.direction == "up":
+        elif j_right_click:
+            reset_buttons()
             x += 1
-          elif event.direction == "middle":
+        elif j_middle_click:
+            reset_buttons()
             name_list.append(alfab[x])
             sense.show_letter(alfab[x], text_colour=(0, 255, 0), back_colour=black)
             time.sleep(0.2)
@@ -566,7 +567,7 @@ def choose_name() :
     for e in name_list :
       name += e
     
-    #sense.show_message("Your name is:", text_colour=white, back_colour=black, scroll_speed=0.05)
+    
     time.sleep(0.2)
     sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
     

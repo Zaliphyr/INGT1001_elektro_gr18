@@ -97,6 +97,8 @@ meny_pictures = {0: [
 j_right_click = False
 j_left_click = False
 j_middle_click = False
+j_up_click = False
+j_down_click = False
 
 # Function bound to joy right
 def j_right(event):
@@ -109,6 +111,18 @@ def j_left(event):
     global j_left_click
     if event.action == ACTION_PRESSED:
         j_left_click = True
+
+# Function bound to joy up
+def j_up(event):
+    global j_up_click
+    if event.action == ACTION_PRESSED:
+        j_up_click = True
+
+# Function bound to joy down
+def j_down(event):
+    global j_down_click
+    if event.action == ACTION_PRESSED:
+        j_down_click = True
 
 # Function bound to joy middle
 def j_middle(event):
@@ -125,10 +139,14 @@ def reset_buttons():
     global j_middle_click
     global j_left_click
     global j_right_click
+    global j_up_click
+    global j_down_click
     interrupt = False
     j_middle_click = False
     j_left_click = False
     j_right_click = False
+    j_up_click = False
+    j_down_click = False
 
 # Function to print the console header
 def startingLines():
@@ -634,9 +652,6 @@ def run_game():
 
 
 def main():
-    global j_right_click        # Gets the joy values
-    global j_left_click         #
-    global j_middle_click       #
     meny_selection = 0          # Selects the first menu
     meny_max = 1                # Sets the max number of menues used
     coins = 0
@@ -644,6 +659,8 @@ def main():
     sense.stick.direction_down = j_left         # Binds the joystick to the joy functions
     sense.stick.direction_up = j_right          #
     sense.stick.direction_middle = j_middle     #
+    sense.stick.direction_right = j_down        #
+    sense.stick.direction_left = j_up           #
 
     while True:
         if j_right_click:       # Checks for joy right movement

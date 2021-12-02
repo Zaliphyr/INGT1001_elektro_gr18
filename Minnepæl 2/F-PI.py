@@ -95,6 +95,78 @@ meny_pictures = {0: [
     ]
 }
 
+
+car_text = [[   "Nissan Skyline GT-R R34 1999",
+                "Farge: Lys grå",
+                "2.6 L twin-turbocharged RB26DETT I6",
+                "276 bhp @ 7000 rpm",
+                "400 Nm",
+                "AWD",
+                "0-100: 4.9s",
+                "Top Speed: 266 km/h"],
+
+                ["Toyota Supra MK IV 1993",
+                "Farge: Oransje",
+                "3.0 L twin-turbocharged 2JZ-GTE I6",
+                "276 bhp @ 5600 rpm",
+                "434 Nm",
+                "RWD",
+                "0-100: 4.7s",
+                "Top Speed: 285 km/h"],
+
+                ["Dodge Charger R/T 1970",
+                "Farge: Lilla",
+                "7.0 L 426 HEMI V8",
+                "425 bhp @ 5000 rpm",
+                "665 Nm",
+                "RWD",
+                "0-100: 5.4s",
+                "Top Speed: 211 km/h"],
+
+                ["Ferrari F40 1987",
+                "Farge: Rød",
+                "2.9 L twin-turbocharged Tipo F120A V8",
+                "471 bhp @ 7000 rpm",
+                "578 Nm",
+                "RWD",
+                "0-100: 4.3s",
+                "Top Speed: 327 km/h"],
+                
+                ["Postman Pat sin bil",
+                "Farge: rød",
+                "10.0L Quad-Turbocharged W24",
+                "10000bhp @ 7000rpm",
+                "12000Nm",
+                "AWD",
+                "0-100km/h: 0.6s",
+                "Top Speed: 6600km/h (Mach 5.384)"],
+                
+                ["Subaru Impreza",
+                "Farge: (5, 0, 255) - #0500FF",
+                "2.0L Turbo 6MT B4",
+                "261 hp @ 6000 rpm",
+                "343Nm",
+                "AWD",
+                "0-100km/h: 5.5s",
+                "Top Speed: 244km/h"],
+                ["Mini 1000 Mk II 1976",
+                "Farge: (205, 255, 0) - #CDFF00",
+                "39 bhp @ 4750 rpm",
+                "1.0L BMC Austin A-series 998",
+                "0-100km/h: 19s",
+                "70Nm",
+                "FWD",
+                "Top Speed: 130km/h"],
+                
+                ["DeLorean DMC-12",
+                "Farge: (155, 155, 155) - #9B9B9B",
+                "2.85L ZMJ-159 V6",
+                "130bhp @ 5500 rpm",
+                "207Nm",
+                "RWD",
+                "0-100km/h: 9.6s",
+                "Top Speed: 209km/h"]]
+
 # These become true when joy directions are pressed
 j_right_click = False
 j_left_click = False

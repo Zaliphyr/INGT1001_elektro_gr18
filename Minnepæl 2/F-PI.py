@@ -609,6 +609,21 @@ def map_collision(g_map, car_pos):
     return point, collision
 
 
+def move_collision(g_map, car_pos):
+    collision = False
+    point = False
+
+    if(g_map[15][car_pos] == o):
+        collision = True
+    elif(g_map[15][car_pos] == c):
+        point = True
+        g_map[15][car_pos] = r
+    
+
+    return point, collision
+
+
+
 
 def choose_name() :
     name = ""
@@ -864,20 +879,20 @@ def memory(coins):
 
 def scores_hat():                                               # Function for displaying leaderboard on sense HAT
 
-    scores = open("score_list.txt")                             # Open file with top scores
+    scores = open("SCOREBOARD_FPI.csv")                             # Open file with top scores
     sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
-    for i in range(3):                                          # Read the first three lines of the file and scroll them
+    for i in range(4):                                          # Read the first three lines of the file and scroll them
         sense.show_message(scores.readline(), scroll_speed = 0.03)  
     scores.close()                                              # Close the file to avoid complications
      
 
 def scores_console():                           # Function for displaying leaderboard in console
 
-    scores = open("scores_list.txt")            # Open file with top scores
+    scores = open("SCOREBOARD_FPI.csv")            # Open file with top scores
     
     scorelist = []                              # Create an empty list
     scorelist.append("Leaderboard")             # Add message Leaderboard to list
-    for i in range(5):                    
+    for i in range(6):                    
         scorelist.append(scores.readline())     # Add the first 5 lines in the txt file to the list
     
     update_screen(scorelist)                    # Use update_screen function to display the top 5 scores in

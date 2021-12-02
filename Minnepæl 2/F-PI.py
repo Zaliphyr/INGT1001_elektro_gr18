@@ -701,9 +701,9 @@ def update_csv(name, coins):
         print("Player", name, "added ->", coins, "coins" )
 
 # Function to transition between 2 pictures
-def transition(pic1, pic2, right):
+def transition(pic1, pic2, right, vertical):
   sleep_time = 0.05
-  if right:
+  if right and not vertical:
     state = []
     for i in range(1, 9):
       for j in range(8):
@@ -714,13 +714,37 @@ def transition(pic1, pic2, right):
       sense.set_pixels(state)
       time.sleep(sleep_time)
       state = []
-  else:
+  elif not right and not vertical:
     state = []
     for i in range(1, 9):
       for j in range(8):
         for k in range(8-i, 8):
           state.append(pic2[(8*j)+k])
         for k in range(8-i):
+          state.append(pic1[(8*j)+k])
+      sense.set_pixels(state)
+      time.sleep(sleep_time)
+      state = []
+  elif right and vertical:
+    state = []
+    for i in range(1, 9):
+      for j in range(i):
+        for k in range(8):
+          state.append(pic2[(8*(7-(i-1)+j))+k])
+      for j in range(8-i):
+        for k in range(8):
+          state.append(pic1[(8*j)+k])
+      sense.set_pixels(state)
+      time.sleep(sleep_time)
+      state = []
+  elif not right and vertical:
+    state = []
+    for i in range(1, 9):
+      for j in range(8-i):
+        for k in range(8):
+          state.append(pic2[(8*(i+j))+k])
+      for j in range(i):
+        for k in range(8):
           state.append(pic1[(8*j)+k])
       sense.set_pixels(state)
       time.sleep(sleep_time)
@@ -812,17 +836,17 @@ def settings():
             settings_selection += 1 # Moves the menu
             if settings_selection > settings_max:   # Check for menu rollover
                 settings_selection = 0
-                transition(settings_pictures[settings_max], settings_pictures[0], True)    # Moves image on screen
+                transition(settings_pictures[settings_max], settings_pictures[0], True, False)    # Moves image on screen
             else:
-                transition(settings_pictures[settings_selection-1], settings_pictures[settings_selection], True)    # Moves image on screen
+                transition(settings_pictures[settings_selection-1], settings_pictures[settings_selection], True, False)    # Moves image on screen
         elif j_left_click:      # Checks for joy left movement
             reset_buttons()     # Reset the joy values
             settings_selection -= 1 # Moves the menu
             if settings_selection < 0:  # Check for menu rollover
                 settings_selection = settings_max
-                transition(settings_pictures[0], settings_pictures[settings_max], False)    # Moves image on screen
+                transition(settings_pictures[0], settings_pictures[settings_max], False, False)    # Moves image on screen
             else:
-                transition(settings_pictures[settings_selection+1], settings_pictures[settings_selection], False)   # Moves image on screen
+                transition(settings_pictures[settings_selection+1], settings_pictures[settings_selection], False, False)   # Moves image on screen
         elif j_middle_click:    # Check for joy middle click
             reset_buttons()     # Reset joy values
             if settings_selection == 0: # Velg bil
@@ -874,17 +898,17 @@ def main():
             meny_selection += 1 # Moves the menu
             if meny_selection > meny_max:   # Check for menu rollover
                 meny_selection = 0
-                transition(meny_pictures[meny_max], meny_pictures[0], True)    # Moves image on screen
+                transition(meny_pictures[meny_max], meny_pictures[0], True, False)    # Moves image on screen
             else:
-                transition(meny_pictures[meny_selection-1], meny_pictures[meny_selection], True)    # Moves image on screen
+                transition(meny_pictures[meny_selection-1], meny_pictures[meny_selection], True, False)    # Moves image on screen
         elif j_left_click:      # Checks for joy left movement
             reset_buttons()     # Reset the joy values
             meny_selection -= 1 # Moves the menu
             if meny_selection < 0:  # Check for menu rollover
                 meny_selection = meny_max
-                transition(meny_pictures[0], meny_pictures[meny_max], False)    # Moves image on screen
+                transition(meny_pictures[0], meny_pictures[meny_max], False, False)    # Moves image on screen
             else:
-                transition(meny_pictures[meny_selection+1], meny_pictures[meny_selection], False)   # Moves image on screen
+                transition(meny_pictures[meny_selection+1], meny_pictures[meny_selection], False, False)   # Moves image on screen
         elif j_middle_click:    # Check for joy middle click
             reset_buttons()     # Reset joy values
             if meny_selection == 0: # Play game

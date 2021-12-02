@@ -170,19 +170,13 @@ def startingLines():
         print(" " * (box_width+2))
 
 # Function to send text to the screen
-def update_screen(text):
-    segments = []                               # Splits the text up into segments if they are longer than the avalable width
-    while len(text) > box_width:                #
-        segments.append(text[:box_width])       #
-        text = text[box_width:]                 #
-    segments.append(text)                       #
+def update_screen(text_list):
+    print("\033[F" * space, end="\x1b[1K\r")
 
-    print("\033[F" * space, end="\x1b[1K\r")    # Removes the empty lines
-
-    for i in segments:                          # Adds text where empty lines was
+    for i in text_list:
         print("║" + i.ljust(box_width) + "║")
-        print("╚" + ("═"*box_width) + "╝")
-    for i in range(space-(len(segments)+1)):    # Fills in the missing empty lines
+    print("╚" + ("═"*box_width) + "╝")
+    for i in range(space-(len(text_list)+1)):
         print(" " * (box_width+2))
 
 

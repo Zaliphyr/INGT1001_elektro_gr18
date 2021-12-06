@@ -1734,8 +1734,9 @@ def settings():
     map_max = 19
     text_car_select = 0
     text_map_select = 0
+    text_settings = 0
 
-
+    update_screen([car_text(0)])
     while True:
         if j_right_click:       # Checks for joy right movement
             reset_buttons()     # Reset the joy values
@@ -1802,46 +1803,49 @@ def settings():
             if text_map_select != map_selection:
                 text_map_select = map_selection
                 if text_map_select == 0:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 1:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 2:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 3:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 4:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 5:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 6:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 7:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 8:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 9:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 10:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 11:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 12:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 13:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 14:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 15:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 16:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 17:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 18:
-                    pass
+                    update_screen(["PLACEHOLDER"])
                 elif text_map_select == 19:
-                    pass
-            
+                    update_screen(["PLACEHOLDER"])
+        if text_settings != settings_selection:
+            text_settings = settings_selection
+            if text_settings == 2:
+                update_screen(["Go back to main menu"])
 
         if settings_selection == 0:
             sense.set_pixels(car_pictures[car_selection])

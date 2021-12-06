@@ -1147,7 +1147,7 @@ def run_game():
             if point:
                 coins += 1
             
-            game_map = obstacle(game_map, coins)    # Adds new obstacles off screen
+            game_map = obstacle(game_map)    # Adds new obstacles off screen
             game_map = coin_placer(game_map)        # Adds new coins off screen
             game_map = mov_map(game_map)            # Moves the map
 

@@ -5,11 +5,12 @@ import random
 import csv
 import os
 
-def reset_sense():          # A function used to reset sense so that the gyroscope works properly
+#Resets Sense and gyroscope so that it's calibrated upright and works properly when starting the game
+def reset_sense():          
     global sense            # Accessing the global variable sense
     sense = SenseHat()      # This is the sense hat
     sense.set_rotation(270) # Selects correct led matrix rotation
-reset_sense()
+reset_sense()               # Runs the function to connect to the Sense
 
 box_width = 120             # The max width for the text in the console, this is changable here
 space = 10                  # Avalable lines for printing text
@@ -22,7 +23,7 @@ c = (248, 231, 28)          # coin      / yellow
 v = (48, 135, 145)          # vehicle   / turquoise
 red_pixel = (189, 16, 224)
 
-# Pictures used for the menu
+# Dictionary of pictures used for the menu
 meny_pictures = {0: [
       (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
     (0, 0, 0), (0, 0, 0), (0, 0, 0), (76, 207, 26), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -692,42 +693,42 @@ def update_screen(text_list):
 def car_pos_joy(prev_pos):
                            # with previous position as input shown by an integer between 0 and 7
 
-    if j_left_click:
-        position = prev_pos - 1
-        reset_buttons()
-    elif j_right_click:
-        position = prev_pos + 1
-        reset_buttons()
+    if j_left_click:                       # If left click:
+        position = prev_pos - 1            # New position is previous position minus 1
+        reset_buttons()                    # Resets button to prepare for next input
+    elif j_right_click:                    # Else if right click:
+        position = prev_pos + 1            # New position is previous position plus 1
+        reset_buttons()                    # Resets button to prepare for next input
     else:
         position = prev_pos
 
-    if position < 1:        # The car can't go further to the left than 0, therefor if the position is negative:
-        position = 1        # Set the position to 0
-    elif position > 6:      # The car can't go further to the right than 7, therefor if the position is over 7:
-        position = 6        # Set the position to 7
+    if position < 1:        # The car can't go further to the left than 1, therefor if the position is below 1:
+        position = 1        # Set the position to 1
+    elif position > 6:      # The car can't go further to the right than 6, therefor if the position is over 6:
+        position = 6        # Set the position to 6
     
-    return position
+    return position         # Returns the position as an integer between 0 and 6
 
 # Function for the position of the car controlled by gyroscope
 def car_pos_gyro(prev_pos):
                             # with previous position as input shown by an integer between 0 and 7
 
     orientation = sense.get_gyroscope() # Collecting orientational data from sensehat
-    yaw = orientation["yaw"] # Singling out the data for the yaw orientation
-    if yaw >= 340 or yaw <= 20: # If the "wheel" of the car is almost flat:
-        position = prev_pos # Keep the previous position
-    elif 340 > yaw > 180: # If the "wheel" of the car is pointed to the left:
-        position = prev_pos - 1 # Move the car one space to the left
-    elif 20 < yaw < 180: # If the "wheel" of the car is pointed to the right:
-        position = prev_pos + 1 # Move the car one space to the right
-    else: # If the wheel is turned 180 degrees or the reading somehow gives another number:
-        position = prev_pos # Keep the previous position
+    yaw = orientation["yaw"]            # Singling out the data for the yaw orientation
+    if yaw >= 340 or yaw <= 20:         # If the "wheel" of the car is almost flat:
+        position = prev_pos             # Keep the previous position
+    elif 340 > yaw > 180:               # If the "wheel" of the car is pointed to the left:
+        position = prev_pos - 1         # Move the car one space to the left
+    elif 20 < yaw < 180:                # If the "wheel" of the car is pointed to the right:
+        position = prev_pos + 1         # Move the car one space to the right
+    else:                               # If the wheel is turned 180 degrees or the reading somehow gives another number:
+        position = prev_pos             # Keep the previous position
 
 
-    if position < 1: # The car can't go further to the left than 1, therefor if the position is negative:
-        position = 1 # Set the position to 1
-    elif position > 6: # The car can't go further to the right than 6, therefor if the position is over 6:
-        position = 6 # Set the position to 6
+    if position < 1:        # The car can't go further to the left than 1, therefore if the position is below 1:
+        position = 1        # Set the position to 1
+    elif position > 6:      # The car can't go further to the right than 6, therefor if the position is over 6:
+        position = 6        # Set the position to 6
 
     return position # The function returns the value of the postition from 1 to 6
 
@@ -1359,26 +1360,26 @@ def transition(pic1, pic2, right, vertical):
 # Function that runs the game
 def run_game():
     game_map = map_creator()            # Creates the map
-    running = True
-    coins = 0
-    screen_coins = 0
-    vehicle_pos = 5
+    running = True                      # Defines the game as running
+    coins = 0                           # Player starts with 0 coins
+    screen_coins = 0                    
+    vehicle_pos = 5                     # Starting position of the car
 
-    last_time_ran_car = 0.0
-    last_time_ran_map = 0.0
+    last_time_ran_car = 0.0             # A variable to hold the last time the car position was updated
+    last_time_ran_map = 0.0             # A variable to hold the last time the map was updated
 
-    reset_sense()
+    reset_sense()                                   # Resets the sense so that the gyroscope is calibrated upright
     gameStart_sequence()
     update_screen([f"SCORE: {screen_coins}"])
 
     while running:
-        now = time.time()
-        sense.get_gyroscope()
+        now = time.time()                           # Saves the time right now
+        sense.get_gyroscope()                       # Gets data from gyroscope
 
-        if now - last_time_ran_car > 1/3:                                              # Allows 3 movements before map moves
-            vehicle_pos = car_pos_gyro(vehicle_pos)                      # Updates viechle position
+        if now - last_time_ran_car > 1/3:                               # Allows car to move 3 times per second
+            vehicle_pos = car_pos_gyro(vehicle_pos)                     # Updates vehicle position
             enable_screen(game_map, vehicle_pos)                        # Sends it to the led matrix
-            point, collision = move_collision(game_map, vehicle_pos)    # Checks for collition or coin on move horisontally
+            point, collision = move_collision(game_map, vehicle_pos)    # Checks for collision or coin on move horisontally
             if collision:
                 running = False
                 break
@@ -1390,7 +1391,7 @@ def run_game():
                 screen_coins = coins
                 update_screen([f"SCORE: {screen_coins}"])
 
-        if now - last_time_ran_map > 1:
+        if now - last_time_ran_map > 1:                                     # Allows map to move every second
             point, collision = map_collision(game_map, vehicle_pos)         # Checks for collition or coin vertically
 
             if collision:
@@ -1407,10 +1408,14 @@ def run_game():
             game_map = coin_placer(game_map)        # Adds new coins off screen
             game_map = mov_map(game_map)            # Moves the map
 
-            last_time_ran_map = now
+            last_time_ran_map = now          # Saves the last time the map was run as now
 
-    return coins
+    return coins    # Returns the amount of coins gathered
 
+<<<<<<< Updated upstream
+=======
+# Dictionary of pictures for the settings menu
+>>>>>>> Stashed changes
 settings_pictures = {2: [
       (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
     (0, 0, 0), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -1423,6 +1428,7 @@ settings_pictures = {2: [
   ]
   }
 
+# Dictionary of pictures for the map menu
 map_pictures = {
     0: [ # Race track
       (255, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 0, 0),
@@ -1626,6 +1632,7 @@ map_pictures = {
   ]
 }
 
+# Dictionary of pictures for the car menu
 car_pictures = {0: [
       (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
     (0, 0, 0), (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -1717,12 +1724,12 @@ car_pictures = {0: [
 
 def settings():
     global v
-    settings_selection = 0
-    settings_max = 2
-    car_selection = 0
-    car_max = 7
-    map_selection = 0
-    map_max = 19
+    settings_selection = 0 # A counter to keep track of where the player is in the settings menu
+    settings_max = 2       # Amount of elements in settings
+    car_selection = 0      # A counter to keep track of where the player is in the car menu
+    car_max = 7            # Amount of elements in car menu
+    map_selection = 0      # A counter to keep track of where the player is in the map menu
+    map_max = 19           # Amount of elements in map menu
     text_car_select = 0
     text_map_select = 0
     text_settings = 0
@@ -1751,21 +1758,21 @@ def settings():
                 transition(settings_pictures[settings_selection+1], map_pictures[map_selection], False, False)   # Moves image on screen
         elif j_middle_click:    # Check for joy middle click
             reset_buttons()     # Reset joy values
-            if settings_selection == 2: # Gå tilbake
-                break
-        if settings_selection == 0:
-            if j_down_click:
+            if settings_selection == 2: # Go back button
+                break #                 # Break and return to main menu
+        if settings_selection == 0:   # If you are in the car menu:
+            if j_down_click:          # Checks for joy down movement
                 reset_buttons()
-                car_selection += 1
-                if car_selection > car_max:
+                car_selection += 1    # Moves the menu
+                if car_selection > car_max:   # Check for menu rollover
                     car_selection = 0
                     transition(car_pictures[0], car_pictures[car_max], False, True)
                 else:
                     transition(car_pictures[car_selection], car_pictures[car_selection-1], False, True)
-            elif j_up_click:
+            elif j_up_click:        # Checks for joy up movement
                 reset_buttons()
-                car_selection -= 1
-                if car_selection < 0:
+                car_selection -= 1  # Moves the menu
+                if car_selection < 0: # Checks for menu rollover
                     car_selection = car_max
                     transition(car_pictures[0], car_pictures[car_max], True, True)
                 else:
@@ -1775,19 +1782,19 @@ def settings():
                 text_car_select = car_selection
                 update_screen(car_text[text_car_select])
             v = car_colors[car_selection]
-        if settings_selection == 1:
-            if j_down_click:
+        if settings_selection == 1:     #If you are in the map menu
+            if j_down_click:            # Checks for joy down movement
                 reset_buttons()
-                map_selection += 1
-                if map_selection > map_max:
+                map_selection += 1      # Moves the menu
+                if map_selection > map_max: # Check for menu rollover
                     map_selection = 0
                     transition(map_pictures[0], map_pictures[map_max], False, True)
                 else:
                     transition(map_pictures[map_selection], map_pictures[map_selection-1], False, True)
-            elif j_up_click:
+            elif j_up_click:        # Checks for joy up movement
                 reset_buttons()
-                map_selection -= 1
-                if map_selection < 0:
+                map_selection -= 1  # Moves the menu
+                if map_selection < 0:   # Check for menu rollover
                     map_selection = map_max
                     transition(map_pictures[0], map_pictures[map_max], True, True)
                 else:
@@ -1804,12 +1811,12 @@ def settings():
             elif text_settings == 2:
                 update_screen(["Go back to main menu"])
 
-        if settings_selection == 0:
-            sense.set_pixels(car_pictures[car_selection])
-        elif settings_selection == 1:
-            sense.set_pixels(map_pictures[map_selection])
+        if settings_selection == 0:                                 # If in car menu
+            sense.set_pixels(car_pictures[car_selection])           # Show picture of car
+        elif settings_selection == 1:                               # If in map menu
+            sense.set_pixels(map_pictures[map_selection])           # Show picture of map
         else:
-            sense.set_pixels(settings_pictures[settings_selection]) # Update screen
+            sense.set_pixels(settings_pictures[settings_selection]) # Update screen with picture from settings menu
 
 
 

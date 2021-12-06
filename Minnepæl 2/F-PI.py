@@ -1128,6 +1128,10 @@ def move_collision(g_map, car_pos):
     return point, collision
 
 
+
+
+
+
 def choose_name() :
     white = (255, 255, 255)
     black = (0, 0, 0)
@@ -1228,15 +1232,43 @@ def update_csv(name, coins):
                 if i % 2 == 0 :
                     f.write("%s %s\n"% (list_names[i], list_names[i + 1]))  # and adds all the players from list_names
         if new_record :
-          print("Player", name, "updated ->", coins, "coins")
+          update_screen(["Player", name, "updated ->", coins, "coins"])
         else :
-          print("Player", name, ", no new record")                                            # with updated scores
+          update_screen(["Player", name, "no new record"])                                            # with updated scores
+
 
     else :    
         
         with open('SCOREBOARD_FPI.csv', "a") as f:                          # If the name chosen does not already exist
             f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
         print("Player", name, "added ->", coins, "coins" )
+
+def sorted_csv(score_file):                  # Function that sorts the scoreboard
+  with open(score_file) as file:                # Opens the file
+    data = csv.reader(file, delimiter = " ")    # Reads the content
+
+    dic = {}                                    # Generates a dictionary
+    for i in data:                              # For every list in data
+      dic[i[0]] = i[1]                          # Updates the dictionary with the content in data
+                                                # First element is key, second element is value
+
+  sorted_dic = {}                               # Generates a sorted dictionary
+  sorted_dic["Name"] = "Coins"                  # Adds the titles to the sorted dic
+  dic.pop("Name")                               # Removes the titles from the original dic
+
+  while dic != {}:                            # While dictionary is not empty
+    best_score = 0                            # Sets a best score
+    for i in dic:                             # For every player that has played
+      if int(dic[i]) >= best_score:            # If the player's score is higher than the best core
+        best_score = int(dic[i])              # Player's score is set as best score
+        best_player = i                       # Player is set as best player
+    dic.pop(best_player)                      # Best player is removed from original dictionary
+    sorted_dic[best_player] = best_score      # Best player is added to sorted dictionary
+
+  with open(score_file, "w") as file:    # Opens the score file
+    for i in sorted_dic:                      # For every player in the sorted dictionary
+      file.write(i + " " + str(sorted_dic[i]) + "\n")   # Score file is overwritten with the sorted dictionary
+                                                        # from best to worst
 
 # Function to transition between 2 pictures
 def transition(pic1, pic2, right, vertical):
@@ -1344,14 +1376,14 @@ settings_pictures = {0: [
     (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33),
   ],
   1: [
-      (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (0, 0, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (0, 0, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (0, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 0, 0), (255, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+      (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (255, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
   ],
   2: [
       (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -1410,11 +1442,35 @@ def memory(coins):
     player_scoreboard
     if os.path.isfile('./SCOREBOARD_FPI.csv') :                             # If the .csv file already exist the 
         update_csv(name, coins)                                             # update_csv() runs
+        sorted_csv('SCOREBOARD_FPI.csv')
     else :
         with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
             for name in player_scoreboard :
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
-        print("Scoreboard created")
+        update_screen(["Scoreboard created"])
+
+def scores_hat():                                               # Function for displaying leaderboard on sense HAT
+
+    scores = open("score_list.txt")                             # Open file with top scores
+    sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
+    for i in range(3):                                          # Read the first three lines of the file and scroll them
+        sense.show_message(scores.readline(), scroll_speed = 0.03)  
+    scores.close()                                              # Close the file to avoid complications
+     
+
+def scores_console():                           # Function for displaying leaderboard in console
+
+    scores = open("scores_list.txt")            # Open file with top scores
+    
+    scorelist = []                              # Create an empty list
+    scorelist.append("Leaderboard")             # Add message Leaderboard to list
+    for i in range(5):                    
+        scorelist.append(scores.readline())     # Add the first 5 lines in the txt file to the list
+    
+    update_screen(scorelist)                    # Use update_screen function to display the top 5 scores in
+                                                # the console
+    scores.close()                              # Close the file to avoid complications
+
 
 def scores_hat():                                               # Function for displaying leaderboard on sense HAT
 

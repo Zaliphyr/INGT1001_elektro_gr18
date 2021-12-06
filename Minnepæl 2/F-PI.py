@@ -1726,6 +1726,7 @@ car_pictures = {0: [
   }
 
 def settings():
+    global v
     settings_selection = 0
     settings_max = 2
     car_selection = 0
@@ -1736,7 +1737,7 @@ def settings():
     text_map_select = 0
     text_settings = 0
 
-    update_screen([car_text(0)])
+    update_screen(car_text[0])
     while True:
         if j_right_click:       # Checks for joy right movement
             reset_buttons()     # Reset the joy values
@@ -1844,7 +1845,11 @@ def settings():
                     update_screen(["PLACEHOLDER"])
         if text_settings != settings_selection:
             text_settings = settings_selection
-            if text_settings == 2:
+            if text_settings == 0:
+                update_screen(car_text[text_car_select])
+            elif text_settings == 1:
+                update_screen(["PLACEHOLDER"])
+            elif text_settings == 2:
                 update_screen(["Go back to main menu"])
 
         if settings_selection == 0:

@@ -775,17 +775,17 @@ def mov_map(map):
     return p_map                    # Returns the new map
 
 # Function to create obstacle in each row
-def obstacle(kart):
+def obstacle(game_map):
     obst = random.randint(1, 6)         # Random number
-    kart[0][obst] = o                   # Changes the random element in the first row
-    return kart                         # Returns map with obstacles
+    game_map[0][obst] = o                   # Changes the random element in the first row
+    return game_map                         # Returns map with obstacles
 
 # Function to create obstacle every 3rd row
-def obstacle3D(kart):
-    if o not in kart[1] and o not in kart[2]:   # If there is no obstacles in the 2nd and 3rd row
+def obstacle3D(game_map):
+    if o not in game_map[1] and o not in game_map[2]:   # If there is no obstacles in the 2nd and 3rd row
         obst = random.randint(1, 6)     # Random number
-        kart[0][obst] = o               # Changes the random element in the first row
-    return kart                         # Return map with obstacles with obstacles every 3rd row
+        game_map[0][obst] = o               # Changes the random element in the first row
+    return game_map                         # Return map with obstacles with obstacles every 3rd row
 
 # Function that was supposed to create obstacles in third person view
 def obstacle_3D(game_map):

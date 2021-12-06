@@ -1,4 +1,4 @@
-# Hei og velkommen til F-Pi main
+ # Hei og velkommen til F-Pi main
 from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random
@@ -316,7 +316,213 @@ def startup_sequence():
             time.sleep(1)
         else:
             time.sleep(0.1)
-    
+
+
+def gameStart_sequence():
+
+    broom = {
+    1: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (255, 255, 255), (255, 255, 255), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (80, 227, 194), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (80, 227, 194), (0, 0, 0),
+        (0, 0, 0), (208, 2, 27), (208, 2, 27), (80, 227, 194), (80, 227, 194), (208, 2, 27), (208, 2, 27), (0, 0, 0),
+        (0, 0, 0), (74, 74, 74), (80, 227, 194), (80, 227, 194), (80, 227, 194), (0, 0, 0), (74, 74, 74), (0, 0, 0),
+        (0, 0, 0), (74, 74, 74), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (74, 74, 74), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    2: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (255, 255, 255), (255, 255, 255), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (80, 227, 194), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (80, 227, 194), (0, 0, 0),
+        (0, 0, 0), (208, 2, 27), (208, 2, 27), (80, 227, 194), (80, 227, 194), (155, 155, 155), (208, 2, 27), (0, 0, 0),
+        (0, 0, 0), (74, 74, 74), (80, 227, 194), (80, 227, 194), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (74, 74, 74), (0, 0, 0), (0, 0, 0), (0, 0, 0), (155, 155, 155), (74, 74, 74), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    3: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (255, 255, 255), (255, 255, 255), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (80, 227, 194), (255, 255, 255), (255, 255, 255), (155, 155, 155), (155, 155, 155), (80, 227, 194), (0, 0, 0),
+        (0, 0, 0), (208, 2, 27), (208, 2, 27), (80, 227, 194), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (74, 74, 74), (80, 227, 194), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (74, 74, 74), (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (74, 74, 74), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    4: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (255, 255, 255), (155, 155, 155), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (80, 227, 194), (255, 255, 255), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (208, 2, 27), (155, 155, 155), (155, 155, 155), (74, 74, 74), (155, 155, 155), (155, 155, 155), (155, 155, 155),
+        (0, 0, 0), (74, 74, 74), (155, 155, 155), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155),
+        (0, 0, 0), (74, 74, 74), (155, 155, 155), (155, 155, 155), (74, 74, 74), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0),
+    ],
+    5: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (155, 155, 155), (155, 155, 155), (80, 227, 194), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155),
+        (155, 155, 155), (155, 155, 155), (155, 155, 155), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155), (155, 155, 155),
+        (155, 155, 155), (155, 155, 155), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155),
+        (155, 155, 155), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155),
+        (155, 155, 155), (74, 74, 74), (155, 155, 155), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155),
+        (155, 155, 155), (155, 155, 155), (155, 155, 155), (74, 74, 74), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155),
+    ],
+    6: [
+        (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (155, 155, 155), (155, 155, 155), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155),
+        (155, 155, 155), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155),
+        (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155),
+        (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155),
+        (155, 155, 155), (74, 74, 74), (155, 155, 155), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155),
+        (155, 155, 155), (155, 155, 155), (155, 155, 155), (74, 74, 74), (155, 155, 155), (155, 155, 155), (74, 74, 74), (74, 74, 74),
+    ],
+    7: [
+        (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155),
+        (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155),
+        (155, 155, 155), (155, 155, 155), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155),
+        (155, 155, 155), (155, 155, 155), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155),
+        (155, 155, 155), (74, 74, 74), (155, 155, 155), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155), (155, 155, 155),
+        (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155),
+        (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155),
+    ],
+    8: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (155, 155, 155), (74, 74, 74), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (155, 155, 155), (155, 155, 155), (74, 74, 74), (74, 74, 74), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (74, 74, 74), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    9: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (74, 74, 74), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+        (0, 0, 0), (155, 155, 155), (155, 155, 155), (74, 74, 74), (74, 74, 74), (155, 155, 155), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (74, 74, 74), (155, 155, 155), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    10: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (155, 155, 155), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (155, 155, 155), (0, 0, 0), (155, 155, 155), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    11: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (155, 155, 155), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (208, 2, 27), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (74, 74, 74), (0, 0, 0), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    12: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (155, 155, 155), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (208, 2, 27), (155, 155, 155), (155, 155, 155), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (74, 74, 74), (0, 0, 0), (155, 155, 155), (74, 74, 74), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    13: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (208, 2, 27), (80, 227, 194), (80, 227, 194), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (74, 74, 74), (0, 0, 0), (0, 0, 0), (74, 74, 74), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    14: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (208, 2, 27), (80, 227, 194), (80, 227, 194), (208, 2, 27), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (74, 74, 74), (0, 0, 0), (0, 0, 0), (74, 74, 74), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    15: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (80, 227, 194), (80, 227, 194), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ],
+    16: [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (80, 227, 194), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+    ]
+    }
+
+    sense.set_pixels(broom[1])
+    time.sleep(0.5)
+    sense.set_pixels(broom[2])
+    time.sleep(0.1)
+    sense.set_pixels(broom[3])
+    time.sleep(0.1)
+    sense.set_pixels(broom[4])
+    time.sleep(0.1)
+    sense.set_pixels(broom[5])
+    time.sleep(0.1)
+    sense.set_pixels(broom[6])
+    time.sleep(0.1)
+    sense.set_pixels(broom[7])
+    time.sleep(0.1)
+    sense.set_pixels(broom[8])
+    time.sleep(0.1)
+    sense.set_pixels(broom[9])
+    time.sleep(0.1)
+    sense.set_pixels(broom[10])
+    time.sleep(0.1)
+    sense.set_pixels(broom[11])
+    time.sleep(0.1)
+    sense.set_pixels(broom[12])
+    time.sleep(0.1)
+    sense.set_pixels(broom[13])
+    time.sleep(0.1)
+    sense.set_pixels(broom[14])
+    time.sleep(0.1)
+    sense.set_pixels(broom[15])
+    time.sleep(0.1)
+    sense.set_pixels(broom[16])
+    time.sleep(0.1)
+
+
+
+
+  
+  
+  
+      
 
 car_text = [[   "Nissan Skyline GT-R R34 1999",
                 "Farge: Lys grå",
@@ -654,7 +860,6 @@ def enable_third_person(game_map, car_pos) :
     screen_pixels[vehicle_pixel] = v            # Set the vehicle to life with posistion from vehicle function
 
     sense.set_pixels(screen_pixels)
-
 
 
 # Function that sets pixels on sense hat
@@ -1026,16 +1231,43 @@ def update_csv(name, coins):
                 if i % 2 == 0 :
                     f.write("%s %s\n"% (list_names[i], list_names[i + 1]))  # and adds all the players from list_names
         if new_record :
-          update_screen(["Player", name, "updated ->", coins, "coins"])
+          update_screen([f"Player {name} updated -> {coins} coins"])
         else :
-          update_screen(["Player", name, "no new record"])                                            # with updated scores
+          update_screen([f"Player {name} no new record"])                                            # with updated scores
 
 
     else :    
         
         with open('SCOREBOARD_FPI.csv', "a") as f:                          # If the name chosen does not already exist
             f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
-        print("Player", name, "added ->", coins, "coins" )
+        update_screen([f"Player {name} added -> {coins} coins"])
+
+def sorted_csv(score_file):                  # Function that sorts the scoreboard
+  with open(score_file) as file:                # Opens the file
+    data = csv.reader(file, delimiter = " ")    # Reads the content
+
+    dic = {}                                    # Generates a dictionary
+    for i in data:                              # For every list in data
+      dic[i[0]] = i[1]                          # Updates the dictionary with the content in data
+                                                # First element is key, second element is value
+
+  sorted_dic = {}                               # Generates a sorted dictionary
+  sorted_dic["Name"] = "Coins"                  # Adds the titles to the sorted dic
+  dic.pop("Name")                               # Removes the titles from the original dic
+
+  while dic != {}:                            # While dictionary is not empty
+    best_score = 0                            # Sets a best score
+    for i in dic:                             # For every player that has played
+      if int(dic[i]) >= best_score:            # If the player's score is higher than the best core
+        best_score = int(dic[i])              # Player's score is set as best score
+        best_player = i                       # Player is set as best player
+    dic.pop(best_player)                      # Best player is removed from original dictionary
+    sorted_dic[best_player] = best_score      # Best player is added to sorted dictionary
+
+  with open(score_file, "w") as file:    # Opens the score file
+    for i in sorted_dic:                      # For every player in the sorted dictionary
+      file.write(i + " " + str(sorted_dic[i]) + "\n")   # Score file is overwritten with the sorted dictionary
+                                                        # from best to worst
 
 def sorted_csv(score_file):                  # Function that sorts the scoreboard
   with open(score_file) as file:                # Opens the file
@@ -1125,6 +1357,7 @@ def run_game():
     last_time_ran_map = 0.0
 
     reset_sense()
+    gameStart_sequence()
 
     while running:
         now = time.time()
@@ -1279,6 +1512,7 @@ car_pictures = {0: [
   ]
   }
 
+
 def settings():
     settings_selection = 0
     settings_max = 2
@@ -1357,6 +1591,12 @@ def settings():
             sense.set_pixels(settings_pictures[settings_selection]) # Update screen
 
 
+        if settings_selection == 0:
+            sense.set_pixels(car_pictures[car_selection])
+        else:
+            sense.set_pixels(settings_pictures[settings_selection]) # Update screen
+
+
 # Function that adds choose_name() and update_csv()
 def memory(coins):
     name = choose_name()                                                    # Find the variable name
@@ -1373,50 +1613,25 @@ def memory(coins):
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
         update_screen(["Scoreboard created"])
 
-def scores_hat():                                               # Function for displaying leaderboard on sense HAT
-
-    scores = open("score_list.txt")                             # Open file with top scores
-    sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
-    for i in range(3):                                          # Read the first three lines of the file and scroll them
-        sense.show_message(scores.readline(), scroll_speed = 0.03)  
-    scores.close()                                              # Close the file to avoid complications
-     
-
-def scores_console():                           # Function for displaying leaderboard in console
-
-    scores = open("scores_list.txt")            # Open file with top scores
-    
-    scorelist = []                              # Create an empty list
-    scorelist.append("Leaderboard")             # Add message Leaderboard to list
-    for i in range(5):                    
-        scorelist.append(scores.readline())     # Add the first 5 lines in the txt file to the list
-    
-    update_screen(scorelist)                    # Use update_screen function to display the top 5 scores in
-                                                # the console
-    scores.close()                              # Close the file to avoid complications
-
-
-def scores_hat():                                               # Function for displaying leaderboard on sense HAT
-
-    scores = open("score_list.txt")                             # Open file with top scores
-    sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
-    for i in range(3):                                          # Read the first three lines of the file and scroll them
-        sense.show_message(scores.readline(), scroll_speed = 0.03)  
-    scores.close()                                              # Close the file to avoid complications
-     
-
-def scores_console():                           # Function for displaying leaderboard in console
-
-    scores = open("scores_list.txt")            # Open file with top scores
-    
-    scorelist = []                              # Create an empty list
-    scorelist.append("Leaderboard")             # Add message Leaderboard to list
-    for i in range(5):                    
-        scorelist.append(scores.readline())     # Add the first 5 lines in the txt file to the list
-    
-    update_screen(scorelist)                    # Use update_screen function to display the top 5 scores in
-                                                # the console
-    scores.close()                              # Close the file to avoid complications
+def scores_hat():
+    text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
+                    "", "           LEADERBOARD:"]
+    with open("SCOREBOARD_FPI.csv") as f:
+        content = f.read().split("\n")
+        if len(content) > 6:
+            for i in range(1, 6):
+                name = content[i].split(" ")[0]
+                score = content[i].split(" ")[1]
+                text.append(f"          {i}: {name} {score}")
+        else:
+            for i in range(1, len(content)-1):
+                name = content[i].split(" ")[0]
+                score = content[i].split(" ")[1]
+                text.append(f"          {i}: {name} {score}")
+    if len(text) < 9:
+        for i in range(len(text)-3, 6):
+            text.append(f"          {i}. ")
+    return(text)
 
 
 # Main function
@@ -1424,6 +1639,7 @@ def main():
     meny_selection = 0          # Selects the first menu
     meny_max = 3               # Sets the max number of menues used
     coins = 0
+    text_on_screen = 0
 
     sense.stick.direction_down = j_left         # Binds the joystick to the joy functions
     sense.stick.direction_up = j_right          #
@@ -1435,6 +1651,9 @@ def main():
     startup_sequence()
     # Add top of display in console
     startingLines()
+    startup_sequence()
+    update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
+                    "", "START SPILL: Trykk inn joystick for å starte spill"])
 
     while True:
         if j_right_click:       # Checks for joy right movement
@@ -1456,15 +1675,39 @@ def main():
         elif j_middle_click:    # Check for joy middle click
             reset_buttons()     # Reset joy values
             if meny_selection == 0: # Play game
+                update_screen(["CALIBRATING, PLEASE HOLD SENSE HAT STRAIGHT", "3".rjust(20)])
+                sense.show_letter(str(3))
+                time.sleep(1)
+                update_screen(["CALIBRATING, PLEASE HOLD SENSE HAT STRAIGHT", "2".rjust(20)])
+                sense.show_letter(str(2))
+                time.sleep(1)
+                update_screen(["CALIBRATING, PLEASE HOLD SENSE HAT STRAIGHT", "1".rjust(20)])
+                sense.show_letter(str(1))
+                time.sleep(1)
+                update_screen(["GAME RUNNING"])
+                sense.clear()
                 coins = run_game()
                 player_dead()
                 memory(coins)
             elif meny_selection == 1: # Leaderboard
-                scores_hat()
+                pass
             elif meny_selection == 2: # Settings
-                 settings()
+                settings()
             elif meny_selection == 3: # Quit game
                 break
+        if text_on_screen != meny_selection:
+            if meny_selection == 0:
+                update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
+                    "", "START SPILL: Trykk inn joystick for å starte spill"])
+            elif meny_selection == 1:
+                update_screen(scores_hat())
+            elif meny_selection == 2:
+                update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
+                    "", "INSTILLINGER: klikk for å gå inn i instillinger menyen"])
+            elif meny_selection == 3:
+                update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
+                    "", "EXIT: klikk for å stopp spill"])
+            text_on_screen = meny_selection
 
         sense.set_pixels(meny_pictures[meny_selection]) # Update screen
     sense.clear()

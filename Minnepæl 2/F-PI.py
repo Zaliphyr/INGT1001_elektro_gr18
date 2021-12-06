@@ -1423,6 +1423,12 @@ def main():
         elif j_middle_click:    # Check for joy middle click
             reset_buttons()     # Reset joy values
             if meny_selection == 0: # Play game
+                update_screen(["CALIBRATING, PLEASE HOLD SENSE HAT STRAIGHT", "3".rjust(20)])
+                time.sleep(1)
+                update_screen(["CALIBRATING, PLEASE HOLD SENSE HAT STRAIGHT", "2".rjust(20)])
+                time.sleep(1)
+                update_screen(["CALIBRATING, PLEASE HOLD SENSE HAT STRAIGHT", "1".rjust(20)])
+                time.sleep(1)
                 coins = run_game()
                 player_dead()
                 memory(coins)

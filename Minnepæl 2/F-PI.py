@@ -1419,12 +1419,16 @@ def main():
             reset_buttons()     # Reset joy values
             if meny_selection == 0: # Play game
                 update_screen(["CALIBRATING, PLEASE HOLD SENSE HAT STRAIGHT", "3".rjust(20)])
+                sense.show_letter(str(3))
                 time.sleep(1)
                 update_screen(["CALIBRATING, PLEASE HOLD SENSE HAT STRAIGHT", "2".rjust(20)])
+                sense.show_letter(str(2))
                 time.sleep(1)
                 update_screen(["CALIBRATING, PLEASE HOLD SENSE HAT STRAIGHT", "1".rjust(20)])
+                sense.show_letter(str(1))
                 time.sleep(1)
                 update_screen(["GAME RUNNING"])
+                sense.clear()
                 coins = run_game()
                 player_dead()
                 memory(coins)

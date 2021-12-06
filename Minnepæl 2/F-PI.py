@@ -1193,6 +1193,11 @@ settings_pictures = {0: [
 def settings():
     settings_selection = 0
     settings_max = 2
+    car_selection = 0
+    car_max = 7
+    map_selection = 0
+    map_max = 19
+
 
     while True:
         if j_right_click:       # Checks for joy right movement
@@ -1200,7 +1205,9 @@ def settings():
             settings_selection += 1 # Moves the menu
             if settings_selection > settings_max:   # Check for menu rollover
                 settings_selection = 0
-                transition(settings_pictures[settings_max], settings_pictures[0], True, False)    # Moves image on screen
+                transition(settings_pictures[settings_max], car_pictures[car_selection], True, False)    # Moves image on screen
+            elif settings_selection == 1:
+                transition(car_pictures[car_selection], settings_pictures[1], True, False)
             else:
                 transition(settings_pictures[settings_selection-1], settings_pictures[settings_selection], True, False)    # Moves image on screen
         elif j_left_click:      # Checks for joy left movement
@@ -1208,22 +1215,44 @@ def settings():
             settings_selection -= 1 # Moves the menu
             if settings_selection < 0:  # Check for menu rollover
                 settings_selection = settings_max
-                transition(settings_pictures[0], settings_pictures[settings_max], False, False)    # Moves image on screen
+                transition(car_pictures[car_selection], settings_pictures[settings_max], False, False)    # Moves image on screen
+            elif settings_selection == 0:
+                transition(settings_pictures[1], car_pictures[car_selection], False, False)
             else:
                 transition(settings_pictures[settings_selection+1], settings_pictures[settings_selection], False, False)   # Moves image on screen
         elif j_middle_click:    # Check for joy middle click
             reset_buttons()     # Reset joy values
-            if settings_selection == 0: # Velg bil
-                #velg-bil-funksjon
-                numberonebullshitguy=0
-            elif settings_selection == 1: # Velg kart
-                #Funksjon for å velge kart
-                numberonebullshitguy = 0
-            elif settings_selection == 2: # Gå tilbake
-                 break
-                 numberonebullshitguy = 1
+            if settings_selection == 2: # Gå tilbake
+                break
+        if settings_selection == 0:
+            if j_down_click:
+                reset_buttons()
+                car_selection += 1
+                if car_selection > car_max:
+                    car_selection = 0
+                    transition(car_pictures[0], car_pictures[car_max], False, True)
+                else:
+                    transition(car_pictures[car_selection], car_pictures[car_selection-1], False, True)
+            elif j_up_click:
+                reset_buttons()
+                car_selection -= 1
+                if car_selection < 0:
+                    car_selection = car_max
+                    transition(car_pictures[0], car_pictures[car_max], True, True)
+                else:
+                    transition(car_pictures[car_selection+1], car_pictures[car_selection], True, True)
+            
 
-        sense.set_pixels(settings_pictures[settings_selection]) # Update screen
+        if settings_selection == 0:
+            sense.set_pixels(car_pictures[car_selection])
+        else:
+            sense.set_pixels(settings_pictures[settings_selection]) # Update screen
+
+
+        if settings_selection == 0:
+            sense.set_pixels(car_pictures[car_selection])
+        else:
+            sense.set_pixels(settings_pictures[settings_selection]) # Update screen
 
 
 # Function that adds choose_name() and update_csv()

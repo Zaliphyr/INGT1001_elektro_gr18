@@ -1854,8 +1854,6 @@ def main():
     sense.stick.direction_right = j_down        #
     sense.stick.direction_left = j_up           #
 
-
-    startup_sequence()
     # Add top of display in console
     startingLines()
     startup_sequence()

@@ -1023,9 +1023,9 @@ def update_csv(name, coins):
                 if i % 2 == 0 :
                     f.write("%s %s\n"% (list_names[i], list_names[i + 1]))  # and adds all the players from list_names
         if new_record :
-          update_screen(["Player", name, "updated ->", coins, "coins"])
+          update_screen([f"Player {name} updated -> {coins} coins"])
         else :
-          update_screen(["Player", name, "no new record"])                                            # with updated scores
+          update_screen([f"Player {name} no new record"])                                            # with updated scores
 
 
     else :    
@@ -1358,6 +1358,27 @@ def memory(coins):
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
         update_screen(["Scoreboard created"])
 
+def scores_hat():
+    text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
+                    "", "           LEADERBOARD:"]
+    with open("SCOREBOARD_FPI.csv") as f:
+        content = f.read().split("\n")
+        if len(content) > 6:
+            for i in range(1, 6):
+                name = content[i].split(" ")[0]
+                score = content[i].split(" ")[1]
+                text.append(f"          {i}: {name} {score}")
+        else:
+            for i in range(1, len(content)-1):
+                name = content[i].split(" ")[0]
+                score = content[i].split(" ")[1]
+                text.append(f"          {i}: {name} {score}")
+    if len(text) < 9:
+        for i in range(len(text)-3, 6):
+            text.append(f"          {i}. ")
+    return(text)
+
+
 # Main function
 def main():
     meny_selection = 0          # Selects the first menu
@@ -1403,6 +1424,7 @@ def main():
                 time.sleep(1)
                 update_screen(["CALIBRATING, PLEASE HOLD SENSE HAT STRAIGHT", "1".rjust(20)])
                 time.sleep(1)
+                update_screen(["GAME RUNNING"])
                 coins = run_game()
                 player_dead()
                 memory(coins)

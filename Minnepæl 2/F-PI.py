@@ -1812,45 +1812,45 @@ def settings():
             if text_map_select != map_selection:
                 text_map_select = map_selection
                 if text_map_select == 0:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Race track""])
                 elif text_map_select == 1:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Grass"])
                 elif text_map_select == 2:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Forest"])
                 elif text_map_select == 3:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Forest offroad"])
                 elif text_map_select == 4:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Desert"])
                 elif text_map_select == 5:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Desert offroad"])
                 elif text_map_select == 6:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Snow"])
                 elif text_map_select == 7:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Snow offroad"])
                 elif text_map_select == 8:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Beach"])
                 elif text_map_select == 9:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Mountain"])
                 elif text_map_select == 10:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Volcano"])
                 elif text_map_select == 11:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Rainbow"])
                 elif text_map_select == 12:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Rainbow 2"])
                 elif text_map_select == 13:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Checkers"])
                 elif text_map_select == 14:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Waves"])
                 elif text_map_select == 15:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Waves 2"])
                 elif text_map_select == 16:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["The void"])
                 elif text_map_select == 17:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Heaven"])
                 elif text_map_select == 18:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Candyland"])
                 elif text_map_select == 19:
-                    update_screen(["PLACEHOLDER"])
+                    update_screen(["Speedboost"])
         if text_settings != settings_selection:
             text_settings = settings_selection
             if text_settings == 0:

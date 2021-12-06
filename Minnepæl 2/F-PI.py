@@ -1,4 +1,4 @@
- # Hei og velkommen til F-Pi main
+ # Imports stuff
 from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random

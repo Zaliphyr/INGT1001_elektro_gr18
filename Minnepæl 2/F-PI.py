@@ -1922,6 +1922,7 @@ def main():
                 coins = run_game()
                 player_dead()
                 memory(coins)
+                text_on_screen = -1
             elif meny_selection == 1: # Leaderboard
                 pass
             elif meny_selection == 2: # Settings
@@ -1937,7 +1938,7 @@ def main():
                 if os.path.isfile('./SCOREBOARD_FPI.csv'):
                     update_screen(scores_hat())
                 else:
-                    pass
+                    update_screen(["NO FILE YET, PLAY GAME TO MAKE FILE"])
             elif meny_selection == 2:
                 update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "INSTILLINGER: klikk for å gå inn i instillinger menyen"])

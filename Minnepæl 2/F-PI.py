@@ -601,6 +601,8 @@ car_text = [[   "Nissan Skyline GT-R R34 1999",
                 "0-100km/h: 9.6s",
                 "Top Speed: 209km/h"]]
 
+map_names = ["Race track", "Grass", "Forest", "Forest offroad", "Desert", "Desert offroad", "Snow", "Snow offroad", "Beach", "Mountain", "Volcano", "Rainbow", "Rainbow 2", "Checkers", "Waves", "Waves 2", "The void", "Heaven", "Candyland", "Speedboost"]
+
 # These become true when joy directions are pressed
 j_right_click = False
 j_left_click = False
@@ -1146,6 +1148,7 @@ def choose_name() :
     name = ""
     name_list = []
     page_confirmed = 0
+    update_screen(["Bla opp og ned for å velge bokstav, du kan ha navn på 3 bokstaver", "Trykk når riktig bokstav er valgt", "Øverst til venstre er ferdigmerket bokstav grønn."])
 
     def page1() :
         color = gray
@@ -1809,52 +1812,13 @@ def settings():
                     transition(map_pictures[map_selection+1], map_pictures[map_selection], True, True)
             if text_map_select != map_selection:
                 text_map_select = map_selection
-                if text_map_select == 0:
-                    update_screen(["Race track"])
-                elif text_map_select == 1:
-                    update_screen(["Grass"])
-                elif text_map_select == 2:
-                    update_screen(["Forest"])
-                elif text_map_select == 3:
-                    update_screen(["Forest offroad"])
-                elif text_map_select == 4:
-                    update_screen(["Desert"])
-                elif text_map_select == 5:
-                    update_screen(["Desert offroad"])
-                elif text_map_select == 6:
-                    update_screen(["Snow"])
-                elif text_map_select == 7:
-                    update_screen(["Snow offroad"])
-                elif text_map_select == 8:
-                    update_screen(["Beach"])
-                elif text_map_select == 9:
-                    update_screen(["Mountain"])
-                elif text_map_select == 10:
-                    update_screen(["Volcano"])
-                elif text_map_select == 11:
-                    update_screen(["Rainbow"])
-                elif text_map_select == 12:
-                    update_screen(["Rainbow 2"])
-                elif text_map_select == 13:
-                    update_screen(["Checkers"])
-                elif text_map_select == 14:
-                    update_screen(["Waves"])
-                elif text_map_select == 15:
-                    update_screen(["Waves 2"])
-                elif text_map_select == 16:
-                    update_screen(["The void"])
-                elif text_map_select == 17:
-                    update_screen(["Heaven"])
-                elif text_map_select == 18:
-                    update_screen(["Candyland"])
-                elif text_map_select == 19:
-                    update_screen(["Speedboost"])
+                update_screen([map_names[text_map_select]])
         if text_settings != settings_selection:
             text_settings = settings_selection
             if text_settings == 0:
                 update_screen(car_text[text_car_select])
             elif text_settings == 1:
-                update_screen(["PLACEHOLDER"])
+                update_screen([map_names[text_map_select]])
             elif text_settings == 2:
                 update_screen(["Go back to main menu"])
 
@@ -1881,26 +1845,27 @@ def memory(coins):
         with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
             for name in player_scoreboard :
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
-        update_screen(["Scoreboard created"])
+        update_screen(["Scoreboard created", f"Player {name} added -> {coins} coins"])
+        time.sleep(1)
 
 def scores_hat():
     text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
-                    "", "           LEADERBOARD:"]
+                    "", "LEADERBOARD:"]
     with open("SCOREBOARD_FPI.csv") as f:
         content = f.read().split("\n")
         if len(content) > 6:
             for i in range(1, 6):
                 name = content[i].split(" ")[0]
                 score = content[i].split(" ")[1]
-                text.append(f"          {i}: {name} {score}")
+                text.append(f"{i}: {name} {score}")
         else:
             for i in range(1, len(content)-1):
                 name = content[i].split(" ")[0]
                 score = content[i].split(" ")[1]
-                text.append(f"          {i}: {name} {score}")
+                text.append(f"{i}: {name} {score}")
     if len(text) < 9:
         for i in range(len(text)-3, 6):
-            text.append(f"          {i}. ")
+            text.append(f"{i}. ")
     return(text)
 
 
@@ -1957,10 +1922,12 @@ def main():
                 coins = run_game()
                 player_dead()
                 memory(coins)
+                text_on_screen = -1
             elif meny_selection == 1: # Leaderboard
                 pass
             elif meny_selection == 2: # Settings
                 settings()
+                text_on_screen = -1
             elif meny_selection == 3: # Quit game
                 break
         if text_on_screen != meny_selection:
@@ -1968,7 +1935,10 @@ def main():
                 update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "START SPILL: Trykk inn joystick for å starte spill"])
             elif meny_selection == 1:
-                update_screen(scores_hat())
+                if os.path.isfile('./SCOREBOARD_FPI.csv'):
+                    update_screen(scores_hat())
+                else:
+                    update_screen(["NO FILE YET, PLAY GAME TO MAKE FILE"])
             elif meny_selection == 2:
                 update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "INSTILLINGER: klikk for å gå inn i instillinger menyen"])

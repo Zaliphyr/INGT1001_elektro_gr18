@@ -1848,6 +1848,7 @@ def memory(coins):
             for name in player_scoreboard :
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
         update_screen(["Scoreboard created", f"Player {name} added -> {coins} coins"])
+        time.sleep(1)
 
 def scores_hat():
     text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",

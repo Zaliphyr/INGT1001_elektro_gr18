@@ -1150,6 +1150,7 @@ def choose_name() :
     name = ""
     name_list = []
     page_confirmed = 0
+    update_screen(["Bla opp og ned for å velge bokstav, du kan ha navn på 3 bokstaver", "Trykk når riktig bokstav er valgt", "Øverst til venstre er ferdigmerket bokstav grønn."])
 
     def page1() :
         color = gray
@@ -1845,26 +1846,26 @@ def memory(coins):
         with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
             for name in player_scoreboard :
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
-        update_screen(["Scoreboard created"])
+        update_screen(["Scoreboard created", f"Player {name} added -> {coins} coins"])
 
 def scores_hat():
     text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
-                    "", "           LEADERBOARD:"]
+                    "", "LEADERBOARD:"]
     with open("SCOREBOARD_FPI.csv") as f:
         content = f.read().split("\n")
         if len(content) > 6:
             for i in range(1, 6):
                 name = content[i].split(" ")[0]
                 score = content[i].split(" ")[1]
-                text.append(f"          {i}: {name} {score}")
+                text.append(f"{i}: {name} {score}")
         else:
             for i in range(1, len(content)-1):
                 name = content[i].split(" ")[0]
                 score = content[i].split(" ")[1]
-                text.append(f"          {i}: {name} {score}")
+                text.append(f"{i}: {name} {score}")
     if len(text) < 9:
         for i in range(len(text)-3, 6):
-            text.append(f"          {i}. ")
+            text.append(f"{i}. ")
     return(text)
 
 
@@ -1921,6 +1922,7 @@ def main():
                 coins = run_game()
                 player_dead()
                 memory(coins)
+                text_on_screen = -1
             elif meny_selection == 1: # Leaderboard
                 pass
             elif meny_selection == 2: # Settings
@@ -1936,7 +1938,7 @@ def main():
                 if os.path.isfile('./SCOREBOARD_FPI.csv'):
                     update_screen(scores_hat())
                 else:
-                    pass
+                    update_screen(["NO FILE YET, PLAY GAME TO MAKE FILE"])
             elif meny_selection == 2:
                 update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "INSTILLINGER: klikk for å gå inn i instillinger menyen"])

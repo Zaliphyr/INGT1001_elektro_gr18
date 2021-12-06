@@ -1189,7 +1189,7 @@ def choose_name() :                                 # Function that lets user ch
             reset_buttons()
             page_confirmed += 1
             name_list.append(alfab[character])  # Adds chosen character to name_list
-            sense.show_letter(alfab[character], text_colour=white, back_colour=black) # Blink current chosen character green
+            sense.show_letter(alfab[character], text_colour=green, back_colour=black) # Blink current chosen character green
             time.sleep(0.2)
             character = 0
             dot = True
@@ -1198,7 +1198,7 @@ def choose_name() :                                 # Function that lets user ch
     for e in name_list :             # Iterates over name_list, makes string with name
         name += e
       
-    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black) # Displays chosen name
+    sense.show_message(name, text_colour=green, back_colour=black) # Displays chosen name
   
     return name
 

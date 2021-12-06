@@ -1,4 +1,4 @@
-# Hei og velkommen til F-Pi main
+ # Hei og velkommen til F-Pi main
 from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random
@@ -1032,7 +1032,7 @@ def update_csv(name, coins):
         
         with open('SCOREBOARD_FPI.csv', "a") as f:                          # If the name chosen does not already exist
             f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
-        print("Player", name, "added ->", coins, "coins" )
+        update_screen([f"Player {name} added -> {coins} coins"])
 
 def sorted_csv(score_file):                  # Function that sorts the scoreboard
   with open(score_file) as file:                # Opens the file
@@ -1363,6 +1363,7 @@ def main():
     meny_selection = 0          # Selects the first menu
     meny_max = 3               # Sets the max number of menues used
     coins = 0
+    text_on_screen = 0
 
     sense.stick.direction_down = j_left         # Binds the joystick to the joy functions
     sense.stick.direction_up = j_right          #
@@ -1373,6 +1374,8 @@ def main():
     # Add top of display in console
     startingLines()
     startup_sequence()
+    update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
+                    "", "START SPILL: Trykk inn joystick for å starte spill"])
 
     while True:
         if j_right_click:       # Checks for joy right movement
@@ -1400,9 +1403,22 @@ def main():
             elif meny_selection == 1: # Leaderboard
                 pass
             elif meny_selection == 2: # Settings
-                 settings()
+                settings()
             elif meny_selection == 3: # Quit game
                 break
+        if text_on_screen != meny_selection:
+            if meny_selection == 0:
+                update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
+                    "", "START SPILL: Trykk inn joystick for å starte spill"])
+            elif meny_selection == 1:
+                update_screen(scores_hat())
+            elif meny_selection == 2:
+                update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
+                    "", "INSTILLINGER: klikk for å gå inn i instillinger menyen"])
+            elif meny_selection == 3:
+                update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
+                    "", "EXIT: klikk for å stopp spill"])
+            text_on_screen = meny_selection
 
         sense.set_pixels(meny_pictures[meny_selection]) # Update screen
     sense.clear()

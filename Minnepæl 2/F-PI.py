@@ -95,6 +95,7 @@ meny_pictures = {0: [
     ]
 }
 
+# Picture sequence that shows the F-Pi logo on startup
 def startup_sequence():
     
     pictures = {
@@ -310,6 +311,7 @@ def startup_sequence():
         ]
     }
 
+    # Picture sequence
     for i in range(20):
         sense.set_pixels(pictures[i])
         if pictures[i] == pictures[7]:
@@ -317,7 +319,7 @@ def startup_sequence():
         else:
             time.sleep(0.1)
 
-
+# Picture sequence that shows a car driving into the game on game start 
 def gameStart_sequence():
 
     broom = {
@@ -483,6 +485,7 @@ def gameStart_sequence():
     ]
     }
 
+    # Hardcoded picture sequence
     sense.set_pixels(broom[1])
     time.sleep(0.5)
     sense.set_pixels(broom[2])
@@ -746,23 +749,14 @@ def coin_placer(g_map):
     while obstacle == True:             # The code will run as long as theres an obstacle where the coin is proposed to go        
         x = int(random.randint(1, 6))   # x is a random integer which corresponds to a pixel on the top row
         y = int(random.randint(0, 3))   # y is a random integer which defines how often a coin should be placed
-        #print("y: ", y)
         coin_placement = g_map[0][x]    # Variable for which pixel to place the coin. Adds to first row 
 
         if o == coin_placement:         # Checks to see if theres an obstacle in where the coin should be placed
             obstacle = True
-            #print("Oi! Her er det en hindring!")
         elif y == 1:                    # There's a 25% chance that y is 1, and then a coin will be placed
             g_map[0][x] = c             # Replaces the current index with a coin, and stops the while loop
             obstacle = False
-
-            """
-            print("Nytt kart:")
-            for row in g_map:
-                print(row)
-            """
         else:
-            #print("Ingen coin denne gangen.")
             break
     
     return g_map
@@ -785,14 +779,14 @@ def obstacle(kart):
     kart[0][obst] = o                   # Changes the random element in the first row
     return kart                         # Returns map with obstacles
 
-# Function to reate obstacle every 3rd row
+# Function to create obstacle every 3rd row
 def obstacle3D(kart):
     if o not in kart[1] and o not in kart[2]:   # If there is no obstacles in the 2nd and 3rd row
         obst = random.randint(1, 6)     # Random number
         kart[0][obst] = o               # Changes the random element in the first row
     return kart                         # Return map with obstacles with obstacles every 3rd row
 
-
+# Function that was supposed to create obstacles in third person view
 def obstacle_3D(game_map):
     
     obst = random.randint(1, 6)
@@ -806,9 +800,21 @@ def obstacle_3D(game_map):
     return game_map
 
 
+# Function that was supposed to enable third person view
 def enable_third_person(game_map, car_pos) :
 
 
+
+    sunset_picture = [
+      (189, 16, 224), (189, 16, 224), (224, 133, 241), (248, 201, 28), (248, 201, 28), (224, 133, 241), (189, 16, 224), (189, 16, 224),
+    (189, 16, 224), (224, 133, 241), (248, 201, 28), (248, 201, 28), (248, 201, 28), (248, 201, 28), (224, 133, 241), (189, 16, 224),
+    (224, 133, 241), (248, 201, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 201, 28), (224, 133, 241),
+    (224, 133, 241), (248, 231, 28), (248, 231, 28), (255, 245, 127), (255, 245, 127), (248, 231, 28), (248, 231, 28), (224, 133, 241),
+    (32, 0, 61), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (32, 0, 61),
+    (32, 0, 61), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (32, 0, 61),
+    (32, 0, 61), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (32, 0, 61),
+    (32, 0, 61), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (32, 0, 61),
+    ]
     road_screen = game_map.copy()
     road_screen = road_screen[12:]     # Chooses the four last lists of the list
 
@@ -827,10 +833,6 @@ def enable_third_person(game_map, car_pos) :
             if element == o:
                 row_index = count_row
                 element_index = count_element
-                print("ROW",row_index)
-                print("ELEMENT",element_index)
-                
-                #screen_pixels[row_index][element_index] = o 
         if count_element < 7:
             count_element += 1
         else:

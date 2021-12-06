@@ -521,7 +521,14 @@ def gameStart_sequence():
 
   
   
-  
+car_colors = [  (179, 179, 179),
+                (255, 102, 0),
+                (179, 0, 134),
+                (255, 0, 0),
+                (255, 0, 0),
+                (5, 0, 255),
+                (205, 255, 0),
+                (155, 155, 155)]
       
 
 car_text = [[   "Nissan Skyline GT-R R34 1999",
@@ -1784,6 +1791,7 @@ def settings():
             if text_car_select != car_selection:
                 text_car_select = car_selection
                 update_screen(car_text[text_car_select])
+            v = car_colors[car_selection]
         if settings_selection == 1:
             if j_down_click:
                 reset_buttons()

@@ -922,6 +922,10 @@ def move_collision(g_map, car_pos):
     return point, collision
 
 
+
+
+
+
 def choose_name() :
     white = (255, 255, 255)
     black = (0, 0, 0)
@@ -1022,9 +1026,10 @@ def update_csv(name, coins):
                 if i % 2 == 0 :
                     f.write("%s %s\n"% (list_names[i], list_names[i + 1]))  # and adds all the players from list_names
         if new_record :
-          print("Player", name, "updated ->", coins, "coins")
+          update_screen(["Player", name, "updated ->", coins, "coins"])
         else :
-          print("Player", name, ", no new record")                                            # with updated scores
+          update_screen(["Player", name, "no new record"])                                            # with updated scores
+
 
     else :    
         
@@ -1235,7 +1240,30 @@ def memory(coins):
         with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
             for name in player_scoreboard :
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
-        print("Scoreboard created")
+        update_screen(["Scoreboard created"])
+
+def scores_hat():                                               # Function for displaying leaderboard on sense HAT
+
+    scores = open("score_list.txt")                             # Open file with top scores
+    sense.show_message("TOP 3", scroll_speed = 0.03)            # Scroll message saying TOP 3
+    for i in range(3):                                          # Read the first three lines of the file and scroll them
+        sense.show_message(scores.readline(), scroll_speed = 0.03)  
+    scores.close()                                              # Close the file to avoid complications
+     
+
+def scores_console():                           # Function for displaying leaderboard in console
+
+    scores = open("scores_list.txt")            # Open file with top scores
+    
+    scorelist = []                              # Create an empty list
+    scorelist.append("Leaderboard")             # Add message Leaderboard to list
+    for i in range(5):                    
+        scorelist.append(scores.readline())     # Add the first 5 lines in the txt file to the list
+    
+    update_screen(scorelist)                    # Use update_screen function to display the top 5 scores in
+                                                # the console
+    scores.close()                              # Close the file to avoid complications
+
 
 def scores_hat():                                               # Function for displaying leaderboard on sense HAT
 

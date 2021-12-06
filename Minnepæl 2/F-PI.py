@@ -316,7 +316,7 @@ def startup_sequence():
             time.sleep(1)
         else:
             time.sleep(0.1)
-    
+
 
 car_text = [[   "Nissan Skyline GT-R R34 1999",
                 "Farge: Lys grå",
@@ -656,7 +656,6 @@ def enable_third_person(game_map, car_pos) :
     sense.set_pixels(screen_pixels)
 
 
-
 # Function that sets pixels on sense hat
 def enable_screen(game_map, car_pos):
   road_screen = game_map[8:]                         # Chooses the eight last lists of the list
@@ -924,8 +923,6 @@ def move_collision(g_map, car_pos):
 
 
 
-
-
 def choose_name() :
     white = (255, 255, 255)
     black = (0, 0, 0)
@@ -1150,7 +1147,7 @@ def run_game():
             if point:
                 coins += 1
             
-            game_map = obstacle(game_map)    # Adds new obstacles off screen
+            game_map = obstacle(game_map, coins)    # Adds new obstacles off screen
             game_map = coin_placer(game_map)        # Adds new coins off screen
             game_map = mov_map(game_map)            # Moves the map
 
@@ -1169,14 +1166,14 @@ settings_pictures = {0: [
     (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33),
   ],
   1: [
-      (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (255, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+      (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (0, 0, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (0, 0, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (0, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 0, 0), (255, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
   ],
   2: [
       (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -1361,28 +1358,6 @@ def memory(coins):
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
         update_screen(["Scoreboard created"])
 
-
-def scores_hat():
-    text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
-                    "", "           LEADERBOARD:"]
-    with open("SCOREBOARD_FPI.csv") as f:
-        content = f.read().split("\n")
-        if len(content) > 6:
-            for i in range(1, 6):
-                name = content[i].split(" ")[0]
-                score = content[i].split(" ")[1]
-                text.append(f"          {i}: {name} {score}")
-        else:
-            for i in range(1, len(content)-1):
-                name = content[i].split(" ")[0]
-                score = content[i].split(" ")[1]
-                text.append(f"          {i}: {name} {score}")
-    if len(text) < 9:
-        for i in range(len(text)-3, 6):
-            text.append(f"          {i}. ")
-    return(text)
-
-
 # Main function
 def main():
     meny_selection = 0          # Selects the first menu
@@ -1396,10 +1371,9 @@ def main():
     sense.stick.direction_right = j_down        #
     sense.stick.direction_left = j_up           #
 
-
-    startup_sequence()
     # Add top of display in console
     startingLines()
+    startup_sequence()
     update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "START SPILL: Trykk inn joystick for å starte spill"])
 
@@ -1433,7 +1407,7 @@ def main():
                 player_dead()
                 memory(coins)
             elif meny_selection == 1: # Leaderboard
-                scores_hat()
+                pass
             elif meny_selection == 2: # Settings
                 settings()
             elif meny_selection == 3: # Quit game

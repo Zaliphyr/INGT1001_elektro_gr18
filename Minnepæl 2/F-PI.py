@@ -108,7 +108,7 @@ def startup_sequence():
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        1: [
+        1 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -118,7 +118,7 @@ def startup_sequence():
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        2: [
+        2 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -128,7 +128,7 @@ def startup_sequence():
             (0, 0, 0), (144, 19, 254), (0, 0, 0), (144, 19, 254), (208, 2, 164), (208, 2, 70), (0, 0, 0), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        3: [
+        3 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -138,7 +138,7 @@ def startup_sequence():
             (0, 0, 0), (144, 19, 254), (0, 0, 0), (144, 19, 254), (208, 2, 164), (208, 2, 70), (0, 0, 0), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        4: [
+        4 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -148,7 +148,7 @@ def startup_sequence():
             (0, 0, 0), (144, 19, 254), (0, 0, 0), (144, 19, 254), (208, 2, 164), (208, 2, 70), (0, 0, 0), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        5: [
+        5 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -158,7 +158,7 @@ def startup_sequence():
             (0, 0, 0), (144, 19, 254), (0, 0, 0), (144, 19, 254), (208, 2, 164), (208, 2, 70), (0, 0, 0), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        6: [
+        6 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27),
@@ -168,7 +168,7 @@ def startup_sequence():
             (0, 0, 0), (144, 19, 254), (0, 0, 0), (144, 19, 254), (208, 2, 164), (208, 2, 70), (0, 0, 0), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        7: [
+        7 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27),
@@ -178,7 +178,7 @@ def startup_sequence():
             (0, 0, 0), (144, 19, 254), (0, 0, 0), (144, 19, 254), (208, 2, 164), (208, 2, 70), (0, 0, 0), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        8: [
+        8 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (208, 2, 27),
@@ -188,7 +188,7 @@ def startup_sequence():
             (0, 0, 0), (144, 19, 254), (0, 0, 0), (144, 19, 254), (208, 2, 164), (208, 2, 70), (0, 0, 0), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        9: [
+        9 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (0, 0, 0), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0), (208, 2, 27),
@@ -198,7 +198,7 @@ def startup_sequence():
             (0, 0, 0), (144, 19, 254), (0, 0, 0), (144, 19, 254), (208, 2, 164), (208, 2, 70), (0, 0, 0), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        10: [
+        10 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (248, 231, 28), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0), (208, 2, 27),
@@ -208,7 +208,7 @@ def startup_sequence():
             (0, 0, 0), (144, 19, 254), (248, 231, 28), (144, 19, 254), (208, 2, 164), (208, 2, 70), (0, 0, 0), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        11: [
+        11 : [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (248, 231, 28), (248, 231, 28), (248, 231, 28), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (208, 2, 27),
@@ -218,7 +218,7 @@ def startup_sequence():
             (0, 0, 0), (144, 19, 254), (248, 231, 28), (144, 19, 254), (208, 2, 164), (208, 2, 70), (248, 231, 28), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (144, 19, 254), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
         ],
-        12: [
+        12 : [
             (0, 0, 0), (0, 0, 0), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (0, 0, 0),
             (0, 0, 0), (208, 2, 27), (208, 2, 27), (208, 2, 27), (248, 231, 28), (248, 231, 28), (248, 231, 28), (0, 0, 0),
             (248, 231, 28), (208, 2, 27), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (208, 2, 27),
@@ -228,7 +228,7 @@ def startup_sequence():
             (248, 231, 28), (144, 19, 254), (248, 231, 28), (144, 19, 254), (208, 2, 164), (208, 2, 70), (248, 231, 28), (144, 19, 254),
             (0, 0, 0), (0, 0, 0), (248, 231, 28), (144, 19, 254), (248, 231, 28), (248, 231, 28), (0, 0, 0), (0, 0, 0),
         ],
-        13: [
+        13 : [
             (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
             (248, 231, 28), (208, 2, 27), (208, 2, 27), (208, 2, 27), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
             (248, 231, 28), (208, 2, 27), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (208, 2, 27),
@@ -238,7 +238,7 @@ def startup_sequence():
             (248, 231, 28), (144, 19, 254), (248, 231, 28), (144, 19, 254), (208, 2, 164), (208, 2, 70), (248, 231, 28), (144, 19, 254),
             (248, 231, 28), (248, 231, 28), (248, 231, 28), (144, 19, 254), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
         ],
-        14: [
+        14 : [
             (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
             (248, 231, 28), (208, 2, 27), (208, 2, 27), (208, 2, 27), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
             (248, 231, 28), (208, 2, 27), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (208, 2, 27),
@@ -248,7 +248,7 @@ def startup_sequence():
             (248, 231, 28), (144, 19, 254), (248, 231, 28), (144, 19, 254), (208, 2, 164), (208, 2, 70), (248, 231, 28), (144, 19, 254),
             (248, 231, 28), (248, 231, 28), (248, 231, 28), (144, 19, 254), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
         ],
-        15: [
+        15 : [
             (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
             (248, 231, 28), (208, 2, 27), (208, 2, 27), (208, 2, 27), (248, 231, 28), (248, 231, 28), (255, 255, 255), (248, 231, 28),
             (248, 231, 28), (208, 2, 27), (255, 255, 255), (248, 231, 28), (248, 231, 28), (255, 255, 255), (248, 231, 28), (208, 2, 27),
@@ -258,7 +258,7 @@ def startup_sequence():
             (248, 231, 28), (255, 255, 255), (248, 231, 28), (144, 19, 254), (208, 2, 164), (208, 2, 70), (248, 231, 28), (144, 19, 254),
             (248, 231, 28), (248, 231, 28), (248, 231, 28), (144, 19, 254), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
         ],
-        16: [
+        16 : [
             (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
             (248, 231, 28), (255, 255, 255), (208, 2, 27), (208, 2, 27), (248, 231, 28), (255, 255, 255), (255, 255, 255), (248, 231, 28),
             (248, 231, 28), (208, 2, 27), (255, 255, 255), (255, 255, 255), (248, 231, 28), (255, 255, 255), (248, 231, 28), (208, 2, 27),
@@ -268,7 +268,7 @@ def startup_sequence():
             (248, 231, 28), (255, 255, 255), (248, 231, 28), (144, 19, 254), (208, 2, 164), (208, 2, 70), (248, 231, 28), (144, 19, 254),
             (248, 231, 28), (248, 231, 28), (248, 231, 28), (144, 19, 254), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
         ],
-        17: [
+        17 : [
             (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
             (248, 231, 28), (255, 255, 255), (208, 2, 27), (208, 2, 27), (248, 231, 28), (255, 255, 255), (255, 255, 255), (248, 231, 28),
             (248, 231, 28), (208, 2, 27), (255, 255, 255), (255, 255, 255), (248, 231, 28), (255, 255, 255), (248, 231, 28), (208, 2, 27),
@@ -278,7 +278,7 @@ def startup_sequence():
             (255, 255, 255), (255, 255, 255), (248, 231, 28), (255, 255, 255), (208, 2, 164), (255, 255, 255), (248, 231, 28), (144, 19, 254),
             (248, 231, 28), (248, 231, 28), (248, 231, 28), (255, 255, 255), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28),
         ],
-        18: [
+        18 : [
             (255, 255, 255), (248, 231, 28), (248, 231, 28), (255, 255, 255), (255, 255, 255), (248, 231, 28), (248, 231, 28), (255, 255, 255),
             (248, 231, 28), (255, 255, 255), (208, 2, 27), (255, 255, 255), (248, 231, 28), (255, 255, 255), (255, 255, 255), (248, 231, 28),
             (248, 231, 28), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (248, 231, 28), (208, 2, 27),
@@ -288,7 +288,7 @@ def startup_sequence():
             (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (248, 231, 28), (144, 19, 254),
             (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (248, 231, 28), (248, 231, 28), (255, 255, 255), (248, 231, 28),
         ],
-        19: [
+        19 : [
             (255, 255, 255), (255, 255, 255), (248, 231, 28), (255, 255, 255), (255, 255, 255), (248, 231, 28), (248, 231, 28), (255, 255, 255),
             (248, 231, 28), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255),
             (248, 231, 28), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255),
@@ -298,7 +298,7 @@ def startup_sequence():
             (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255),
             (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (248, 231, 28),
         ],
-        20: [
+        20 : [
             (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255),
             (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255),
             (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255), (255, 255, 255),
@@ -521,7 +521,14 @@ def gameStart_sequence():
 
   
   
-  
+car_colors = [  (179, 179, 179),
+                (255, 102, 0),
+                (179, 0, 134),
+                (255, 0, 0),
+                (255, 0, 0),
+                (5, 0, 255),
+                (205, 255, 0),
+                (155, 155, 155)]
       
 
 car_text = [[   "Nissan Skyline GT-R R34 1999",
@@ -594,6 +601,8 @@ car_text = [[   "Nissan Skyline GT-R R34 1999",
                 "RWD",
                 "0-100km/h: 9.6s",
                 "Top Speed: 209km/h"]]
+
+map_names = ["Race track", "Grass", "Forest", "Forest offroad", "Desert", "Desert offroad", "Snow", "Snow offroad", "Beach", "Mountain", "Volcano", "Rainbow", "Rainbow 2", "Checkers", "Waves", "Waves 2", "The void", "Heaven", "Candyland", "Speedboost"]
 
 # These become true when joy directions are pressed
 j_right_click = False
@@ -1129,6 +1138,8 @@ def move_collision(g_map, car_pos):
 
 
 
+
+
 def choose_name() :
     white = (255, 255, 255)
     black = (0, 0, 0)
@@ -1267,6 +1278,33 @@ def sorted_csv(score_file):                  # Function that sorts the scoreboar
       file.write(i + " " + str(sorted_dic[i]) + "\n")   # Score file is overwritten with the sorted dictionary
                                                         # from best to worst
 
+def sorted_csv(score_file):                  # Function that sorts the scoreboard
+  with open(score_file) as file:                # Opens the file
+    data = csv.reader(file, delimiter = " ")    # Reads the content
+
+    dic = {}                                    # Generates a dictionary
+    for i in data:                              # For every list in data
+      dic[i[0]] = i[1]                          # Updates the dictionary with the content in data
+                                                # First element is key, second element is value
+
+  sorted_dic = {}                               # Generates a sorted dictionary
+  sorted_dic["Name"] = "Coins"                  # Adds the titles to the sorted dic
+  dic.pop("Name")                               # Removes the titles from the original dic
+
+  while dic != {}:                            # While dictionary is not empty
+    best_score = 0                            # Sets a best score
+    for i in dic:                             # For every player that has played
+      if int(dic[i]) >= best_score:            # If the player's score is higher than the best core
+        best_score = int(dic[i])              # Player's score is set as best score
+        best_player = i                       # Player is set as best player
+    dic.pop(best_player)                      # Best player is removed from original dictionary
+    sorted_dic[best_player] = best_score      # Best player is added to sorted dictionary
+
+  with open(score_file, "w") as file:    # Opens the score file
+    for i in sorted_dic:                      # For every player in the sorted dictionary
+      file.write(i + " " + str(sorted_dic[i]) + "\n")   # Score file is overwritten with the sorted dictionary
+                                                        # from best to worst
+
 # Function to transition between 2 pictures
 def transition(pic1, pic2, right, vertical):
   sleep_time = 0.05
@@ -1322,6 +1360,7 @@ def run_game():
     game_map = map_creator()            # Creates the map
     running = True
     coins = 0
+    screen_coins = 0
     vehicle_pos = 5
 
     last_time_ran_car = 0.0
@@ -1329,6 +1368,7 @@ def run_game():
 
     reset_sense()
     gameStart_sequence()
+    update_screen([f"SCORE: {screen_coins}"])
 
     while running:
         now = time.time()
@@ -1345,6 +1385,10 @@ def run_game():
                 coins += 1
             last_time_ran_car = now
 
+            if screen_coins != coins:
+                screen_coins = coins
+                update_screen([f"SCORE: {screen_coins}"])
+
         if now - last_time_ran_map > 1:
             point, collision = map_collision(game_map, vehicle_pos)         # Checks for collition or coin vertically
 
@@ -1353,6 +1397,10 @@ def run_game():
 
             if point:
                 coins += 1
+
+            if screen_coins != coins:
+                screen_coins = coins
+                update_screen([f"SCORE: {screen_coins}"])
             
             game_map = obstacle(game_map)    # Adds new obstacles off screen
             game_map = coin_placer(game_map)        # Adds new coins off screen
@@ -1373,14 +1421,14 @@ settings_pictures = {0: [
     (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33),
   ],
   1: [
-      (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (0, 0, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (0, 0, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (0, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 0, 0), (255, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+      (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (155, 155, 155), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (155, 155, 155), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
+    (0, 255, 0), (255, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
   ],
   2: [
       (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -1685,16 +1733,19 @@ car_pictures = {0: [
   ]
   }
 
-
 def settings():
+    global v
     settings_selection = 0
     settings_max = 2
     car_selection = 0
     car_max = 7
     map_selection = 0
     map_max = 19
+    text_car_select = 0
+    text_map_select = 0
+    text_settings = 0
 
-
+    update_screen(car_text[0])
     while True:
         if j_right_click:       # Checks for joy right movement
             reset_buttons()     # Reset the joy values
@@ -1703,9 +1754,9 @@ def settings():
                 settings_selection = 0
                 transition(settings_pictures[settings_max], car_pictures[car_selection], True, False)    # Moves image on screen
             elif settings_selection == 1:
-                transition(car_pictures[car_selection], settings_pictures[1], True, False)
-            else:
-                transition(settings_pictures[settings_selection-1], settings_pictures[settings_selection], True, False)    # Moves image on screen
+                transition(car_pictures[car_selection], map_pictures[map_selection], True, False)
+            elif settings_selection == 2:
+                transition(map_pictures[map_selection], settings_pictures[settings_selection], True, False)    # Moves image on screen
         elif j_left_click:      # Checks for joy left movement
             reset_buttons()     # Reset the joy values
             settings_selection -= 1 # Moves the menu
@@ -1713,9 +1764,9 @@ def settings():
                 settings_selection = settings_max
                 transition(car_pictures[car_selection], settings_pictures[settings_max], False, False)    # Moves image on screen
             elif settings_selection == 0:
-                transition(settings_pictures[1], car_pictures[car_selection], False, False)
-            else:
-                transition(settings_pictures[settings_selection+1], settings_pictures[settings_selection], False, False)   # Moves image on screen
+                transition(map_pictures[map_selection], car_pictures[car_selection], False, False)
+            elif settings_selection == 1:
+                transition(settings_pictures[settings_selection+1], map_pictures[map_selection], False, False)   # Moves image on screen
         elif j_middle_click:    # Check for joy middle click
             reset_buttons()     # Reset joy values
             if settings_selection == 2: # Gå tilbake
@@ -1738,17 +1789,46 @@ def settings():
                 else:
                     transition(car_pictures[car_selection+1], car_pictures[car_selection], True, True)
             
+            if text_car_select != car_selection:
+                text_car_select = car_selection
+                update_screen(car_text[text_car_select])
+            v = car_colors[car_selection]
+        if settings_selection == 1:
+            if j_down_click:
+                reset_buttons()
+                map_selection += 1
+                if map_selection > map_max:
+                    map_selection = 0
+                    transition(map_pictures[0], map_pictures[map_max], False, True)
+                else:
+                    transition(map_pictures[map_selection], map_pictures[map_selection-1], False, True)
+            elif j_up_click:
+                reset_buttons()
+                map_selection -= 1
+                if map_selection < 0:
+                    map_selection = map_max
+                    transition(map_pictures[0], map_pictures[map_max], True, True)
+                else:
+                    transition(map_pictures[map_selection+1], map_pictures[map_selection], True, True)
+            if text_map_select != map_selection:
+                text_map_select = map_selection
+                update_screen([map_names[text_map_select]])
+        if text_settings != settings_selection:
+            text_settings = settings_selection
+            if text_settings == 0:
+                update_screen(car_text[text_car_select])
+            elif text_settings == 1:
+                update_screen([map_names[text_map_select]])
+            elif text_settings == 2:
+                update_screen(["Go back to main menu"])
 
         if settings_selection == 0:
             sense.set_pixels(car_pictures[car_selection])
+        elif settings_selection == 1:
+            sense.set_pixels(map_pictures[map_selection])
         else:
             sense.set_pixels(settings_pictures[settings_selection]) # Update screen
 
-
-        if settings_selection == 0:
-            sense.set_pixels(car_pictures[car_selection])
-        else:
-            sense.set_pixels(settings_pictures[settings_selection]) # Update screen
 
 
 # Function that adds choose_name() and update_csv()
@@ -1845,6 +1925,7 @@ def main():
                 pass
             elif meny_selection == 2: # Settings
                 settings()
+                text_on_screen = -1
             elif meny_selection == 3: # Quit game
                 break
         if text_on_screen != meny_selection:
@@ -1852,7 +1933,10 @@ def main():
                 update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "START SPILL: Trykk inn joystick for å starte spill"])
             elif meny_selection == 1:
-                update_screen(scores_hat())
+                if os.path.isfile('./SCOREBOARD_FPI.csv'):
+                    update_screen(scores_hat())
+                else:
+                    pass
             elif meny_selection == 2:
                 update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "INSTILLINGER: klikk for å gå inn i instillinger menyen"])

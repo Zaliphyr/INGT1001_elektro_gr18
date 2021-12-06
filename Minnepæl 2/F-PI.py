@@ -1,4 +1,4 @@
- # Hei og velkommen til F-Pi main
+ # Imports stuff
 from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random
@@ -517,10 +517,6 @@ def gameStart_sequence():
     time.sleep(0.1)
 
 
-
-
-  
-  
 car_colors = [  (179, 179, 179),
                 (255, 102, 0),
                 (179, 0, 134),
@@ -870,7 +866,6 @@ def enable_third_person(game_map, car_pos) :
 
     sense.set_pixels(screen_pixels)
 
-
 # Function that sets pixels on sense hat
 def enable_screen(game_map, car_pos):
   road_screen = game_map[8:]                         # Chooses the eight last lists of the list
@@ -1136,10 +1131,6 @@ def move_collision(g_map, car_pos):
     return point, collision
 
 
-
-
-
-
 def choose_name() :
     white = (255, 255, 255)
     black = (0, 0, 0)
@@ -1252,6 +1243,7 @@ def update_csv(name, coins):
             f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
         update_screen([f"Player {name} added -> {coins} coins"])
 
+
 def sorted_csv(score_file):                  # Function that sorts the scoreboard
   with open(score_file) as file:                # Opens the file
     data = csv.reader(file, delimiter = " ")    # Reads the content
@@ -1278,6 +1270,7 @@ def sorted_csv(score_file):                  # Function that sorts the scoreboar
     for i in sorted_dic:                      # For every player in the sorted dictionary
       file.write(i + " " + str(sorted_dic[i]) + "\n")   # Score file is overwritten with the sorted dictionary
                                                         # from best to worst
+
 
 def sorted_csv(score_file):                  # Function that sorts the scoreboard
   with open(score_file) as file:                # Opens the file
@@ -1813,13 +1806,13 @@ def settings():
                     transition(map_pictures[map_selection+1], map_pictures[map_selection], True, True)
             if text_map_select != map_selection:
                 text_map_select = map_selection
-                update_screen([map_names[text_map_select]])
+                update_screen(["DU HAR DESVERRE IKKE KARTVELGER DLC, SÅ DU KAN BARE SE KARTENE, IKKE FORANDRE KART", map_names[text_map_select]])
         if text_settings != settings_selection:
             text_settings = settings_selection
             if text_settings == 0:
                 update_screen(car_text[text_car_select])
             elif text_settings == 1:
-                update_screen([map_names[text_map_select]])
+                update_screen(["DU HAR DESVERRE IKKE KARTVELGER DLC, SÅ DU KAN BARE SE KARTENE, IKKE FORANDRE KART", map_names[text_map_select]])
             elif text_settings == 2:
                 update_screen(["Go back to main menu"])
 
@@ -1829,8 +1822,6 @@ def settings():
             sense.set_pixels(map_pictures[map_selection])
         else:
             sense.set_pixels(settings_pictures[settings_selection]) # Update screen
-
-
 
 # Function that adds choose_name() and update_csv()
 def memory(coins):
@@ -1848,6 +1839,7 @@ def memory(coins):
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
         update_screen(["Scoreboard created", f"Player {name} added -> {coins} coins"])
         time.sleep(1)
+
 
 def scores_hat():
     text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
@@ -1868,7 +1860,6 @@ def scores_hat():
         for i in range(len(text)-3, 6):
             text.append(f"{i}. ")
     return(text)
-
 
 # Main function
 def main():

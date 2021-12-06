@@ -1322,6 +1322,7 @@ def run_game():
     game_map = map_creator()            # Creates the map
     running = True
     coins = 0
+    screen_coins = 0
     vehicle_pos = 5
 
     last_time_ran_car = 0.0
@@ -1329,6 +1330,7 @@ def run_game():
 
     reset_sense()
     gameStart_sequence()
+    update_screen([f"SCORE: {screen_coins}"])
 
     while running:
         now = time.time()
@@ -1345,6 +1347,10 @@ def run_game():
                 coins += 1
             last_time_ran_car = now
 
+            if screen_coins != coins:
+                screen_coins = coins
+                update_screen([f"SCORE: {screen_coins}"])
+
         if now - last_time_ran_map > 1:
             point, collision = map_collision(game_map, vehicle_pos)         # Checks for collition or coin vertically
 
@@ -1353,6 +1359,10 @@ def run_game():
 
             if point:
                 coins += 1
+
+            if screen_coins != coins:
+                screen_coins = coins
+                update_screen([f"SCORE: {screen_coins}"])
             
             game_map = obstacle(game_map)    # Adds new obstacles off screen
             game_map = coin_placer(game_map)        # Adds new coins off screen

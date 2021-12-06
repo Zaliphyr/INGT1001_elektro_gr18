@@ -1934,7 +1934,10 @@ def main():
                 update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "START SPILL: Trykk inn joystick for å starte spill"])
             elif meny_selection == 1:
-                update_screen(scores_hat())
+                if os.path.isfile('./SCOREBOARD_FPI.csv'):
+                    update_screen(scores_hat())
+                else:
+                    pass
             elif meny_selection == 2:
                 update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "INSTILLINGER: klikk for å gå inn i instillinger menyen"])

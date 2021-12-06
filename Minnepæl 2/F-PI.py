@@ -1812,7 +1812,7 @@ def settings():
             if text_map_select != map_selection:
                 text_map_select = map_selection
                 if text_map_select == 0:
-                    update_screen(["Race track""])
+                    update_screen(["Race track"])
                 elif text_map_select == 1:
                     update_screen(["Grass"])
                 elif text_map_select == 2:
@@ -1963,6 +1963,7 @@ def main():
                 pass
             elif meny_selection == 2: # Settings
                 settings()
+                text_on_screen = -1
             elif meny_selection == 3: # Quit game
                 break
         if text_on_screen != meny_selection:

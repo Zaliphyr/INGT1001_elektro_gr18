@@ -1131,7 +1131,7 @@ def move_collision(g_map, car_pos):
     return point, collision
 
 
-def choose_name() :
+def choose_name() :                                 # Function that lets user choose name
     white = (255, 255, 255)
     black = (0, 0, 0)
     gray = (100, 100, 100)
@@ -1143,7 +1143,8 @@ def choose_name() :
     page_confirmed = 0
     update_screen(["Bla opp og ned for å velge bokstav, du kan ha navn på 3 bokstaver", "Trykk når riktig bokstav er valgt", "Øverst til venstre er ferdigmerket bokstav grønn."])
 
-    def page1() :
+        # Pages of chosen character in name. No chosen character = page 1
+    def page1() :           
         color = gray
         if page_confirmed >= 1 :
             color = green
@@ -1162,49 +1163,47 @@ def choose_name() :
     character = 0
   
     dot = True
-    while len(name_list) < 3 :
-        if dot :
+    while len(name_list) < 3 :      # Defines what happens when buttons are pressed
+        if dot :                    # Runs one time in the start, and after evert button action
             sense.show_letter(alfab[character], text_colour=white, back_colour=black)
             page1()
             page2()
             page3()
             dot = False
     
-        
-        if j_up_click :
+        if j_up_click :             # Scrolls to next character A -> Z
             reset_buttons()
             character -= 1
             if character < 0 :
                 character = (len(alfab)-1)
             dot = True
             
-      
-        elif j_down_click:
+        elif j_down_click:          # Scrolls to next character A -> B
             reset_buttons()
             character += 1
             if character >= (len(alfab)) :
                 character = 0
             dot = True
 
-        elif j_middle_click:
+        elif j_middle_click:        # Saves the chosen character, confirmes with green light
             reset_buttons()
             page_confirmed += 1
-            name_list.append(alfab[character])
-            sense.show_letter(alfab[character], text_colour=white, back_colour=black)
+            name_list.append(alfab[character])  # Adds chosen character to name_list
+            sense.show_letter(alfab[character], text_colour=white, back_colour=black) # Blink current chosen character green
             time.sleep(0.2)
             character = 0
             dot = True
             
   
-    for e in name_list :
+    for e in name_list :             # Iterates over name_list, makes string with name
         name += e
       
-    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
+    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black) # Displays chosen name
   
     return name
 
-# Function that updates an already created file
-def update_csv(name, coins):
+
+def update_csv(name, coins):                                                # Function that updates an already created file
     list_names = []
     with open('SCOREBOARD_FPI.csv', newline='') as f:
         file_content = csv.reader(f, delimiter=' ', quotechar='|')          # Opens the .csv file and reads all lines:

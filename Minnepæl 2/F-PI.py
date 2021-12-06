@@ -1793,11 +1793,6 @@ def settings():
             sense.set_pixels(settings_pictures[settings_selection]) # Update screen
 
 
-        if settings_selection == 0:
-            sense.set_pixels(car_pictures[car_selection])
-        else:
-            sense.set_pixels(settings_pictures[settings_selection]) # Update screen
-
 
 # Function that adds choose_name() and update_csv()
 def memory(coins):

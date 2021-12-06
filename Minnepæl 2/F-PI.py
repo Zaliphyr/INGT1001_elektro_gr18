@@ -521,7 +521,14 @@ def gameStart_sequence():
 
   
   
-  
+car_colors = [  (179, 179, 179),
+                (255, 102, 0),
+                (179, 0, 134),
+                (255, 0, 0),
+                (255, 0, 0),
+                (5, 0, 255),
+                (205, 255, 0),
+                (155, 155, 155)]
       
 
 car_text = [[   "Nissan Skyline GT-R R34 1999",
@@ -594,6 +601,8 @@ car_text = [[   "Nissan Skyline GT-R R34 1999",
                 "RWD",
                 "0-100km/h: 9.6s",
                 "Top Speed: 209km/h"]]
+
+map_names = ["Race track", "Grass", "Forest", "Forest offroad", "Desert", "Desert offroad", "Snow", "Snow offroad", "Beach", "Mountain", "Volcano", "Rainbow", "Rainbow 2", "Checkers", "Waves", "Waves 2", "The void", "Heaven", "Candyland", "Speedboost"]
 
 # These become true when joy directions are pressed
 j_right_click = False
@@ -1141,6 +1150,7 @@ def choose_name() :
     name = ""
     name_list = []
     page_confirmed = 0
+    update_screen(["Bla opp og ned for å velge bokstav, du kan ha navn på 3 bokstaver", "Trykk når riktig bokstav er valgt", "Øverst til venstre er ferdigmerket bokstav grønn."])
 
     def page1() :
         color = gray
@@ -1351,6 +1361,7 @@ def run_game():
     game_map = map_creator()            # Creates the map
     running = True
     coins = 0
+    screen_coins = 0
     vehicle_pos = 5
 
     last_time_ran_car = 0.0
@@ -1358,6 +1369,7 @@ def run_game():
 
     reset_sense()
     gameStart_sequence()
+    update_screen([f"SCORE: {screen_coins}"])
 
     while running:
         now = time.time()
@@ -1374,6 +1386,10 @@ def run_game():
                 coins += 1
             last_time_ran_car = now
 
+            if screen_coins != coins:
+                screen_coins = coins
+                update_screen([f"SCORE: {screen_coins}"])
+
         if now - last_time_ran_map > 1:
             point, collision = map_collision(game_map, vehicle_pos)         # Checks for collition or coin vertically
 
@@ -1382,6 +1398,10 @@ def run_game():
 
             if point:
                 coins += 1
+
+            if screen_coins != coins:
+                screen_coins = coins
+                update_screen([f"SCORE: {screen_coins}"])
             
             game_map = obstacle(game_map)    # Adds new obstacles off screen
             game_map = coin_placer(game_map)        # Adds new coins off screen
@@ -1696,14 +1716,18 @@ car_pictures = {0: [
   }
 
 def settings():
+    global v
     settings_selection = 0
     settings_max = 2
     car_selection = 0
     car_max = 7
     map_selection = 0
     map_max = 19
+    text_car_select = 0
+    text_map_select = 0
+    text_settings = 0
 
-
+    update_screen(car_text[0])
     while True:
         if j_right_click:       # Checks for joy right movement
             reset_buttons()     # Reset the joy values
@@ -1746,6 +1770,11 @@ def settings():
                     transition(car_pictures[0], car_pictures[car_max], True, True)
                 else:
                     transition(car_pictures[car_selection+1], car_pictures[car_selection], True, True)
+            
+            if text_car_select != car_selection:
+                text_car_select = car_selection
+                update_screen(car_text[text_car_select])
+            v = car_colors[car_selection]
         if settings_selection == 1:
             if j_down_click:
                 reset_buttons()
@@ -1763,7 +1792,17 @@ def settings():
                     transition(map_pictures[0], map_pictures[map_max], True, True)
                 else:
                     transition(map_pictures[map_selection+1], map_pictures[map_selection], True, True)
-            
+            if text_map_select != map_selection:
+                text_map_select = map_selection
+                update_screen([map_names[text_map_select]])
+        if text_settings != settings_selection:
+            text_settings = settings_selection
+            if text_settings == 0:
+                update_screen(car_text[text_car_select])
+            elif text_settings == 1:
+                update_screen([map_names[text_map_select]])
+            elif text_settings == 2:
+                update_screen(["Go back to main menu"])
 
         if settings_selection == 0:
             sense.set_pixels(car_pictures[car_selection])
@@ -1788,7 +1827,7 @@ def memory(coins):
         with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
             for name in player_scoreboard :
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
-        update_screen(["Scoreboard created"])
+        update_screen(["Scoreboard created", f"Player {name} added -> {coins} coins"])
 
 def scores_hat():
     text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
@@ -1824,8 +1863,6 @@ def main():
     sense.stick.direction_right = j_down        #
     sense.stick.direction_left = j_up           #
 
-
-    startup_sequence()
     # Add top of display in console
     startingLines()
     startup_sequence()
@@ -1866,10 +1903,12 @@ def main():
                 coins = run_game()
                 player_dead()
                 memory(coins)
+                text_on_screen = -1
             elif meny_selection == 1: # Leaderboard
                 pass
             elif meny_selection == 2: # Settings
                 settings()
+                text_on_screen = -1
             elif meny_selection == 3: # Quit game
                 break
         if text_on_screen != meny_selection:
@@ -1877,7 +1916,10 @@ def main():
                 update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "START SPILL: Trykk inn joystick for å starte spill"])
             elif meny_selection == 1:
-                update_screen(scores_hat())
+                if os.path.isfile('./SCOREBOARD_FPI.csv'):
+                    update_screen(scores_hat())
+                else:
+                    update_screen(["NO FILE YET, PLAY GAME TO MAKE FILE"])
             elif meny_selection == 2:
                 update_screen(["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "INSTILLINGER: klikk for å gå inn i instillinger menyen"])

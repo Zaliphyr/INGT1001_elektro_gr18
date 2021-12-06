@@ -1812,7 +1812,7 @@ def settings():
             if text_map_select != map_selection:
                 text_map_select = map_selection
                 if text_map_select == 0:
-                    update_screen(["Race track""])
+                    update_screen(["Race track"])
                 elif text_map_select == 1:
                     update_screen(["Grass"])
                 elif text_map_select == 2:

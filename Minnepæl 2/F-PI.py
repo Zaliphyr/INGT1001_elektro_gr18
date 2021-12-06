@@ -598,6 +598,7 @@ car_text = [[   "Nissan Skyline GT-R R34 1999",
                 "0-100km/h: 9.6s",
                 "Top Speed: 209km/h"]]
 
+# Names for the different maps, in order
 map_names = ["Race track", "Grass", "Forest", "Forest offroad", "Desert", "Desert offroad", "Snow", "Snow offroad", "Beach", "Mountain", "Volcano", "Rainbow", "Rainbow 2", "Checkers", "Waves", "Waves 2", "The void", "Heaven", "Candyland", "Speedboost"]
 
 # These become true when joy directions are pressed
@@ -1202,8 +1203,8 @@ def choose_name() :                                 # Function that lets user ch
   
     return name
 
-
-def update_csv(name, coins):                                                # Function that updates an already created file
+# Function that updates an already created file
+def update_csv(name, coins):
     list_names = []
     with open('SCOREBOARD_FPI.csv', newline='') as f:
         file_content = csv.reader(f, delimiter=' ', quotechar='|')          # Opens the .csv file and reads all lines:
@@ -1407,6 +1408,7 @@ settings_pictures = {0: [
   ]
   }
 
+# Pictures of the different maps
 map_pictures = {
     0: [ # Race track
       (255, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 0, 0),

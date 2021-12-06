@@ -1,4 +1,4 @@
- # Hei og velkommen til F-Pi main
+ # Imports stuff
 from sense_hat import SenseHat, ACTION_HELD, ACTION_RELEASED, ACTION_PRESSED
 import time
 import random
@@ -868,7 +868,6 @@ def enable_third_person(game_map, car_pos) :
 
     sense.set_pixels(screen_pixels)
 
-
 # Function that sets pixels on sense hat
 def enable_screen(game_map, car_pos):
   road_screen = game_map[8:]                         # Chooses the eight last lists of the list
@@ -1134,11 +1133,7 @@ def move_collision(g_map, car_pos):
     return point, collision
 
 
-
-
-
-
-def choose_name() :
+def choose_name() :                                 # Function that lets user choose name
     white = (255, 255, 255)
     black = (0, 0, 0)
     gray = (100, 100, 100)
@@ -1150,7 +1145,8 @@ def choose_name() :
     page_confirmed = 0
     update_screen(["Bla opp og ned for å velge bokstav, du kan ha navn på 3 bokstaver", "Trykk når riktig bokstav er valgt", "Øverst til venstre er ferdigmerket bokstav grønn."])
 
-    def page1() :
+        # Pages of chosen character in name. No chosen character = page 1
+    def page1() :           
         color = gray
         if page_confirmed >= 1 :
             color = green
@@ -1169,49 +1165,47 @@ def choose_name() :
     character = 0
   
     dot = True
-    while len(name_list) < 3 :
-        if dot :
+    while len(name_list) < 3 :      # Defines what happens when buttons are pressed
+        if dot :                    # Runs one time in the start, and after evert button action
             sense.show_letter(alfab[character], text_colour=white, back_colour=black)
             page1()
             page2()
             page3()
             dot = False
     
-        
-        if j_up_click :
+        if j_up_click :             # Scrolls to next character A -> Z
             reset_buttons()
             character -= 1
             if character < 0 :
                 character = (len(alfab)-1)
             dot = True
             
-      
-        elif j_down_click:
+        elif j_down_click:          # Scrolls to next character A -> B
             reset_buttons()
             character += 1
             if character >= (len(alfab)) :
                 character = 0
             dot = True
 
-        elif j_middle_click:
+        elif j_middle_click:        # Saves the chosen character, confirmes with green light
             reset_buttons()
             page_confirmed += 1
-            name_list.append(alfab[character])
-            sense.show_letter(alfab[character], text_colour=white, back_colour=black)
+            name_list.append(alfab[character])  # Adds chosen character to name_list
+            sense.show_letter(alfab[character], text_colour=green, back_colour=black) # Blink current chosen character green
             time.sleep(0.2)
             character = 0
             dot = True
             
   
-    for e in name_list :
+    for e in name_list :             # Iterates over name_list, makes string with name
         name += e
       
-    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
+    sense.show_message(name, text_colour=green, back_colour=black) # Displays chosen name
   
     return name
 
-# Function that updates an already created file
-def update_csv(name, coins):
+
+def update_csv(name, coins):                                                # Function that updates an already created file
     list_names = []
     with open('SCOREBOARD_FPI.csv', newline='') as f:
         file_content = csv.reader(f, delimiter=' ', quotechar='|')          # Opens the .csv file and reads all lines:
@@ -1250,6 +1244,7 @@ def update_csv(name, coins):
             f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
         update_screen([f"Player {name} added -> {coins} coins"])
 
+
 def sorted_csv(score_file):                  # Function that sorts the scoreboard
   with open(score_file) as file:                # Opens the file
     data = csv.reader(file, delimiter = " ")    # Reads the content
@@ -1276,6 +1271,7 @@ def sorted_csv(score_file):                  # Function that sorts the scoreboar
     for i in sorted_dic:                      # For every player in the sorted dictionary
       file.write(i + " " + str(sorted_dic[i]) + "\n")   # Score file is overwritten with the sorted dictionary
                                                         # from best to worst
+
 
 def sorted_csv(score_file):                  # Function that sorts the scoreboard
   with open(score_file) as file:                # Opens the file
@@ -1812,13 +1808,13 @@ def settings():
                     transition(map_pictures[map_selection+1], map_pictures[map_selection], True, True)
             if text_map_select != map_selection:
                 text_map_select = map_selection
-                update_screen([map_names[text_map_select]])
+                update_screen(["DU HAR DESVERRE IKKE KARTVELGER DLC, SÅ DU KAN BARE SE KARTENE, IKKE FORANDRE KART", map_names[text_map_select]])
         if text_settings != settings_selection:
             text_settings = settings_selection
             if text_settings == 0:
                 update_screen(car_text[text_car_select])
             elif text_settings == 1:
-                update_screen([map_names[text_map_select]])
+                update_screen(["DU HAR DESVERRE IKKE KARTVELGER DLC, SÅ DU KAN BARE SE KARTENE, IKKE FORANDRE KART", map_names[text_map_select]])
             elif text_settings == 2:
                 update_screen(["Go back to main menu"])
 
@@ -1828,8 +1824,6 @@ def settings():
             sense.set_pixels(map_pictures[map_selection])
         else:
             sense.set_pixels(settings_pictures[settings_selection]) # Update screen
-
-
 
 # Function that adds choose_name() and update_csv()
 def memory(coins):
@@ -1847,6 +1841,7 @@ def memory(coins):
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
         update_screen(["Scoreboard created", f"Player {name} added -> {coins} coins"])
         time.sleep(1)
+
 
 def scores_hat():
     text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
@@ -1867,7 +1862,6 @@ def scores_hat():
         for i in range(len(text)-3, 6):
             text.append(f"{i}. ")
     return(text)
-
 
 # Main function
 def main():

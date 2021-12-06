@@ -1732,6 +1732,8 @@ def settings():
     car_max = 7
     map_selection = 0
     map_max = 19
+    text_car_select = 0
+    text_map_select = 0
 
 
     while True:
@@ -1776,6 +1778,10 @@ def settings():
                     transition(car_pictures[0], car_pictures[car_max], True, True)
                 else:
                     transition(car_pictures[car_selection+1], car_pictures[car_selection], True, True)
+            
+            if text_car_select != car_selection:
+                text_car_select = car_selection
+                update_screen(car_text[text_car_select])
         if settings_selection == 1:
             if j_down_click:
                 reset_buttons()
@@ -1793,6 +1799,48 @@ def settings():
                     transition(map_pictures[0], map_pictures[map_max], True, True)
                 else:
                     transition(map_pictures[map_selection+1], map_pictures[map_selection], True, True)
+            if text_map_select != map_selection:
+                text_map_select = map_selection
+                if text_map_select == 0:
+                    pass
+                elif text_map_select == 1:
+                    pass
+                elif text_map_select == 2:
+                    pass
+                elif text_map_select == 3:
+                    pass
+                elif text_map_select == 4:
+                    pass
+                elif text_map_select == 5:
+                    pass
+                elif text_map_select == 6:
+                    pass
+                elif text_map_select == 7:
+                    pass
+                elif text_map_select == 8:
+                    pass
+                elif text_map_select == 9:
+                    pass
+                elif text_map_select == 10:
+                    pass
+                elif text_map_select == 11:
+                    pass
+                elif text_map_select == 12:
+                    pass
+                elif text_map_select == 13:
+                    pass
+                elif text_map_select == 14:
+                    pass
+                elif text_map_select == 15:
+                    pass
+                elif text_map_select == 16:
+                    pass
+                elif text_map_select == 17:
+                    pass
+                elif text_map_select == 18:
+                    pass
+                elif text_map_select == 19:
+                    pass
             
 
         if settings_selection == 0:

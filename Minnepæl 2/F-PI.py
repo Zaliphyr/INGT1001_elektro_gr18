@@ -602,6 +602,8 @@ car_text = [[   "Nissan Skyline GT-R R34 1999",
                 "0-100km/h: 9.6s",
                 "Top Speed: 209km/h"]]
 
+map_names = ["Race track", "Grass", "Forest", "Forest offroad", "Desert", "Desert offroad", "Snow", "Snow offroad", "Beach", "Mountain", "Volcano", "Rainbow", "Rainbow 2", "Checkers", "Waves", "Waves 2", "The void", "Heaven", "Candyland", "Speedboost"]
+
 # These become true when joy directions are pressed
 j_right_click = False
 j_left_click = False
@@ -1811,52 +1813,13 @@ def settings():
                     transition(map_pictures[map_selection+1], map_pictures[map_selection], True, True)
             if text_map_select != map_selection:
                 text_map_select = map_selection
-                if text_map_select == 0:
-                    update_screen(["Race track"])
-                elif text_map_select == 1:
-                    update_screen(["Grass"])
-                elif text_map_select == 2:
-                    update_screen(["Forest"])
-                elif text_map_select == 3:
-                    update_screen(["Forest offroad"])
-                elif text_map_select == 4:
-                    update_screen(["Desert"])
-                elif text_map_select == 5:
-                    update_screen(["Desert offroad"])
-                elif text_map_select == 6:
-                    update_screen(["Snow"])
-                elif text_map_select == 7:
-                    update_screen(["Snow offroad"])
-                elif text_map_select == 8:
-                    update_screen(["Beach"])
-                elif text_map_select == 9:
-                    update_screen(["Mountain"])
-                elif text_map_select == 10:
-                    update_screen(["Volcano"])
-                elif text_map_select == 11:
-                    update_screen(["Rainbow"])
-                elif text_map_select == 12:
-                    update_screen(["Rainbow 2"])
-                elif text_map_select == 13:
-                    update_screen(["Checkers"])
-                elif text_map_select == 14:
-                    update_screen(["Waves"])
-                elif text_map_select == 15:
-                    update_screen(["Waves 2"])
-                elif text_map_select == 16:
-                    update_screen(["The void"])
-                elif text_map_select == 17:
-                    update_screen(["Heaven"])
-                elif text_map_select == 18:
-                    update_screen(["Candyland"])
-                elif text_map_select == 19:
-                    update_screen(["Speedboost"])
+                update_screen([map_names[text_map_select]])
         if text_settings != settings_selection:
             text_settings = settings_selection
             if text_settings == 0:
                 update_screen(car_text[text_car_select])
             elif text_settings == 1:
-                update_screen(["PLACEHOLDER"])
+                update_screen([map_names[text_map_select]])
             elif text_settings == 2:
                 update_screen(["Go back to main menu"])
 

@@ -1150,6 +1150,7 @@ def choose_name() :
     name = ""
     name_list = []
     page_confirmed = 0
+    update_screen(["Bla opp og ned for å velge bokstav, du kan ha navn på 3 bokstaver", "Trykk når riktig bokstav er valgt", "Øverst til venstre er ferdigmerket bokstav grønn."])
 
     def page1() :
         color = gray
@@ -1846,7 +1847,7 @@ def memory(coins):
         with open('SCOREBOARD_FPI.csv', "w") as f:                          # Otherwise the file will first be created here !
             for name in player_scoreboard :
                 f.write("%s %s\n"% (name, player_scoreboard[name]))
-        update_screen(["Scoreboard created"])
+        update_screen(["Scoreboard created", f"Player {name} added -> {coins} coins"])
 
 def scores_hat():
     text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",

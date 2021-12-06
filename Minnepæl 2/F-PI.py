@@ -1851,22 +1851,22 @@ def memory(coins):
 
 def scores_hat():
     text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
-                    "", "           LEADERBOARD:"]
+                    "", "LEADERBOARD:"]
     with open("SCOREBOARD_FPI.csv") as f:
         content = f.read().split("\n")
         if len(content) > 6:
             for i in range(1, 6):
                 name = content[i].split(" ")[0]
                 score = content[i].split(" ")[1]
-                text.append(f"          {i}: {name} {score}")
+                text.append(f"{i}: {name} {score}")
         else:
             for i in range(1, len(content)-1):
                 name = content[i].split(" ")[0]
                 score = content[i].split(" ")[1]
-                text.append(f"          {i}: {name} {score}")
+                text.append(f"{i}: {name} {score}")
     if len(text) < 9:
         for i in range(len(text)-3, 6):
-            text.append(f"          {i}. ")
+            text.append(f"{i}. ")
     return(text)
 
 

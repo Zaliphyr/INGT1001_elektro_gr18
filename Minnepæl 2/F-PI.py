@@ -1262,35 +1262,7 @@ def sorted_csv(score_file):                  # Function that sorts the scoreboar
   while dic != {}:                            # While dictionary is not empty
     best_score = 0                            # Sets a best score
     for i in dic:                             # For every player that has played
-      if int(dic[i]) >= best_score:            # If the player's score is higher than the best core
-        best_score = int(dic[i])              # Player's score is set as best score
-        best_player = i                       # Player is set as best player
-    dic.pop(best_player)                      # Best player is removed from original dictionary
-    sorted_dic[best_player] = best_score      # Best player is added to sorted dictionary
-
-  with open(score_file, "w") as file:    # Opens the score file
-    for i in sorted_dic:                      # For every player in the sorted dictionary
-      file.write(i + " " + str(sorted_dic[i]) + "\n")   # Score file is overwritten with the sorted dictionary
-                                                        # from best to worst
-
-
-def sorted_csv(score_file):                  # Function that sorts the scoreboard
-  with open(score_file) as file:                # Opens the file
-    data = csv.reader(file, delimiter = " ")    # Reads the content
-
-    dic = {}                                    # Generates a dictionary
-    for i in data:                              # For every list in data
-      dic[i[0]] = i[1]                          # Updates the dictionary with the content in data
-                                                # First element is key, second element is value
-
-  sorted_dic = {}                               # Generates a sorted dictionary
-  sorted_dic["Name"] = "Coins"                  # Adds the titles to the sorted dic
-  dic.pop("Name")                               # Removes the titles from the original dic
-
-  while dic != {}:                            # While dictionary is not empty
-    best_score = 0                            # Sets a best score
-    for i in dic:                             # For every player that has played
-      if int(dic[i]) >= best_score:            # If the player's score is higher than the best core
+      if int(dic[i]) >= best_score:           # If the player's score is higher than the best core
         best_score = int(dic[i])              # Player's score is set as best score
         best_player = i                       # Player is set as best player
     dic.pop(best_player)                      # Best player is removed from original dictionary

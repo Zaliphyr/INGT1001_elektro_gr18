@@ -520,7 +520,7 @@ def gameStart_sequence():
     sense.set_pixels(broom[16])
     time.sleep(0.1)
 
-
+# Diffrent colors for the car, used in car selector
 car_colors = [  (179, 179, 179),
                 (255, 102, 0),
                 (179, 0, 134),
@@ -530,7 +530,7 @@ car_colors = [  (179, 179, 179),
                 (205, 255, 0),
                 (155, 155, 155)]
       
-
+# Text for the diffrent cars
 car_text = [[   "Nissan Skyline GT-R R34 1999",
                 "Farge: Lys grå",
                 "2.6 L twin-turbocharged RB26DETT I6",
@@ -800,7 +800,6 @@ def obstacle_3D(game_map):
     
     return game_map
 
-
 # Function that was supposed to enable third person view
 def enable_third_person(game_map, car_pos) :
 
@@ -883,7 +882,7 @@ def enable_screen(game_map, car_pos):
 
   sense.set_pixels(screen_pixels)
 
-
+# Shows death animation
 def player_dead() :
 
   sun_down0 = [
@@ -1105,7 +1104,7 @@ def player_dead() :
   sense.set_pixels(sun_down0)
   time.sleep(y)
 
-
+# Check if car is going to crash into obstacle or coin on map move
 def map_collision(g_map, car_pos):
     collision = False
     point = False
@@ -1119,7 +1118,7 @@ def map_collision(g_map, car_pos):
     
     return point, collision
 
-
+# Check if car is going to crash into obstacle or coin on car move side to side
 def move_collision(g_map, car_pos):
     collision = False
     point = False
@@ -1133,8 +1132,8 @@ def move_collision(g_map, car_pos):
 
     return point, collision
 
-
-def choose_name() :                                 # Function that lets user choose name
+ # Function that lets user choose name
+def choose_name() :                                
     white = (255, 255, 255)
     black = (0, 0, 0)
     gray = (100, 100, 100)
@@ -1205,8 +1204,8 @@ def choose_name() :                                 # Function that lets user ch
   
     return name
 
-
-def update_csv(name, coins):                                                # Function that updates an already created file
+# Function that updates an already created file
+def update_csv(name, coins):                                                
     list_names = []
     with open('SCOREBOARD_FPI.csv', newline='') as f:
         file_content = csv.reader(f, delimiter=' ', quotechar='|')          # Opens the .csv file and reads all lines:
@@ -1245,36 +1244,8 @@ def update_csv(name, coins):                                                # Fu
             f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
         update_screen([f"Player {name} added -> {coins} coins"])
 
-
-def sorted_csv(score_file):                  # Function that sorts the scoreboard
-  with open(score_file) as file:                # Opens the file
-    data = csv.reader(file, delimiter = " ")    # Reads the content
-
-    dic = {}                                    # Generates a dictionary
-    for i in data:                              # For every list in data
-      dic[i[0]] = i[1]                          # Updates the dictionary with the content in data
-                                                # First element is key, second element is value
-
-  sorted_dic = {}                               # Generates a sorted dictionary
-  sorted_dic["Name"] = "Coins"                  # Adds the titles to the sorted dic
-  dic.pop("Name")                               # Removes the titles from the original dic
-
-  while dic != {}:                            # While dictionary is not empty
-    best_score = 0                            # Sets a best score
-    for i in dic:                             # For every player that has played
-      if int(dic[i]) >= best_score:            # If the player's score is higher than the best core
-        best_score = int(dic[i])              # Player's score is set as best score
-        best_player = i                       # Player is set as best player
-    dic.pop(best_player)                      # Best player is removed from original dictionary
-    sorted_dic[best_player] = best_score      # Best player is added to sorted dictionary
-
-  with open(score_file, "w") as file:    # Opens the score file
-    for i in sorted_dic:                      # For every player in the sorted dictionary
-      file.write(i + " " + str(sorted_dic[i]) + "\n")   # Score file is overwritten with the sorted dictionary
-                                                        # from best to worst
-
-
-def sorted_csv(score_file):                  # Function that sorts the scoreboard
+# Function that sorts the scoreboard
+def sorted_csv(score_file):                  
   with open(score_file) as file:                # Opens the file
     data = csv.reader(file, delimiter = " ")    # Reads the content
 
@@ -1406,10 +1377,7 @@ def run_game():
 
     return coins    # Returns the amount of coins gathered
 
-<<<<<<< Updated upstream
-=======
-# Dictionary of pictures for the settings menu
->>>>>>> Stashed changes
+# Pictures used on settimgs menu
 settings_pictures = {2: [
       (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
     (0, 0, 0), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -1716,6 +1684,7 @@ car_pictures = {0: [
   ]
   }
 
+# Fubction that runs the settings menu
 def settings():
     global v
     settings_selection = 0 # A counter to keep track of where the player is in the settings menu
@@ -1829,7 +1798,7 @@ def memory(coins):
         update_screen(["Scoreboard created", f"Player {name} added -> {coins} coins"])
         time.sleep(1)
 
-
+# Function that returns the top 5 from leaderboard
 def scores_hat():
     text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "LEADERBOARD:"]
@@ -1931,6 +1900,6 @@ def main():
         sense.set_pixels(meny_pictures[meny_selection]) # Update screen
     sense.clear()
 
+
 if __name__ == "__main__":
     main()
-

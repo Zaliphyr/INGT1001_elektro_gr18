@@ -640,7 +640,7 @@ def j_middle(event):
     elif event.action == ACTION_HELD:
         interrupt = True
 
-# Needs to be runned after using a joy direction
+# Needs to be ran after using a joy direction
 def reset_buttons():
     global interrupt
     global j_middle_click
@@ -1102,17 +1102,17 @@ def player_dead() :
   sense.set_pixels(sun_down0)
   time.sleep(y)
 
-
+# Function to check if the car has hit an obstacle or a coin
 def map_collision(g_map, car_pos):
-    collision = False
-    point = False
+    collision = False                 # Set collision to False, if the car hits an obstacle this will become True
+    point = False                     # Set point to False, if the car gets a coin this will become True
 
-    if (g_map[14][car_pos] == o):
-        collision = True
+    if (g_map[14][car_pos] == o):     # If the there is an obstacle in the same position as the car in the row above
+        collision = True              # Set collision to True
     
-    elif (g_map[14][car_pos] == c):
-        point = True
-        g_map[14][car_pos] = r
+    elif (g_map[14][car_pos] == c):   # If the there is a coin in the same position as the car in the row above
+        point = True                  # Set point to True
+        g_map[14][car_pos] = r        # Redefine that position to road so the coin disappears
     
     return point, collision
 

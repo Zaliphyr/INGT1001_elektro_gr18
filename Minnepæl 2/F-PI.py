@@ -644,7 +644,7 @@ def j_middle(event):
     elif event.action == ACTION_HELD:
         interrupt = True
 
-# Needs to be runned after using a joy direction
+# Needs to be ran after using a joy direction
 def reset_buttons():
     global interrupt
     global j_middle_click
@@ -1104,17 +1104,18 @@ def player_dead() :
   sense.set_pixels(sun_down0)
   time.sleep(y)
 
+
 # Check if car is going to crash into obstacle or coin on map move
 def map_collision(g_map, car_pos):
-    collision = False
-    point = False
+    collision = False                 # Set collision to False, if the car hits an obstacle this will become True
+    point = False                     # Set point to False, if the car gets a coin this will become True
 
-    if (g_map[14][car_pos] == o):
-        collision = True
+    if (g_map[14][car_pos] == o):     # If the there is an obstacle in the same position as the car in the row above
+        collision = True              # Set collision to True
     
-    elif (g_map[14][car_pos] == c):
-        point = True
-        g_map[14][car_pos] = r
+    elif (g_map[14][car_pos] == c):   # If the there is a coin in the same position as the car in the row above
+        point = True                  # Set point to True
+        g_map[14][car_pos] = r        # Redefine that position to road so the coin disappears
     
     return point, collision
 
@@ -1132,16 +1133,16 @@ def move_collision(g_map, car_pos):
 
     return point, collision
 
- # Function that lets user choose name
-def choose_name() :                                
-    white = (255, 255, 255)
-    black = (0, 0, 0)
-    gray = (100, 100, 100)
-    green = (0, 255, 0)
-  
-    alfab = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+ # Function that lets user choose name   
+def choose_name() :
     name = ""
     name_list = []
+    alfab = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    white = (255, 255, 255)
+    black = (0, 0, 0)
+    green = (0, 77, 26)
+    gray = (100, 100, 100)
     page_confirmed = 0
     update_screen(["Bla opp og ned for å velge bokstav, du kan ha navn på 3 bokstaver", "Trykk når riktig bokstav er valgt", "Øverst til venstre er ferdigmerket bokstav grønn."])
 
@@ -1172,7 +1173,6 @@ def choose_name() :
             page2()
             page3()
             dot = False
-    
         if j_up_click :             # Scrolls to next character A -> Z
             reset_buttons()
             character -= 1
@@ -1201,7 +1201,6 @@ def choose_name() :
         name += e
       
     sense.show_message(name, text_colour=green, back_colour=black) # Displays chosen name
-  
     return name
 
 # Function that updates an already created file

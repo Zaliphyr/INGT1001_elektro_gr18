@@ -5,11 +5,12 @@ import random
 import csv
 import os
 
-def reset_sense():          # A function used to reset sense so that the gyroscope works properly
+#Resets Sense and gyroscope so that it's calibrated upright and works properly when starting the game
+def reset_sense():          
     global sense            # Accessing the global variable sense
     sense = SenseHat()      # This is the sense hat
     sense.set_rotation(270) # Selects correct led matrix rotation
-reset_sense()
+reset_sense()               # Runs the function to connect to the Sense
 
 box_width = 120             # The max width for the text in the console, this is changable here
 space = 10                  # Avalable lines for printing text
@@ -22,7 +23,7 @@ c = (248, 231, 28)          # coin      / yellow
 v = (48, 135, 145)          # vehicle   / turquoise
 red_pixel = (189, 16, 224)
 
-# Pictures used for the menu
+# Dictionary of pictures used for the menu
 meny_pictures = {0: [
       (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
     (0, 0, 0), (0, 0, 0), (0, 0, 0), (76, 207, 26), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -95,6 +96,7 @@ meny_pictures = {0: [
     ]
 }
 
+# Picture sequence that shows the F-Pi logo on startup
 def startup_sequence():
     
     pictures = {
@@ -310,6 +312,7 @@ def startup_sequence():
         ]
     }
 
+    # Picture sequence
     for i in range(20):
         sense.set_pixels(pictures[i])
         if pictures[i] == pictures[7]:
@@ -317,7 +320,7 @@ def startup_sequence():
         else:
             time.sleep(0.1)
 
-
+# Picture sequence that shows a car driving into the game on game start 
 def gameStart_sequence():
 
     broom = {
@@ -483,6 +486,7 @@ def gameStart_sequence():
     ]
     }
 
+    # Hardcoded picture sequence
     sense.set_pixels(broom[1])
     time.sleep(0.5)
     sense.set_pixels(broom[2])
@@ -516,7 +520,7 @@ def gameStart_sequence():
     sense.set_pixels(broom[16])
     time.sleep(0.1)
 
-
+# Diffrent colors for the car, used in car selector
 car_colors = [  (179, 179, 179),
                 (255, 102, 0),
                 (179, 0, 134),
@@ -526,7 +530,7 @@ car_colors = [  (179, 179, 179),
                 (205, 255, 0),
                 (155, 155, 155)]
       
-
+# Text for the diffrent cars
 car_text = [[   "Nissan Skyline GT-R R34 1999",
                 "Farge: Lys grå",
                 "2.6 L twin-turbocharged RB26DETT I6",
@@ -688,42 +692,42 @@ def update_screen(text_list):
 def car_pos_joy(prev_pos):
                            # with previous position as input shown by an integer between 0 and 7
 
-    if j_left_click:
-        position = prev_pos - 1
-        reset_buttons()
-    elif j_right_click:
-        position = prev_pos + 1
-        reset_buttons()
+    if j_left_click:                       # If left click:
+        position = prev_pos - 1            # New position is previous position minus 1
+        reset_buttons()                    # Resets button to prepare for next input
+    elif j_right_click:                    # Else if right click:
+        position = prev_pos + 1            # New position is previous position plus 1
+        reset_buttons()                    # Resets button to prepare for next input
     else:
         position = prev_pos
 
-    if position < 1:        # The car can't go further to the left than 0, therefor if the position is negative:
-        position = 1        # Set the position to 0
-    elif position > 6:      # The car can't go further to the right than 7, therefor if the position is over 7:
-        position = 6        # Set the position to 7
+    if position < 1:        # The car can't go further to the left than 1, therefor if the position is below 1:
+        position = 1        # Set the position to 1
+    elif position > 6:      # The car can't go further to the right than 6, therefor if the position is over 6:
+        position = 6        # Set the position to 6
     
-    return position
+    return position         # Returns the position as an integer between 0 and 6
 
 # Function for the position of the car controlled by gyroscope
 def car_pos_gyro(prev_pos):
                             # with previous position as input shown by an integer between 0 and 7
 
     orientation = sense.get_gyroscope() # Collecting orientational data from sensehat
-    yaw = orientation["yaw"] # Singling out the data for the yaw orientation
-    if yaw >= 340 or yaw <= 20: # If the "wheel" of the car is almost flat:
-        position = prev_pos # Keep the previous position
-    elif 340 > yaw > 180: # If the "wheel" of the car is pointed to the left:
-        position = prev_pos - 1 # Move the car one space to the left
-    elif 20 < yaw < 180: # If the "wheel" of the car is pointed to the right:
-        position = prev_pos + 1 # Move the car one space to the right
-    else: # If the wheel is turned 180 degrees or the reading somehow gives another number:
-        position = prev_pos # Keep the previous position
+    yaw = orientation["yaw"]            # Singling out the data for the yaw orientation
+    if yaw >= 340 or yaw <= 20:         # If the "wheel" of the car is almost flat:
+        position = prev_pos             # Keep the previous position
+    elif 340 > yaw > 180:               # If the "wheel" of the car is pointed to the left:
+        position = prev_pos - 1         # Move the car one space to the left
+    elif 20 < yaw < 180:                # If the "wheel" of the car is pointed to the right:
+        position = prev_pos + 1         # Move the car one space to the right
+    else:                               # If the wheel is turned 180 degrees or the reading somehow gives another number:
+        position = prev_pos             # Keep the previous position
 
 
-    if position < 1: # The car can't go further to the left than 1, therefor if the position is negative:
-        position = 1 # Set the position to 1
-    elif position > 6: # The car can't go further to the right than 6, therefor if the position is over 6:
-        position = 6 # Set the position to 6
+    if position < 1:        # The car can't go further to the left than 1, therefore if the position is below 1:
+        position = 1        # Set the position to 1
+    elif position > 6:      # The car can't go further to the right than 6, therefor if the position is over 6:
+        position = 6        # Set the position to 6
 
     return position # The function returns the value of the postition from 1 to 6
 
@@ -746,23 +750,14 @@ def coin_placer(g_map):
     while obstacle == True:             # The code will run as long as theres an obstacle where the coin is proposed to go        
         x = int(random.randint(1, 6))   # x is a random integer which corresponds to a pixel on the top row
         y = int(random.randint(0, 3))   # y is a random integer which defines how often a coin should be placed
-        #print("y: ", y)
         coin_placement = g_map[0][x]    # Variable for which pixel to place the coin. Adds to first row 
 
         if o == coin_placement:         # Checks to see if theres an obstacle in where the coin should be placed
             obstacle = True
-            #print("Oi! Her er det en hindring!")
         elif y == 1:                    # There's a 25% chance that y is 1, and then a coin will be placed
             g_map[0][x] = c             # Replaces the current index with a coin, and stops the while loop
             obstacle = False
-
-            """
-            print("Nytt kart:")
-            for row in g_map:
-                print(row)
-            """
         else:
-            #print("Ingen coin denne gangen.")
             break
     
     return g_map
@@ -785,14 +780,14 @@ def obstacle(kart):
     kart[0][obst] = o                   # Changes the random element in the first row
     return kart                         # Returns map with obstacles
 
-# Function to reate obstacle every 3rd row
+# Function to create obstacle every 3rd row
 def obstacle3D(kart):
     if o not in kart[1] and o not in kart[2]:   # If there is no obstacles in the 2nd and 3rd row
         obst = random.randint(1, 6)     # Random number
         kart[0][obst] = o               # Changes the random element in the first row
     return kart                         # Return map with obstacles with obstacles every 3rd row
 
-
+# Function that was supposed to create obstacles in third person view
 def obstacle_3D(game_map):
     
     obst = random.randint(1, 6)
@@ -805,10 +800,21 @@ def obstacle_3D(game_map):
     
     return game_map
 
-
+# Function that was supposed to enable third person view
 def enable_third_person(game_map, car_pos) :
 
 
+
+    sunset_picture = [
+      (189, 16, 224), (189, 16, 224), (224, 133, 241), (248, 201, 28), (248, 201, 28), (224, 133, 241), (189, 16, 224), (189, 16, 224),
+    (189, 16, 224), (224, 133, 241), (248, 201, 28), (248, 201, 28), (248, 201, 28), (248, 201, 28), (224, 133, 241), (189, 16, 224),
+    (224, 133, 241), (248, 201, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 231, 28), (248, 201, 28), (224, 133, 241),
+    (224, 133, 241), (248, 231, 28), (248, 231, 28), (255, 245, 127), (255, 245, 127), (248, 231, 28), (248, 231, 28), (224, 133, 241),
+    (32, 0, 61), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (32, 0, 61),
+    (32, 0, 61), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (32, 0, 61),
+    (32, 0, 61), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (32, 0, 61),
+    (32, 0, 61), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (74, 74, 74), (32, 0, 61),
+    ]
     road_screen = game_map.copy()
     road_screen = road_screen[12:]     # Chooses the four last lists of the list
 
@@ -827,10 +833,6 @@ def enable_third_person(game_map, car_pos) :
             if element == o:
                 row_index = count_row
                 element_index = count_element
-                print("ROW",row_index)
-                print("ELEMENT",element_index)
-                
-                #screen_pixels[row_index][element_index] = o 
         if count_element < 7:
             count_element += 1
         else:
@@ -880,7 +882,7 @@ def enable_screen(game_map, car_pos):
 
   sense.set_pixels(screen_pixels)
 
-
+# Shows death animation
 def player_dead() :
 
   sun_down0 = [
@@ -1102,7 +1104,8 @@ def player_dead() :
   sense.set_pixels(sun_down0)
   time.sleep(y)
 
-# Function to check if the car has hit an obstacle or a coin
+
+# Check if car is going to crash into obstacle or coin on map move
 def map_collision(g_map, car_pos):
     collision = False                 # Set collision to False, if the car hits an obstacle this will become True
     point = False                     # Set point to False, if the car gets a coin this will become True
@@ -1116,7 +1119,7 @@ def map_collision(g_map, car_pos):
     
     return point, collision
 
-
+# Check if car is going to crash into obstacle or coin on car move side to side
 def move_collision(g_map, car_pos):
     collision = False
     point = False
@@ -1131,6 +1134,7 @@ def move_collision(g_map, car_pos):
     return point, collision
 
 
+ # Function that lets user choose name   
 def choose_name() :
     name = ""
     name_list = []
@@ -1142,7 +1146,8 @@ def choose_name() :
     page_confirmed = 0
     update_screen(["Bla opp og ned for å velge bokstav, du kan ha navn på 3 bokstaver", "Trykk når riktig bokstav er valgt", "Øverst til venstre er ferdigmerket bokstav grønn."])
 
-    def page1() :
+        # Pages of chosen character in name. No chosen character = page 1
+    def page1() :           
         color = gray
         if page_confirmed >= 1 :
             color = green
@@ -1161,44 +1166,45 @@ def choose_name() :
     character = 0
   
     dot = True
-    while len(name_list) < 3 :
-        if dot :
+    while len(name_list) < 3 :      # Defines what happens when buttons are pressed
+        if dot :                    # Runs one time in the start, and after evert button action
             sense.show_letter(alfab[character], text_colour=white, back_colour=black)
             page1()
             page2()
             page3()
             dot = False
-    
-    
-    
-    x = 0
-    while len(name_list) < 3 :
-        sense.show_letter(alfab[x], text_colour=white, back_colour=black)
-      
-        if j_up_click :
+        if j_up_click :             # Scrolls to next character A -> Z
             reset_buttons()
-            x -= 1
-        elif j_down_click:
+            character -= 1
+            if character < 0 :
+                character = (len(alfab)-1)
+            dot = True
+            
+        elif j_down_click:          # Scrolls to next character A -> B
             reset_buttons()
-            x += 1
-        elif j_middle_click:
+            character += 1
+            if character >= (len(alfab)) :
+                character = 0
+            dot = True
+
+        elif j_middle_click:        # Saves the chosen character, confirmes with green light
             reset_buttons()
-            name_list.append(alfab[x])
-            sense.show_letter(alfab[x], text_colour=(0, 255, 0), back_colour=black)
+            page_confirmed += 1
+            name_list.append(alfab[character])  # Adds chosen character to name_list
+            sense.show_letter(alfab[character], text_colour=green, back_colour=black) # Blink current chosen character green
             time.sleep(0.2)
-            x = 0
-    
-    for e in name_list :
-      name += e
-    
-    
-    time.sleep(0.2)
-    sense.show_message(name, text_colour=(0, 255, 0), back_colour=black)
-    
+            character = 0
+            dot = True
+            
+  
+    for e in name_list :             # Iterates over name_list, makes string with name
+        name += e
+      
+    sense.show_message(name, text_colour=green, back_colour=black) # Displays chosen name
     return name
 
 # Function that updates an already created file
-def update_csv(name, coins):
+def update_csv(name, coins):                                                
     list_names = []
     with open('SCOREBOARD_FPI.csv', newline='') as f:
         file_content = csv.reader(f, delimiter=' ', quotechar='|')          # Opens the .csv file and reads all lines:
@@ -1237,36 +1243,8 @@ def update_csv(name, coins):
             f.write("%s %s\n"% (name, player_scoreboard[name]))             # the aldreay created file gets appended with the new name and its score (coins)
         update_screen([f"Player {name} added -> {coins} coins"])
 
-
-def sorted_csv(score_file):                  # Function that sorts the scoreboard
-  with open(score_file) as file:                # Opens the file
-    data = csv.reader(file, delimiter = " ")    # Reads the content
-
-    dic = {}                                    # Generates a dictionary
-    for i in data:                              # For every list in data
-      dic[i[0]] = i[1]                          # Updates the dictionary with the content in data
-                                                # First element is key, second element is value
-
-  sorted_dic = {}                               # Generates a sorted dictionary
-  sorted_dic["Name"] = "Coins"                  # Adds the titles to the sorted dic
-  dic.pop("Name")                               # Removes the titles from the original dic
-
-  while dic != {}:                            # While dictionary is not empty
-    best_score = 0                            # Sets a best score
-    for i in dic:                             # For every player that has played
-      if int(dic[i]) >= best_score:            # If the player's score is higher than the best core
-        best_score = int(dic[i])              # Player's score is set as best score
-        best_player = i                       # Player is set as best player
-    dic.pop(best_player)                      # Best player is removed from original dictionary
-    sorted_dic[best_player] = best_score      # Best player is added to sorted dictionary
-
-  with open(score_file, "w") as file:    # Opens the score file
-    for i in sorted_dic:                      # For every player in the sorted dictionary
-      file.write(i + " " + str(sorted_dic[i]) + "\n")   # Score file is overwritten with the sorted dictionary
-                                                        # from best to worst
-
-
-def sorted_csv(score_file):                  # Function that sorts the scoreboard
+# Function that sorts the scoreboard
+def sorted_csv(score_file):                  
   with open(score_file) as file:                # Opens the file
     data = csv.reader(file, delimiter = " ")    # Reads the content
 
@@ -1346,26 +1324,26 @@ def transition(pic1, pic2, right, vertical):
 # Function that runs the game
 def run_game():
     game_map = map_creator()            # Creates the map
-    running = True
-    coins = 0
-    screen_coins = 0
-    vehicle_pos = 5
+    running = True                      # Defines the game as running
+    coins = 0                           # Player starts with 0 coins
+    screen_coins = 0                    
+    vehicle_pos = 5                     # Starting position of the car
 
-    last_time_ran_car = 0.0
-    last_time_ran_map = 0.0
+    last_time_ran_car = 0.0             # A variable to hold the last time the car position was updated
+    last_time_ran_map = 0.0             # A variable to hold the last time the map was updated
 
-    reset_sense()
+    reset_sense()                                   # Resets the sense so that the gyroscope is calibrated upright
     gameStart_sequence()
     update_screen([f"SCORE: {screen_coins}"])
 
     while running:
-        now = time.time()
-        sense.get_gyroscope()
+        now = time.time()                           # Saves the time right now
+        sense.get_gyroscope()                       # Gets data from gyroscope
 
-        if now - last_time_ran_car > 1/3:                                              # Allows 3 movements before map moves
-            vehicle_pos = car_pos_gyro(vehicle_pos)                      # Updates viechle position
+        if now - last_time_ran_car > 1/3:                               # Allows car to move 3 times per second
+            vehicle_pos = car_pos_gyro(vehicle_pos)                     # Updates vehicle position
             enable_screen(game_map, vehicle_pos)                        # Sends it to the led matrix
-            point, collision = move_collision(game_map, vehicle_pos)    # Checks for collition or coin on move horisontally
+            point, collision = move_collision(game_map, vehicle_pos)    # Checks for collision or coin on move horisontally
             if collision:
                 running = False
                 break
@@ -1377,7 +1355,7 @@ def run_game():
                 screen_coins = coins
                 update_screen([f"SCORE: {screen_coins}"])
 
-        if now - last_time_ran_map > 1:
+        if now - last_time_ran_map > 1:                                     # Allows map to move every second
             point, collision = map_collision(game_map, vehicle_pos)         # Checks for collition or coin vertically
 
             if collision:
@@ -1394,31 +1372,12 @@ def run_game():
             game_map = coin_placer(game_map)        # Adds new coins off screen
             game_map = mov_map(game_map)            # Moves the map
 
-            last_time_ran_map = now
+            last_time_ran_map = now          # Saves the last time the map was run as now
 
-    return coins
+    return coins    # Returns the amount of coins gathered
 
-settings_pictures = {0: [
-      (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-    (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (74, 144, 226), (74, 144, 226), (0, 0, 0), (0, 0, 0),
-    (0, 0, 0), (0, 0, 0), (208, 2, 27), (208, 2, 27), (74, 144, 226), (74, 144, 226), (0, 0, 0), (0, 0, 0),
-    (208, 2, 27), (208, 2, 27), (208, 2, 27), (208, 2, 27), (74, 144, 226), (74, 144, 226), (74, 144, 226), (74, 144, 226),
-    (208, 2, 27), (74, 74, 74), (74, 74, 74), (208, 2, 27), (74, 144, 226), (74, 74, 74), (74, 74, 74), (74, 144, 226),
-    (0, 0, 0), (74, 74, 74), (74, 74, 74), (0, 0, 0), (0, 0, 0), (74, 74, 74), (74, 74, 74), (0, 0, 0),
-    (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33),
-    (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33), (126, 211, 33),
-  ],
-  1: [
-      (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (155, 155, 155), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (155, 155, 155), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-    (0, 255, 0), (255, 0, 0), (255, 128, 0), (255, 255, 0), (2, 255, 0), (0, 0, 255), (128, 0, 128), (255, 255, 255),
-  ],
-  2: [
+# Pictures used on settimgs menu
+settings_pictures = {2: [
       (0, 0, 0), (0, 0, 0), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
     (0, 0, 0), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
     (255, 255, 255), (255, 255, 255), (255, 255, 255), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -1430,6 +1389,7 @@ settings_pictures = {0: [
   ]
   }
 
+# Dictionary of pictures for the map menu
 map_pictures = {
     0: [ # Race track
       (255, 0, 0), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (155, 155, 155), (255, 0, 0),
@@ -1633,6 +1593,7 @@ map_pictures = {
   ]
 }
 
+# Dictionary of pictures for the car menu
 car_pictures = {0: [
       (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
     (0, 0, 0), (0, 0, 0), (0, 0, 0), (155, 155, 155), (155, 155, 155), (0, 0, 0), (0, 0, 0), (0, 0, 0),
@@ -1722,14 +1683,15 @@ car_pictures = {0: [
   ]
   }
 
+# Fubction that runs the settings menu
 def settings():
     global v
-    settings_selection = 0
-    settings_max = 2
-    car_selection = 0
-    car_max = 7
-    map_selection = 0
-    map_max = 19
+    settings_selection = 0 # A counter to keep track of where the player is in the settings menu
+    settings_max = 2       # Amount of elements in settings
+    car_selection = 0      # A counter to keep track of where the player is in the car menu
+    car_max = 7            # Amount of elements in car menu
+    map_selection = 0      # A counter to keep track of where the player is in the map menu
+    map_max = 19           # Amount of elements in map menu
     text_car_select = 0
     text_map_select = 0
     text_settings = 0
@@ -1758,21 +1720,21 @@ def settings():
                 transition(settings_pictures[settings_selection+1], map_pictures[map_selection], False, False)   # Moves image on screen
         elif j_middle_click:    # Check for joy middle click
             reset_buttons()     # Reset joy values
-            if settings_selection == 2: # Gå tilbake
-                break
-        if settings_selection == 0:
-            if j_down_click:
+            if settings_selection == 2: # Go back button
+                break #                 # Break and return to main menu
+        if settings_selection == 0:   # If you are in the car menu:
+            if j_down_click:          # Checks for joy down movement
                 reset_buttons()
-                car_selection += 1
-                if car_selection > car_max:
+                car_selection += 1    # Moves the menu
+                if car_selection > car_max:   # Check for menu rollover
                     car_selection = 0
                     transition(car_pictures[0], car_pictures[car_max], False, True)
                 else:
                     transition(car_pictures[car_selection], car_pictures[car_selection-1], False, True)
-            elif j_up_click:
+            elif j_up_click:        # Checks for joy up movement
                 reset_buttons()
-                car_selection -= 1
-                if car_selection < 0:
+                car_selection -= 1  # Moves the menu
+                if car_selection < 0: # Checks for menu rollover
                     car_selection = car_max
                     transition(car_pictures[0], car_pictures[car_max], True, True)
                 else:
@@ -1782,19 +1744,19 @@ def settings():
                 text_car_select = car_selection
                 update_screen(car_text[text_car_select])
             v = car_colors[car_selection]
-        if settings_selection == 1:
-            if j_down_click:
+        if settings_selection == 1:     #If you are in the map menu
+            if j_down_click:            # Checks for joy down movement
                 reset_buttons()
-                map_selection += 1
-                if map_selection > map_max:
+                map_selection += 1      # Moves the menu
+                if map_selection > map_max: # Check for menu rollover
                     map_selection = 0
                     transition(map_pictures[0], map_pictures[map_max], False, True)
                 else:
                     transition(map_pictures[map_selection], map_pictures[map_selection-1], False, True)
-            elif j_up_click:
+            elif j_up_click:        # Checks for joy up movement
                 reset_buttons()
-                map_selection -= 1
-                if map_selection < 0:
+                map_selection -= 1  # Moves the menu
+                if map_selection < 0:   # Check for menu rollover
                     map_selection = map_max
                     transition(map_pictures[0], map_pictures[map_max], True, True)
                 else:
@@ -1811,12 +1773,12 @@ def settings():
             elif text_settings == 2:
                 update_screen(["Go back to main menu"])
 
-        if settings_selection == 0:
-            sense.set_pixels(car_pictures[car_selection])
-        elif settings_selection == 1:
-            sense.set_pixels(map_pictures[map_selection])
+        if settings_selection == 0:                                 # If in car menu
+            sense.set_pixels(car_pictures[car_selection])           # Show picture of car
+        elif settings_selection == 1:                               # If in map menu
+            sense.set_pixels(map_pictures[map_selection])           # Show picture of map
         else:
-            sense.set_pixels(settings_pictures[settings_selection]) # Update screen
+            sense.set_pixels(settings_pictures[settings_selection]) # Update screen with picture from settings menu
 
 # Function that adds choose_name() and update_csv()
 def memory(coins):
@@ -1835,7 +1797,7 @@ def memory(coins):
         update_screen(["Scoreboard created", f"Player {name} added -> {coins} coins"])
         time.sleep(1)
 
-
+# Function that returns the top 5 from leaderboard
 def scores_hat():
     text = ["Velkommen til F-PI! Tiårets råeste bilspill!", "Naviger i menyen ved å trykke joysticken til høyre eller venstre",
                     "", "LEADERBOARD:"]
@@ -1937,6 +1899,6 @@ def main():
         sense.set_pixels(meny_pictures[meny_selection]) # Update screen
     sense.clear()
 
+
 if __name__ == "__main__":
     main()
-
